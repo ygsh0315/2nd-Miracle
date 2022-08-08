@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 7746614182502270746}
   - component: {fileID: 2930152745453284484}
   - component: {fileID: 6569282753857763479}
-  - component: {fileID: 6088435993593210602}
   - component: {fileID: -2082427241544451997}
-  m_Layer: 7
+  - component: {fileID: -4706098246594623713}
+  m_Layer: 8
   m_Name: missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,22 +226,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &6088435993593210602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3142679886803288840}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68c010a0c0f7a948b5749c59ab5ff8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
-  acceleration: 10
-  acSpeed: 0
-  explosionFactory: {fileID: 1134129239631916, guid: 1143a49ffea07224f800b628954167de, type: 3}
 --- !u!114 &-2082427241544451997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +238,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ee663a63444714fa745000346bd7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4706098246594623713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142679886803288840}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68c010a0c0f7a948b5749c59ab5ff8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  acceleration: 10
+  acSpeed: 0
+  explosionFactory: {fileID: 1134129239631916, guid: 1143a49ffea07224f800b628954167de, type: 3}
 --- !u!1001 &7990961338824109148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,9 +265,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trail
       objectReference: {fileID: 0}
+    - target: {fileID: 455803234271853486, guid: f49cde2588509c6489982a80182161fe, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 471289621560201513, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 471289621560201519, guid: f49cde2588509c6489982a80182161fe, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2601317173253166939, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -352,6 +360,10 @@ PrefabInstance:
     - target: {fileID: 6703530200432390250, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
       value: 1.2157367
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060344088967796638, guid: f49cde2588509c6489982a80182161fe, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f49cde2588509c6489982a80182161fe, type: 3}

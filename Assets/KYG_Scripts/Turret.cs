@@ -24,6 +24,10 @@ public class Turret : MonoBehaviour
     public int missilePoolSize = 12;
     //미사일 발사 간격
     public float fireDelay = 2f;
+
+    //조준시간
+    public float aimTime = 1f;
+
     //현재시간
     float currentTime;
 
@@ -72,8 +76,9 @@ public class Turret : MonoBehaviour
             turretState = state.Detect;
         }
         currentTime += Time.deltaTime;
+        targetDistance = (target.position - transform.position).magnitude;
         //감지상태일시 회전하고 싶다.
-        if(isDetected == true)
+        if (isDetected == true)
         {
             if (target)
             {    
@@ -88,7 +93,7 @@ public class Turret : MonoBehaviour
         }
         else if(turretState == state.Attack && target)
         {
-            turretAttack();
+            Invoke("turretAttack", aimTime);
         }
         else if(turretState == state.Idle)
         {
@@ -104,7 +109,7 @@ public class Turret : MonoBehaviour
         {
             return;
         }
-        targetDistance = (target.position - transform.position).magnitude;
+        
         if (target.position.y > DetectingAltitude && targetDistance < DetectingRange)
         {
             isDetected = true;

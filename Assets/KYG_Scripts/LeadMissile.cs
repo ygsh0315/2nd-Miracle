@@ -23,15 +23,17 @@ public class LeadMissile : MonoBehaviour
     float distance;
 
     float ratio;
+
     GameObject LCS;
 
-
+    bool isClose = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Player");
+
         LCS = GameObject.Find("LCS");
     }
 
@@ -45,7 +47,7 @@ public class LeadMissile : MonoBehaviour
         }
         else
         {
-            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out LcsHit))
+            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out LcsHit)&&!isClose)
             {
                 distance = (target.transform.position - transform.position).magnitude;
                 targetDir = (LCS.transform.position - LcsHit.point).normalized;
@@ -58,6 +60,12 @@ public class LeadMissile : MonoBehaviour
                 //Debug.DrawLine(LcsHit.point, target.transform.position, Color.blue);
                 //Debug.DrawLine(transform.position, impactPoint, Color.magenta);
             }
+        }
+
+       if(distance<15 && Vector3.Angle(transform.forward, target.transform.position - transform.position) > 15)
+        {
+            isClose = true;
+            dir = transform.forward;
         }
 
         transform.forward = Vector3.Lerp(transform.forward, dir, 10 * Time.deltaTime);
