@@ -12,7 +12,7 @@ public class AirplaneController : MonoBehaviour
     // 바퀴모음
     // List<WheelCollider> wheels = null;
     [SerializeField]
-    mouseFlightController controller = null;
+    MouseFlightController controller = null;
     [SerializeField]
     // 플레이어 컨트롤러 민감도
     float rollControlSensitivity = 0.2f;
