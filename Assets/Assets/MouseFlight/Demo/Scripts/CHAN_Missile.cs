@@ -26,6 +26,7 @@ public class CHAN_Missile : MonoBehaviour
     Vector2 seekerPos;
     public Vector2 targetPos;
     float curTime = 0;
+    [SerializeField] float setTime = 1;
     int LaunchCount = 0;
     public bool isLocked { get; set; }
     public bool finalLocked { get; set; }
@@ -161,7 +162,7 @@ public class CHAN_Missile : MonoBehaviour
             curTime += Time.deltaTime;
             print(curTime);
             //그 후 2초가 경과하면 발사준비 완료
-            if (curTime > 2)
+            if (curTime > setTime)
             {
                 finalLocked = true;
             }
