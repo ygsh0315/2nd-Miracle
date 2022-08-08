@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5963987378034128125}
   - component: {fileID: 7741096685032893551}
   - component: {fileID: 7741096685032893549}
+  - component: {fileID: 972493260167559169}
+  - component: {fileID: -7011519026480345815}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -99,6 +101,33 @@ MonoBehaviour:
   bulletPoolSize: 1000
   bulletDelay: 0.1
   idleTime: 2
+--- !u!64 &972493260167559169
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5963987378034128122}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!65 &-7011519026480345815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5963987378034128122}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.7815733, y: 1.3135519, z: 6.8984985}
+  m_Center: {x: -0.029734612, y: 0.15677595, z: -0.1602478}
 --- !u!1 &7741096684018595234
 GameObject:
   m_ObjectHideFlags: 0
