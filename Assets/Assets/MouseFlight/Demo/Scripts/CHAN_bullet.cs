@@ -28,12 +28,18 @@ namespace MFlight
 
         }
 
-        private void OnTriggerEnter(Collider other)
+
+        private void OnCollisionEnter(Collision other)
         {
-            cg = player.GetComponent<CHAN_Gun>();
-            cg.bulletPool.Add(gameObject);
-            gameObject.SetActive(false);
-            print("들어감");
+            if (other.gameObject.name.Contains("Enemy"))
+            {
+                Destroy(other.gameObject);
+            }
+            // cg = player.GetComponent<CHAN_Gun>();
+            // cg.bulletPool.Add(gameObject);
+            // gameObject.SetActive(false);
+            print("Hit");
+
         }
     }
 }

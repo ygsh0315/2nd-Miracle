@@ -77,7 +77,7 @@ public class CHAN_Missile : MonoBehaviour
             InitialSet();
         }
 
-        if (Input.GetMouseButtonDown(1) && readyToLanch)
+        if (Input.GetKeyDown(KeyCode.Space) && readyToLanch)
         {
             //미사일 런치
             isLaunch = true;
