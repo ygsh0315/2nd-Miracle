@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 namespace MFlight
@@ -13,12 +13,17 @@ namespace MFlight
         Vector3 dir;
         CHAN_Gun cg;
         GameObject player;
+        CHAN_Missile cm;
+        GameObject target;
+        public Action<GameObject> onDestroyed;
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             dir = transform.forward;
-            player = GameObject.Find("Plane");
+            player = GameObject.Find("Player");
             rb.velocity = transform.forward * velocity;
+            cm = player.GetComponent<CHAN_Missile>();
+            
         }
 
         // Update is called once per frame
@@ -27,17 +32,19 @@ namespace MFlight
 
 
         }
-
+        public void RemoveTarget(GameObject t)
+        {
+            cm.target.Remove(t);
+        }
 
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.name.Contains("Enemy"))
             {
+                RemoveTarget(other.gameObject);
                 Destroy(other.gameObject);
+                
             }
-            // cg = player.GetComponent<CHAN_Gun>();
-            // cg.bulletPool.Add(gameObject);
-            // gameObject.SetActive(false);
             print("Hit");
 
         }
