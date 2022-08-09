@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
             currentTime = 0;
         }
 
-        if (distance > avoidRange * 2)
+        if (distance > avoidRange * 3)
         {
             state = EnemyState.Detact;
         }

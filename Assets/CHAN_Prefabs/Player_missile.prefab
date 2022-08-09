@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2930152745453284484}
   - component: {fileID: 6569282753857763479}
   - component: {fileID: 3760094894788327359}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Player_missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 455803234271853486, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 471289621560201513, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -259,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 471289621560201519, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2601317173253166939, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -347,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8060344088967796638, guid: f49cde2588509c6489982a80182161fe, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f49cde2588509c6489982a80182161fe, type: 3}
