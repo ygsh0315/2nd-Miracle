@@ -8,7 +8,7 @@ public class PlayerLeadMissile : MonoBehaviour
 {
     public static float LMspeed = 100;
 
-    Transform target;
+    GameObject target;
 
     RaycastHit LcsHit;
 
@@ -36,8 +36,10 @@ public class PlayerLeadMissile : MonoBehaviour
     {
         GameObject player = GameObject.Find("Player");
         cm = player.GetComponent<CHAN_Missile>();
-        target = cm.detected[0].transform;
+        target = cm.detected[0];
         ELCS = target.transform.GetChild(0);
+        onDestroyed(target);
+
     }
 
     // Update is called once per frame
