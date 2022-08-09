@@ -35,10 +35,13 @@ public class Hud : MonoBehaviour
         //seeker.gameObject.SetActive(false);
         targetBox.gameObject.SetActive(false);
         targetRedBox.gameObject.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update()
     {
+
         if (mouseFlight == null || playerCam == null)
             return;
 
