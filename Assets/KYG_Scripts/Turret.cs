@@ -38,7 +38,7 @@ public class Turret : MonoBehaviour
     //¹ß»ç´ë
     Transform holder;
     //Å¸°Ù
-    Transform target;
+    public Transform target;
     //Å¸°Ù¹æÇâ
     Vector3 targetDir;
     //Å¸°Ù°úÀÇ °Å¸®
@@ -55,6 +55,7 @@ public class Turret : MonoBehaviour
     void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
+        //target = GameObject.Find("Enemy").transform;
         launcher = transform.GetChild(0);
         holder = transform.GetChild(0).GetChild(0).GetChild(0);
         firePosition = holder;

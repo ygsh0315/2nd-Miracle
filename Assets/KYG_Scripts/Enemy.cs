@@ -89,11 +89,17 @@ public class Enemy : MonoBehaviour
 
     float randomDirTime = 3f;
 
+    public GameObject sc;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Player");
+        sc.transform.position = transform.position + transform.forward.normalized * speed * 0.01f;
+        sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
         for (int i = 0; i < missilePoolSize; i++)
         {
             GameObject missileFirePosition = Instantiate(missileFirePositionFactory);

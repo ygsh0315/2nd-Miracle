@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scale: 1
   vel: 100
+  flareLifeTime: 10
 --- !u!54 &-769106572385921218
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -249,8 +250,40 @@ PrefabInstance:
       value: MissileTrail
       objectReference: {fileID: 0}
     - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 1157
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 32768
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.a
-      value: 0.19607843
+      value: 0.10980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.a
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2911247210493046046, guid: 23ca50d81d62a884f95ec97e65873684, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value

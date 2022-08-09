@@ -28,7 +28,7 @@ public class LeadMissile : MonoBehaviour
 
     bool isClose = false;
 
-
+    public GameObject explosionFactory;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,5 +70,12 @@ public class LeadMissile : MonoBehaviour
 
         transform.forward = Vector3.Lerp(transform.forward, dir, 10 * Time.deltaTime);
         transform.position += transform.forward.normalized * LMspeed * Time.deltaTime;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject explosion = Instantiate(explosionFactory);
+        explosion.transform.position = collision.transform.position;
+        Destroy(collision.gameObject);
+        Destroy(gameObject);
     }
 }

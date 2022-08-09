@@ -130,6 +130,16 @@ public class AirplaneController : MonoBehaviour
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
         displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
+
+        if (transform.position.y > 50)
+        {
+            Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
+            Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);
+            Transform rightWheel = transform.GetChild(1).GetChild(0).GetChild(2);
+            frontWheel.localRotation = Quaternion.Lerp(frontWheel.localRotation, Quaternion.Euler(100, 0, 0), 1f * Time.deltaTime);
+            leftWheel.localRotation = Quaternion.Lerp(leftWheel.localRotation, Quaternion.Euler(0, 0, 145), 1f * Time.deltaTime);
+            rightWheel.localRotation = Quaternion.Lerp(rightWheel.localRotation, Quaternion.Euler(0, 0, -145), 1f * Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
