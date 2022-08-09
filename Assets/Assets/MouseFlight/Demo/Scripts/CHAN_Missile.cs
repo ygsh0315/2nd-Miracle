@@ -39,10 +39,11 @@ public class CHAN_Missile : MonoBehaviour
     // 시작되자마자 미사일풀의 미사일을 비활성화 한다.
     void Awake()
     {
-        for (int i = 0; i < missilePool.Count; i++)
+        for (int i = 1; i < missilePool.Count; i++)
         {
-            missilePool[i].SetActive(false);
+            missilePool[i - 1].SetActive(false);
         }
+
 
     }
     // 플레이어와 타겟 사이 거리를 측정할 리스트공간을 할당한다.
@@ -61,7 +62,14 @@ public class CHAN_Missile : MonoBehaviour
     {
         // 조준점의 좌표를 받는다.
         seekerPos = Camera.main.WorldToScreenPoint(MController.BoresightPos);
-        GetTargetPos();
+        if (target.Count != 0)
+        {
+            GetTargetPos();
+        }
+        else
+        {
+            return;
+        }
         //플레이어와 타깃들 사이 거리를 계속해서 받는 함수
         if (Input.GetKey(KeyCode.R))
         {
@@ -79,14 +87,16 @@ public class CHAN_Missile : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && readyToLanch)
         {
             //미사일 런치
-            isLaunch = true;
-            if (LaunchCount > 4)
+
+            if (LaunchCount > 3)
             {
-                print("미사일 없음");
+
             }
             else
             {
+                isLaunch = true;
                 LaunchMissile(LaunchCount);
+                print(LaunchCount);
             }
             LaunchCount++;
         }
@@ -131,7 +141,6 @@ public class CHAN_Missile : MonoBehaviour
     void InitialSet()
     {
         detected.Clear();
-        //targetPos = new Vector2(2000, 2000);
         finalLocked = false;
         isLocked = false;
         curTime = 0;
@@ -159,7 +168,7 @@ public class CHAN_Missile : MonoBehaviour
 
             isLocked = true;
             curTime += Time.deltaTime;
-            print(curTime);
+            //print(curTime);
             //그 후 2초가 경과하면 발사준비 완료
             if (curTime > 2)
             {
@@ -170,7 +179,7 @@ public class CHAN_Missile : MonoBehaviour
         else
         {
             InitialSet();
-            print("2차" + curTime);
+            //print("2차" + curTime);
         }
     }
 

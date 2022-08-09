@@ -25,10 +25,17 @@ public class missile0 : MonoBehaviour
     {
 
         cm = player.GetComponent<CHAN_Missile>();
-        target = cm.detected[0].transform;
+        if (cm.detected.Count != 0)
+        {
+            target = cm.detected[0].transform;
+        }
+        else
+        {
+            return;
+        }
         rb = GetComponent<Rigidbody>();
 
-        Physics.gravity *= 1.5f;
+        //Physics.gravity *= 1.5f;
     }
 
     // Update is called once per frame
@@ -36,6 +43,7 @@ public class missile0 : MonoBehaviour
     {
 
         curTime += Time.deltaTime;
+        rb.AddForce(Vector3.down, ForceMode.Force);
         if (curTime > 0.7f)
         {
             missileLaunch(target);
@@ -71,17 +79,18 @@ public class missile0 : MonoBehaviour
 
     }
 
+
     // 처음에는 미사일이 떨어지다가
     // 일정 시간이 지나면 가속을 시작하도록 만들 것
 
     [SerializeField] GameObject explosionFactory;
-    private void OnCollisionEnter(Collision collision)
-    {
-        GameObject explosion = Instantiate(explosionFactory);
-        explosion.transform.position = collision.transform.position;
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
-    }
+    // private void OnCollisionEnter(Collision collision)
+    // {
+    //     GameObject explosion = Instantiate(explosionFactory);
+    //     explosion.transform.position = collision.transform.position;
+    //     Destroy(collision.gameObject);
+    //     Destroy(gameObject);
+    // }
 
 
 
