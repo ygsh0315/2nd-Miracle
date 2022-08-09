@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +20,8 @@ public class missile0 : MonoBehaviour
     public float missileSpeed = 10;
     float accSpeed;
     float curTime;
+
+    public Action<GameObject> onDestroyed;
 
     void Start()
     {
@@ -84,13 +86,20 @@ public class missile0 : MonoBehaviour
     // 일정 시간이 지나면 가속을 시작하도록 만들 것
 
     [SerializeField] GameObject explosionFactory;
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     GameObject explosion = Instantiate(explosionFactory);
-    //     explosion.transform.position = collision.transform.position;
-    //     Destroy(collision.gameObject);
-    //     Destroy(gameObject);
-    // }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (onDestroyed != null)
+        {
+            onDestroyed(target.gameObject);
+        }
+
+        GameObject explosion = Instantiate(explosionFactory);
+        explosion.transform.position = collision.transform.position;
+
+
+        Destroy(collision.gameObject);
+        Destroy(gameObject);
+    }
 
 
 

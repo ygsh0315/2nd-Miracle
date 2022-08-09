@@ -24,7 +24,7 @@ public class CHAN_Missile : MonoBehaviour
     Rigidbody Trb;
     Rigidbody rb;
     Vector2 seekerPos;
-    public Vector2 targetPos;
+    public Vector3 targetPos;
     float curTime = 0;
     [SerializeField] float setTime = 1;
     int LaunchCount = 0;
@@ -61,6 +61,10 @@ public class CHAN_Missile : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            print(Camera.main.WorldToScreenPoint(target[0].transform.position));
+        }
         // 조준점의 좌표를 받는다.
         seekerPos = Camera.main.WorldToScreenPoint(MController.BoresightPos);
         if (target.Count != 0)
@@ -103,12 +107,21 @@ public class CHAN_Missile : MonoBehaviour
         }
     }
 
+    public void RemoveTarget(GameObject t)
+    {
+        target.Remove(t);
+    }
+
     // 발사버튼을 눌렀을 때 리스트에 담겨있는 미사일을 활성화 시키고 초기속도를 부여함
     void LaunchMissile(int Count)
     {
         fakeMissilePool[LaunchCount].SetActive(false);
 
         missilePool[Count].SetActive(true);
+        missilePool[Count].GetComponent<missile0>().onDestroyed = (t) =>
+        {
+            target.Remove(t);
+        };
         missilePool[Count].transform.position = hardPoint[Count].transform.position;
         missilePool[Count].transform.rotation = hardPoint[Count].transform.rotation;
         missilePool[Count].GetComponent<Rigidbody>().velocity = rb.velocity;
@@ -149,22 +162,31 @@ public class CHAN_Missile : MonoBehaviour
     }
     void Seek1()
     {
+        int index = -1;
         for (int j = 0; j < target.Count; j++)
         {
             // 만약 플레이어,타깃사이 거리가1000 m 이하이고 좌측쉬프트를 누르고 있을때
             if (meToTarget[j] < 1000 && !isBehind[j])
             {
+                if (index == -1) index = j;
+                else if (meToTarget[index] > meToTarget[j])
+                {
+                    index = j;
+                }
                 //감지된 적 오브젝트를 리스트에 넣고 다시 검사
-                detected.Add(target[j]);
             }
-
+        }
+        if (index != -1)
+        {
+            detected.Add(target[index]);
         }
     }
     void Seek2()
     {
         targetPos = Camera.main.WorldToScreenPoint(detected[0].transform.position);
         // 스크린상 타겟좌표가 해당 범위안에 들었을 때 두번째 탐지 완료
-        if (Mathf.Abs(targetPos.x) < (seekerPos.x + 60) && Mathf.Abs(targetPos.y) < (seekerPos.y + 60))
+        if ((seekerPos.x - 200 < targetPos.x && targetPos.x < seekerPos.x + 200 &&
+            (seekerPos.y - 200 < targetPos.y && targetPos.y < seekerPos.y + 200)))
         {
 
             isLocked = true;
