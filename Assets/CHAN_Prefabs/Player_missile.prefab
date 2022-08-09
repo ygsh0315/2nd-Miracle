@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7746614182502270746}
   - component: {fileID: 2930152745453284484}
   - component: {fileID: 6569282753857763479}
+  - component: {fileID: 3760094894788327359}
   m_Layer: 8
   m_Name: Player_missile
   m_TagString: Untagged
@@ -224,6 +225,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &3760094894788327359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142679886803288840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9560353f6093fee41bd5415190d91196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionFactory: {fileID: 1134129239631916, guid: 1143a49ffea07224f800b628954167de, type: 3}
 --- !u!1001 &7990961338824109148
 PrefabInstance:
   m_ObjectHideFlags: 0

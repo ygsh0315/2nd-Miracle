@@ -118,7 +118,7 @@ public class CHAN_Missile : MonoBehaviour
         fakeMissilePool[LaunchCount].SetActive(false);
 
         missilePool[Count].SetActive(true);
-        missilePool[Count].GetComponent<missile0>().onDestroyed = (t) =>
+        missilePool[Count].GetComponent<PlayerLeadMissile>().onDestroyed = (t) =>
         {
             target.Remove(t);
         };
