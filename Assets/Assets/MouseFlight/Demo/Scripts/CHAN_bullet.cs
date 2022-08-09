@@ -13,6 +13,7 @@ namespace MFlight
         Vector3 dir;
         CHAN_Gun cg;
         GameObject player;
+        public GameObject explosionFactory;
         void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -33,6 +34,8 @@ namespace MFlight
         {
             if (other.gameObject.name.Contains("Enemy"))
             {
+                GameObject explosion = Instantiate(explosionFactory);
+                explosion.transform.position = other.transform.position;
                 Destroy(other.gameObject);
             }
             // cg = player.GetComponent<CHAN_Gun>();
