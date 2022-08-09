@@ -87,8 +87,8 @@ public class AirplaneController : MonoBehaviour
             RunAutopilot(controller.MouseAimPos, out autoYaw, out autoPitch, out autoRoll);
 
         //Use either keyboard or autopilot input.
-        print("pitch :" + pitchOverride);
-        print("roll :" + rollOverride);
+        //print("pitch :" + pitchOverride);
+        //print("roll :" + rollOverride);
         Yaw = autoYaw;
         Pitch = (pitchOverride) ? Pitch : autoPitch;
         Roll = (rollOverride) ? Roll : autoRoll;
