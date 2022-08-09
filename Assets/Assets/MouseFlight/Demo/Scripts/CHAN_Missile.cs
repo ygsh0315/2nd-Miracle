@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -166,7 +166,7 @@ public class CHAN_Missile : MonoBehaviour
         for (int j = 0; j < target.Count; j++)
         {
             // 만약 플레이어,타깃사이 거리가1000 m 이하이고 좌측쉬프트를 누르고 있을때
-            if (meToTarget[j] < 1000 && !isBehind[j])
+            if (meToTarget[j] < 1000 && !isBehind[j] && target[j].activeSelf)
             {
                 if (index == -1) index = j;
                 else if (meToTarget[index] > meToTarget[j])
