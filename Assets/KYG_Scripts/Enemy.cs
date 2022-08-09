@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    #region »óÅÂÁ¤ÀÇ
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public enum EnemyState
     {
         Detact,
@@ -17,68 +17,68 @@ public class Enemy : MonoBehaviour
     public EnemyState state = EnemyState.Idle;
     #endregion
     public GameObject target;
-    
+
     public float speed = 100;
 
     public float detactRange = 1000;
 
     public float missileRange = 500;
-    
+
     public float attackRange = 1000;
-    
+
     public float fireRange = 100;
 
     public float avoidRange = 100;
 
 
-    #region ¹Ì»çÀÏ
+    #region ï¿½Ì»ï¿½ï¿½ï¿½
 
-    //¹Ì»çÀÏ ÀåÅº¼ö
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½Åºï¿½ï¿½
     public int missilePoolSize = 4;
-    //¹Ì»çÀÏ ¹ß»ç °£°Ý
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
     public float missileDelay = 0.1f;
 
-    //¹Ì»çÀÏ °£°Ý
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public float missileSpacing = 2f;
-    
-    //¹Ì»çÀÏ ½Ã°£
+
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     public float missileCurrentTime = 0;
-    
-    
-    //¹Ì»çÀÏ°øÀå
+
+
+    //ï¿½Ì»ï¿½ï¿½Ï°ï¿½ï¿½ï¿½
     public GameObject missileFactory;
-    
-    //¹Ì»çÀÏ ¹ß»çÀ§Ä¡
-   
+
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½Ä¡
+
     public GameObject missileFirePosition;
-    //¹Ì»çÀÏ ¹ß»ç À§Ä¡ °øÀå
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
     public GameObject missileFirePositionFactory;
-   
-    //¹Ì»çÀÏ ÅºÃ¢
+
+    //ï¿½Ì»ï¿½ï¿½ï¿½ ÅºÃ¢
     List<GameObject> missileFirePositions = new List<GameObject>();
-   
-    //¹Ì»çÀÏÀç°í
+
+    //ï¿½Ì»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     List<GameObject> missilePool = new List<GameObject>();
     #endregion
 
-    #region ÃÑ¾Ë
-    //ÃÑ¾Ë°øÀå
+    #region ï¿½Ñ¾ï¿½
+    //ï¿½Ñ¾Ë°ï¿½ï¿½ï¿½
     public GameObject bulletFactory;
-    //ÃÑ¾ËÀç°í
+    //ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½
     public List<GameObject> bulletPool = new List<GameObject>();
-    
-    //ÃÑ¾Ë ¹ß»çÀ§Ä¡
+
+    //ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ï¿½ï¿½Ä¡
     public Transform firePosition;
-    //ÃÑ¾Ë ÀåÅº¼ö
+    //ï¿½Ñ¾ï¿½ ï¿½ï¿½Åºï¿½ï¿½
     public int bulletPoolSize = 100;
-    //ÃÑ¾Ë ¹ß»ç °£°Ý
+    //ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
     public float bulletDelay = 0.1f;
 
 
     float bulletCurrentTime = 0;
     #endregion
-    
-    
+
+
     float distance;
 
     Vector3 dir;
@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
 
     float randomDirTime = 3f;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,8 +100,8 @@ public class Enemy : MonoBehaviour
             missileFirePosition.transform.parent = transform.Find("MissilePools").transform;
             missileFirePositions.Add(missileFirePosition);
             missileFirePosition.SetActive(true);
-            float totalSpacing = missilePoolSize  * missileSpacing;
-            Vector3 firstPos = transform.position +  new Vector3(-(totalSpacing-1.5f) * 0.5f, -0.5f, 1.5f);
+            float totalSpacing = missilePoolSize * missileSpacing;
+            Vector3 firstPos = transform.position + new Vector3(-(totalSpacing - 1.5f) * 0.5f, -0.5f, 1.5f);
             missileFirePositions[i].transform.position = firstPos + new Vector3(i * missileSpacing, 0, 0);
             GameObject missile = Instantiate(missileFactory);
             missilePool.Add(missile);
@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour
             missilePool[i].transform.parent = missileFirePositions[i].transform;
             missilePool[i].transform.position = missileFirePositions[i].transform.position;
             missile.GetComponent<LeadMissile>().enabled = false;
-            
+
         }
         for (int i = 0; i < bulletPoolSize; i++)
         {
@@ -123,8 +123,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(Vector3.Angle(transform.forward, target.transform.position) < 30f);
-        print(Vector3.Angle(transform.forward, target.transform.position));
+        //print(Vector3.Angle(transform.forward, target.transform.position) < 30f);
+        //print(Vector3.Angle(transform.forward, target.transform.position));
         currentTime += Time.deltaTime;
         switch (state)
         {
@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
             dir = Random.insideUnitSphere.normalized;
             currentTime = 0;
         }
-        
+
         if (distance > avoidRange * 2)
         {
             state = EnemyState.Detact;
@@ -165,7 +165,7 @@ public class Enemy : MonoBehaviour
 
     private void Idle()
     {
-        
+
         if (currentTime > idleTime)
         {
             state = EnemyState.Detact;
@@ -174,10 +174,10 @@ public class Enemy : MonoBehaviour
 
     private void Detact()
     {
-        if(distance < detactRange)
+        if (distance < detactRange)
         {
             dir = (target.transform.position - transform.position).normalized;
-            
+
         }
         if (distance < attackRange)
         {
@@ -192,10 +192,10 @@ public class Enemy : MonoBehaviour
         {
             state = EnemyState.Avoid;
         }
-        if (distance < missileRange && Vector3.Angle(transform.forward,target.transform.position)<30f)
+        if (distance < missileRange && Vector3.Angle(transform.forward, target.transform.position) < 30f)
         {
             FireMissile();
-            
+
         }
         if (distance < fireRange)
         {
@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour
     {
         print("Fire");
         bulletCurrentTime += Time.deltaTime;
-        if(bulletPool.Count>0 && target && bulletCurrentTime > bulletDelay && distance< fireRange && Vector3.Angle(transform.forward, target.transform.position-transform.position) < 15f)
+        if (bulletPool.Count > 0 && target && bulletCurrentTime > bulletDelay && distance < fireRange && Vector3.Angle(transform.forward, target.transform.position - transform.position) < 15f)
         {
             GameObject bullet = bulletPool[0];
             bullet.SetActive(true);
@@ -224,14 +224,14 @@ public class Enemy : MonoBehaviour
         print("Missile");
         StartCoroutine(MissileActive());
 
-        
+
     }
 
     IEnumerator MissileActive()
     {
         for (int i = 0; i < missilePoolSize; i++)
         {
-            if (missilePool.Count>0 && target && distance < missileRange 
+            if (missilePool.Count > 0 && target && distance < missileRange
                 && Vector3.Angle(transform.forward, target.transform.position - transform.position) < 30)
             {
                 missileFirePosition.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
