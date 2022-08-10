@@ -75,7 +75,7 @@ public class LeadMissile : MonoBehaviour
     {
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
-        Destroy(collision.gameObject);
+        //Destroy(collision.gameObject);
         Destroy(gameObject);
     }
 }
