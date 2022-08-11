@@ -38,7 +38,7 @@ public class PlayerLeadMissile : MonoBehaviour
         cm = player.GetComponent<CHAN_Missile>();
         target = cm.detected[0];
         ELCS = target.transform.GetChild(0);
-        onDestroyed(target);
+        
 
     }
 
@@ -78,6 +78,7 @@ public class PlayerLeadMissile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        onDestroyed(target);
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
         collision.gameObject.GetComponent<Enemy>().hp--;
