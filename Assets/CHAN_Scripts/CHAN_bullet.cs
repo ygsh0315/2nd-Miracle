@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+using System.Collections;
+=======
 using System;
+>>>>>>> main
 using System.Collections.Generic;
 using UnityEngine;
 namespace MFlight
@@ -13,18 +17,26 @@ namespace MFlight
         Vector3 dir;
         CHAN_Gun cg;
         GameObject player;
+<<<<<<< HEAD
+=======
         CHAN_Missile cm;
         GameObject target;
         public Action<GameObject> onDestroyed;
         public GameObject explosionFactory;
+>>>>>>> main
         void Start()
         {
             rb = GetComponent<Rigidbody>();
             dir = transform.forward;
+<<<<<<< HEAD
+            player = GameObject.Find("Plane");
+            rb.velocity = transform.forward * velocity;
+=======
             player = GameObject.Find("Player");
             rb.velocity = transform.forward * velocity;
             cm = player.GetComponent<CHAN_Missile>();
             
+>>>>>>> main
         }
 
         // Update is called once per frame
@@ -33,6 +45,15 @@ namespace MFlight
 
 
         }
+<<<<<<< HEAD
+
+        private void OnTriggerEnter(Collider other)
+        {
+            cg = player.GetComponent<CHAN_Gun>();
+            cg.bulletPool.Add(gameObject);
+            gameObject.SetActive(false);
+            print("들어감");
+=======
         public void RemoveTarget(GameObject t)
         {
             cm.target.Remove(t);
@@ -50,6 +71,7 @@ namespace MFlight
             }
             print("Hit");
 
+>>>>>>> main
         }
     }
 }

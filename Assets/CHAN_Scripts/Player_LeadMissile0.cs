@@ -1,10 +1,10 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 //���� �����ϴ� �̻���
 
-public class PlayerLeadMissile : MonoBehaviour
+public class Player_LeadMissile0 : MonoBehaviour
 {
     public static float LMspeed = 100;
 
@@ -24,22 +24,17 @@ public class PlayerLeadMissile : MonoBehaviour
 
     float ratio;
 
-    Transform ELCS;
-    CHAN_Missile cm;
-    public Action<GameObject> onDestroyed;
+    GameObject LCS;
 
     bool isClose = false;
 
-    public GameObject explosionFactory;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject player = GameObject.Find("Player");
-        cm = player.GetComponent<CHAN_Missile>();
-        target = cm.detected[0];
-        ELCS = target.transform.GetChild(0);
-        
+        target = GameObject.Find("Player");
 
+        LCS = GameObject.Find("LCS");
     }
 
     // Update is called once per frame
@@ -55,7 +50,7 @@ public class PlayerLeadMissile : MonoBehaviour
             if (Physics.Raycast(transform.position, target.transform.position - transform.position, out LcsHit) && !isClose)
             {
                 distance = (target.transform.position - transform.position).magnitude;
-                targetDir = (ELCS.position - LcsHit.point).normalized;
+                targetDir = (LCS.transform.position - LcsHit.point).normalized;
                 hitDistance = (target.transform.position - LcsHit.point).magnitude;
                 ratio = distance / hitDistance;
                 impactPoint = transform.position + targetDir * LMspeed * ratio;
@@ -75,13 +70,5 @@ public class PlayerLeadMissile : MonoBehaviour
 
         transform.forward = Vector3.Lerp(transform.forward, dir, 10 * Time.deltaTime);
         transform.position += transform.forward.normalized * LMspeed * Time.deltaTime;
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        onDestroyed(target);
-        GameObject explosion = Instantiate(explosionFactory);
-        explosion.transform.position = collision.transform.position;
-        collision.gameObject.GetComponent<Enemy>().hp--;
-        Destroy(gameObject);
     }
 }
