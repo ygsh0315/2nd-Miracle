@@ -46,6 +46,14 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     float AutopilotSensitivity = 8f;
 
+    [Header("WEP setting")]
+    [SerializeField] float initailFOV = 60;
+    [SerializeField] float finalFOV = 80;
+
+    bool isWEP = false;
+    [SerializeField] float setTime = 1;
+    float curTime;
+
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
@@ -97,12 +105,24 @@ public class AirplaneController : MonoBehaviour
         {
             if (thrustPercent > 1)
             {
+                curTime += Time.deltaTime;
+                if (curTime > setTime)
+                {
+                    isWEP = true;
+                }
                 thrustPercent = 1;
             }
+
             else
             {
+                isWEP = false;
                 thrustPercent += 0.005f;
             }
+        }
+        else
+        {
+            curTime = 0;
+            isWEP = false;
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -130,6 +150,30 @@ public class AirplaneController : MonoBehaviour
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
         displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
+<<<<<<< Updated upstream
+=======
+
+        if (transform.position.y > 50)
+        {
+            Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
+            Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);
+            Transform rightWheel = transform.GetChild(1).GetChild(0).GetChild(2);
+            frontWheel.localRotation = Quaternion.Lerp(frontWheel.localRotation, Quaternion.Euler(100, 0, 0), 1f * Time.deltaTime);
+            leftWheel.localRotation = Quaternion.Lerp(leftWheel.localRotation, Quaternion.Euler(0, 0, 145), 1f * Time.deltaTime);
+            rightWheel.localRotation = Quaternion.Lerp(rightWheel.localRotation, Quaternion.Euler(0, 0, -145), 1f * Time.deltaTime);
+        }
+
+
+        //WEP 실행부
+        if (isWEP)
+        {
+            WEP_ON();
+        }
+        else if(!isWEP)
+        {
+            WEP_OFF();
+        }
+>>>>>>> Stashed changes
     }
 
     private void FixedUpdate()
@@ -186,6 +230,24 @@ public class AirplaneController : MonoBehaviour
         var wingsLevelRoll = transform.right.y;
         var wingsLevelInfluence = Mathf.InverseLerp(0f, 10f, angleOffTarget);
         Roll = Mathf.Lerp(wingsLevelRoll, agressiveRoll, wingsLevelInfluence);
+    }
+
+    void WEP_ON()
+    {
+        //플레이어가 throttle 100% 이상 출력을 높였을 때 발동됨
+        //발동조건은 trigger 변수를 통해서 발동시킬 것임
+        // 해당함수의 기능은 기존출력의 120% 출력을 발생시킴
+        thrustPercent = 1.2f;
+        // 카메라가 멀어짐
+        Camera.main.fieldOfView =Mathf.Lerp(Camera.main.fieldOfView, finalFOV, 1*Time.deltaTime);
+        print(Camera.main.fieldOfView);
+        // 카메라가 흔들림
+    }
+    void WEP_OFF()
+    {
+        //thrustPercent = 1.0f;
+        
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView,initailFOV, 1 * Time.deltaTime);
     }
 
 }

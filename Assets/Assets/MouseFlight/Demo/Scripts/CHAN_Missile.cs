@@ -108,6 +108,16 @@ public class CHAN_Missile : MonoBehaviour
         fakeMissilePool[LaunchCount].SetActive(false);
 
         missilePool[Count].SetActive(true);
+<<<<<<< Updated upstream
+=======
+        //미사일 스크립트에서 발사가 시작됐을 때 'Ondestroyed' 라는 Action 이 실행됨
+        //그 Action 이 실행되면 이 스크립트의 'target' 리스트 항목이 지워짐
+        //missilePool[Count].GetComponent<PlayerLeadMissile>().onDestroyed = RemoveTarget;
+        missilePool[Count].GetComponent<PlayerLeadMissile>().onDestroyed = (t) =>
+        {
+            target.Remove(t);
+        };
+>>>>>>> Stashed changes
         missilePool[Count].transform.position = hardPoint[Count].transform.position;
         missilePool[Count].transform.rotation = hardPoint[Count].transform.rotation;
         missilePool[Count].GetComponent<Rigidbody>().velocity = rb.velocity;
