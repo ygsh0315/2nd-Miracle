@@ -40,7 +40,7 @@ public class missile : MonoBehaviour
     {
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
-        Destroy(collision.gameObject);
+        PlayerHP.Instance.HP -= 100;
         Destroy(gameObject);
     }
 }

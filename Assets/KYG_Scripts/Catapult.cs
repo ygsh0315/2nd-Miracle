@@ -18,6 +18,6 @@ public class Catapult : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print(1000);
-        other.GetComponent<Rigidbody>().velocity = other.transform.forward * 100;
+        other.GetComponent<Rigidbody>().velocity = new Vector3(0,100000000,0);
     }
 }

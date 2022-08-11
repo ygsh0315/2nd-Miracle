@@ -16,6 +16,7 @@ namespace MFlight
         CHAN_Missile cm;
         GameObject target;
         public Action<GameObject> onDestroyed;
+        public GameObject explosionFactory;
         void Start()
         {
             rb = GetComponent<Rigidbody>();
@@ -41,6 +42,8 @@ namespace MFlight
         {
             if (other.gameObject.name.Contains("Enemy"))
             {
+                GameObject explosion = Instantiate(explosionFactory);
+                explosion.transform.position = other.transform.position;
                 RemoveTarget(other.gameObject);
                 Destroy(other.gameObject);
                 

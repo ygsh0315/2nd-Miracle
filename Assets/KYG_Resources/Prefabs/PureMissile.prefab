@@ -240,7 +240,7 @@ MonoBehaviour:
   speed: 100
   acceleration: 10
   acSpeed: 0
-  explosionFactory: {fileID: 0}
+  explosionFactory: {fileID: 1134129239631916, guid: 1143a49ffea07224f800b628954167de, type: 3}
 --- !u!1001 &7990961338824109148
 PrefabInstance:
   m_ObjectHideFlags: 0
