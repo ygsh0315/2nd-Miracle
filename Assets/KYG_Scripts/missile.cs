@@ -8,26 +8,23 @@ public class missile : MonoBehaviour
     public float acceleration = 10;
     public float acSpeed;
     public GameObject explosionFactory;
-    Transform target;
+    GameObject target;
     Vector3 targetDir;
     Vector3 dir;
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = GameObject.Find("Player");   
     }
 
     // Update is called once per frame
     void Update()
     {
         acSpeed += acceleration * Time.deltaTime;
-        if(PlayerMove.instance != null)
-        {
-        target = PlayerMove.instance.transform;
-        }
+       
         if (target)
         {
-        targetDir = target.position - transform.position;
+        targetDir = target.transform.position - transform.position;
         // transform.rotation = new Quaternion(targetDir.x, targetDir.y, targetDir.z,1);
         dir = targetDir.normalized;
         transform.forward = targetDir.normalized;
@@ -43,7 +40,11 @@ public class missile : MonoBehaviour
     {
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
+<<<<<<< HEAD
         //Destroy(collision.gameObject);
+=======
+        PlayerHP.Instance.HP -= 100;
+>>>>>>> main
         Destroy(gameObject);
     }
 }

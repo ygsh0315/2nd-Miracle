@@ -150,8 +150,11 @@ public class AirplaneController : MonoBehaviour
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
         displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> main
 
         if (transform.position.y > 50)
         {
@@ -162,6 +165,7 @@ public class AirplaneController : MonoBehaviour
             leftWheel.localRotation = Quaternion.Lerp(leftWheel.localRotation, Quaternion.Euler(0, 0, 145), 1f * Time.deltaTime);
             rightWheel.localRotation = Quaternion.Lerp(rightWheel.localRotation, Quaternion.Euler(0, 0, -145), 1f * Time.deltaTime);
         }
+<<<<<<< HEAD
 
 
         //WEP 실행부
@@ -174,6 +178,8 @@ public class AirplaneController : MonoBehaviour
             WEP_OFF();
         }
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
     }
 
     private void FixedUpdate()

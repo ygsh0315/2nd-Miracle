@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     public float accSpeed = 0;
     public float maxSpeed = 100;
     public float finalSpeed = 0;
+
+
     private void Awake()
     {
         instance = this;

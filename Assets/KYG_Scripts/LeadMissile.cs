@@ -23,15 +23,17 @@ public class LeadMissile : MonoBehaviour
     float distance;
 
     float ratio;
+
     GameObject LCS;
 
+    bool isClose = false;
 
-
-
+    public GameObject explosionFactory;
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Player");
+
         LCS = GameObject.Find("LCS");
     }
 
@@ -45,7 +47,7 @@ public class LeadMissile : MonoBehaviour
         }
         else
         {
-            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out LcsHit))
+            if (Physics.Raycast(transform.position, target.transform.position - transform.position, out LcsHit)&&!isClose)
             {
                 distance = (target.transform.position - transform.position).magnitude;
                 targetDir = (LCS.transform.position - LcsHit.point).normalized;
@@ -60,7 +62,23 @@ public class LeadMissile : MonoBehaviour
             }
         }
 
+       if(distance<15 && Vector3.Angle(transform.forward, target.transform.position - transform.position) > 15)
+        {
+            isClose = true;
+            dir = transform.forward;
+        }
+
         transform.forward = Vector3.Lerp(transform.forward, dir, 10 * Time.deltaTime);
         transform.position += transform.forward.normalized * LMspeed * Time.deltaTime;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject explosion = Instantiate(explosionFactory);
+        explosion.transform.position = collision.transform.position;
+        if(collision.gameObject.name == "Player")
+        {
+        PlayerHP.Instance.HP -= 100;
+        }
+        Destroy(gameObject);
     }
 }
