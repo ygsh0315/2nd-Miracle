@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour
         Detact,
         Attack,
         Idle,
-        Avoid
+        Avoid,
+        Destroy
     }
 
     public EnemyState state = EnemyState.Idle;
@@ -91,7 +92,13 @@ public class Enemy : MonoBehaviour
 
     public GameObject sc;
 
+    public GameObject FlightEffect;
 
+    public GameObject DestroyEffect;
+
+    public int hp = 1;
+
+    Rigidbody rb;
 
 
     // Start is called before the first frame update
@@ -100,6 +107,8 @@ public class Enemy : MonoBehaviour
         target = GameObject.Find("Player");
         sc.transform.position = transform.position + transform.forward.normalized * speed * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
+        rb = GetComponent<Rigidbody>();
+        DestroyEffect.SetActive(false);
         for (int i = 0; i < missilePoolSize; i++)
         {
             GameObject missileFirePosition = Instantiate(missileFirePositionFactory);
@@ -124,11 +133,18 @@ public class Enemy : MonoBehaviour
             bulletPool.Add(bullet);
             bullet.SetActive(false);
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            state = EnemyState.Destroy;
+          
+        }
+        
         //print(Vector3.Angle(transform.forward, target.transform.position) < 30f);
         //print(Vector3.Angle(transform.forward, target.transform.position));
         currentTime += Time.deltaTime;
@@ -146,29 +162,23 @@ public class Enemy : MonoBehaviour
             case EnemyState.Avoid:
                 Avoid();
                 break;
+            case EnemyState.Destroy:
+                Destroy();
+                break;
         }
-        if (target && state != EnemyState.Idle)
+        if (target && state != EnemyState.Idle && state != EnemyState.Destroy)
         {
             distance = (target.transform.position - transform.position).magnitude;
             transform.forward = Vector3.Lerp(transform.forward, dir, 1 * Time.deltaTime);
             transform.position += transform.forward * speed * Time.deltaTime;
         }
-    }
-
-    private void Avoid()
-    {
-        if (currentTime > randomDirTime)
+        if (hp <= 0)
         {
-            dir = Random.insideUnitSphere.normalized;
-            currentTime = 0;
-        }
-
-        if (distance > avoidRange * 3)
-        {
-            state = EnemyState.Detact;
+            state = EnemyState.Destroy;
         }
     }
 
+    
     private void Idle()
     {
 
@@ -246,4 +256,33 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    private void Avoid()
+    {
+        if (currentTime > randomDirTime)
+        {
+            dir = Random.insideUnitSphere.normalized;
+            currentTime = 0;
+        }
+
+        if (distance > avoidRange * 3)
+        {
+            state = EnemyState.Detact;
+        }
+    }
+    private void Destroy()
+    {
+        if(FlightEffect.activeSelf == false)
+        {
+            return;
+        }
+
+        FlightEffect.SetActive(false);
+        DestroyEffect.SetActive(true);
+        rb.AddForce(transform.forward * speed * 100);
+        rb.useGravity = true;
+        Destroy(gameObject, 10f);
+    }
+
+
+
 }

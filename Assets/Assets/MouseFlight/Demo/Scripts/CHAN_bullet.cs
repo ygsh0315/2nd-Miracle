@@ -45,7 +45,7 @@ namespace MFlight
                 GameObject explosion = Instantiate(explosionFactory);
                 explosion.transform.position = other.transform.position;
                 RemoveTarget(other.gameObject);
-                Destroy(other.gameObject);
+                other.gameObject.GetComponent<Enemy>().hp--;
                 
             }
             print("Hit");

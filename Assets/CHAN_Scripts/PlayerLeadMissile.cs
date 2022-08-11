@@ -80,7 +80,7 @@ public class PlayerLeadMissile : MonoBehaviour
     {
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
-        Destroy(collision.gameObject);
+        collision.gameObject.GetComponent<Enemy>().hp--;
         Destroy(gameObject);
     }
 }
