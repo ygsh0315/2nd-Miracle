@@ -280,7 +280,7 @@ public class Enemy : MonoBehaviour
         DestroyEffect.SetActive(true);
         rb.AddForce(transform.forward * speed * 100);
         rb.useGravity = true;
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 15f);
     }
 
 
