@@ -4,17 +4,17 @@
 public class AircraftPhysicsDisplaySettings : ScriptableObject
 {
     private static AircraftPhysicsDisplaySettings displaySettings;
-    public static AircraftPhysicsDisplaySettings Instance
-    {
-        get
-        {
-            if (displaySettings == null)
-            {
-                displaySettings = Load();
-            }
-            return displaySettings;
-        }
-    }
+    //public static AircraftPhysicsDisplaySettings Instance
+    //{
+    //    get
+    //    {
+    //        if (displaySettings == null)
+    //        {
+    //            displaySettings = Load();
+    //        }
+    //        return displaySettings;
+    //    }
+    //}
 
     [Header("Scaling")]
     public bool scaleForcesByWeight = true;

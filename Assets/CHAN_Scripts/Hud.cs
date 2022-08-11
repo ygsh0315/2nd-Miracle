@@ -128,12 +128,12 @@ public class Hud : MonoBehaviour
             //print("타깃 락");
             isSeekerOn = true;
             targetBox.gameObject.SetActive(true);
-            targetBox.position = new Vector2(cm.targetPos.x, cm.targetPos.y);
+            targetBox.position = new Vector3(cm.targetPos.x, cm.targetPos.y);
             if (cm.finalLocked)
             {
                 targetBox.gameObject.SetActive(false);
                 targetRedBox.gameObject.SetActive(true);
-                targetRedBox.position = new Vector2(cm.targetPos.x, cm.targetPos.y);
+                targetRedBox.position = new Vector3(cm.targetPos.x, cm.targetPos.y);
                 cm.readyToLanch = true;
             }
         }
