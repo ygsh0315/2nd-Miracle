@@ -46,6 +46,14 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     float AutopilotSensitivity = 8f;
 
+    [Header("WEP Setting")]
+    [SerializeField] float SetTime=1;
+    [SerializeField] float initialFOV = 60;
+    [SerializeField] float targetFOV = 80;
+    float curTime;
+    bool isWEP = false;
+
+
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
@@ -97,12 +105,27 @@ public class AirplaneController : MonoBehaviour
         {
             if (thrustPercent > 1)
             {
-                thrustPercent = 1;
+                curTime += Time.deltaTime;
+                if (curTime > SetTime)
+                {
+                    isWEP = true;
+                    thrustPercent = 1.2f;
+                }
+                else
+                {
+                    thrustPercent = 1;
+                }
             }
             else
             {
                 thrustPercent += 0.005f;
             }
+        }
+        else if(thrustPercent>1)
+        {
+            isWEP = false;
+            thrustPercent = 1;
+            curTime = 0;
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -139,6 +162,17 @@ public class AirplaneController : MonoBehaviour
             frontWheel.localRotation = Quaternion.Lerp(frontWheel.localRotation, Quaternion.Euler(100, 0, 0), 1f * Time.deltaTime);
             leftWheel.localRotation = Quaternion.Lerp(leftWheel.localRotation, Quaternion.Euler(0, 0, 145), 1f * Time.deltaTime);
             rightWheel.localRotation = Quaternion.Lerp(rightWheel.localRotation, Quaternion.Euler(0, 0, -145), 1f * Time.deltaTime);
+        }
+
+        if (isWEP)
+        {
+            WEP_ON();
+            
+        }
+        else
+        {
+            WEP_OFF();
+           
         }
     }
 
@@ -198,4 +232,15 @@ public class AirplaneController : MonoBehaviour
         Roll = Mathf.Lerp(wingsLevelRoll, agressiveRoll, wingsLevelInfluence);
     }
 
+    void WEP_ON()
+    {
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime);
+        //이팩트 추가부분
+        //카메라 shakiung 부분
+    }
+
+    void WEP_OFF()
+    {
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, initialFOV, Time.deltaTime);
+    }
 }
