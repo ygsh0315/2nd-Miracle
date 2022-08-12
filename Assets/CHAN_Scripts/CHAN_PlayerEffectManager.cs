@@ -12,12 +12,12 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
     [SerializeField] float start = 0;
     [SerializeField] float end = 0;
-    [SerializeField] float animTime=1;
-    float curTime;
+    
+    
     [SerializeField] AirplaneController controller;
     [SerializeField]  Image image;
     int n = 0;
-    [SerializeField] float fadeTime;
+    [SerializeField] float fadeSpeed;
 
 
     void Start()
@@ -29,19 +29,19 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controller.PilotState < 30)
+        
+        if (controller.PilotState <= 40)
         {
+                PlayFadeIn();
             if (n - controller.PilotState <= 0)
             {
-                PlayFadeIn();
-                print("fadeIn");
-            }
-            else if (n - controller.PilotState >= 0)
-            {
-                PlayFadeOut();
-                print("fadeOut");
+                
+                
+
             }
             
+
+
             if (controller.PilotState < 10)
             { 
             controller.canControl = false;
@@ -52,7 +52,9 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         else
         {
             controller.canControl = true;
+            PlayFadeOut();
             
+
         }
 
        
@@ -76,36 +78,38 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         // 경과 시간 계산.  
         // 2초(animTime)동안 재생될 수 있도록 animTime으로 나누기.  
-        curTime += Time.deltaTime;
+        
 
         // Image 컴포넌트의 색상 값 읽어오기.  
         Color color = image.color;
         // 알파 값 계산.  
-        color.a += 0.005f;
+        color.a = Mathf.Lerp(color.a, end, 0.01f);
         if (color.a > end)
         {
             color.a = end;
         }
         // 계산한 알파 값 다시 설정.  
         image.color = color;
+        print(color.a);
         // Debug.Log(time);
     }
     void PlayFadeOut()
     {
         // 경과 시간 계산.  
         // 2초(animTime)동안 재생될 수 있도록 animTime으로 나누기.  
-        curTime += Time.deltaTime;
+        
 
         // Image 컴포넌트의 색상 값 읽어오기.  
         Color color = image.color;
         // 알파 값 계산.  
-        color.a -= 0.005f;
         if (color.a < start)
         {
             color.a = start;
         }
+        color.a = Mathf.Lerp(color.a, start, 0.001f);
         // 계산한 알파 값 다시 설정.  
         image.color = color;
+        //print(color.a);
     }
     
 

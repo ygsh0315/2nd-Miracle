@@ -6051,8 +6051,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 797874662639019306, guid: 4c0745f29d7d3dd43b710139828ae827, type: 3}
+      propertyPath: end
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 797874662639019306, guid: 4c0745f29d7d3dd43b710139828ae827, type: 3}
       propertyPath: fadeTime
-      value: 0.005
+      value: 0.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 797874662639019306, guid: 4c0745f29d7d3dd43b710139828ae827, type: 3}
+      propertyPath: fadeSpeed
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 797874662639019306, guid: 4c0745f29d7d3dd43b710139828ae827, type: 3}
       propertyPath: controller
