@@ -47,58 +47,75 @@ public class AirplaneController : MonoBehaviour
     float AutopilotSensitivity = 8f;
 
     [Header("WEP Setting")]
-    [SerializeField] float SetTime=1;
-    [SerializeField] float initialFOV = 60;
-    [SerializeField] float targetFOV = 80;
+    [SerializeField] float SetTime = 1;
+    public CHAN_PlayerEffectManager Effect;
+    
     float curTime;
     bool isWEP = false;
+
+    [Header("G-LOC Setting")]
+    [SerializeField] float LOCVel = 60;
+    [SerializeField] public float PilotState{get;set;}
+    public bool canControl;
 
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
         rb = GetComponent<Rigidbody>();
+        
+        PilotState = 100;
+
     }
 
     private void Update()
     {
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
+
         //입력값을 받는다.
-        Pitch = Input.GetAxis("Vertical");
-        Roll = Input.GetAxis("Horizontal");
-        Yaw = Input.GetAxis("Yaw");
-        float autoYaw = 0f;
-        float autoPitch = 0f;
-        float autoRoll = 0f;
-
-        if (Mathf.Abs(Roll) > .25f)
+        if (canControl)
         {
-            rollOverride = true;
+            Pitch = Input.GetAxis("Vertical");
+            Roll = Input.GetAxis("Horizontal");
+            Yaw = Input.GetAxis("Yaw");
+
+            float autoYaw = 0f;
+            float autoPitch = 0f;
+            float autoRoll = 0f;
+
+            if (Mathf.Abs(Roll) > .25f)
+            {
+                rollOverride = true;
+            }
+            else if (Mathf.Abs(Roll) < .25f)
+            {
+                rollOverride = false;
+            }
+
+            if (Mathf.Abs(Pitch) > .25f)
+            {
+                pitchOverride = true;
+
+            }
+            else if (Mathf.Abs(Pitch) < .25f)
+            {
+                pitchOverride = false;
+
+            }
+            if (controller != null)
+                RunAutopilot(controller.MouseAimPos, out autoYaw, out autoPitch, out autoRoll);
+
+            Yaw = autoYaw;
+            Pitch = (pitchOverride) ? Pitch : autoPitch;
+            Roll = (rollOverride) ? Roll : autoRoll;
         }
-        else if (Mathf.Abs(Roll) < .25f)
+        else
         {
-            rollOverride = false;
+            Pitch = Mathf.Lerp(Pitch, 0, Time.deltaTime);
+            Roll = Mathf.Lerp(Roll, 0, Time.deltaTime);
+            Yaw = Mathf.Lerp(Yaw, 0, Time.deltaTime);
         }
-
-        if (Mathf.Abs(Pitch) > .25f)
-        {
-            pitchOverride = true;
-
-        }
-        else if (Mathf.Abs(Pitch) < .25f)
-        {
-            pitchOverride = false;
-
-        }
-        if (controller != null)
-            RunAutopilot(controller.MouseAimPos, out autoYaw, out autoPitch, out autoRoll);
-
-        //Use either keyboard or autopilot input.
-        //print("pitch :" + pitchOverride);
-        //print("roll :" + rollOverride);
-        Yaw = autoYaw;
-        Pitch = (pitchOverride) ? Pitch : autoPitch;
-        Roll = (rollOverride) ? Roll : autoRoll;
+        
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -151,6 +168,7 @@ public class AirplaneController : MonoBehaviour
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
+        displayText.text += "HP: " + (int)(PilotState) + "%\n";
         displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
 
         if (transform.position.y > 100)
@@ -175,14 +193,36 @@ public class AirplaneController : MonoBehaviour
 
         if (isWEP)
         {
-            WEP_ON();
+            Effect.WEP_ON();
             
         }
         else
         {
-            WEP_OFF();
+            Effect.WEP_OFF();
            
         }
+
+        //여기는 G-LOC 감지하는 코드
+        if (Mathf.Abs(Pitch) > 0.95f && rb.velocity.magnitude > LOCVel)
+        {
+            //파일럿의 체력이 점차 감소한다.
+            PilotState -= 0.05f;
+            if (PilotState <= 0)
+            {
+                PilotState = 0;
+            }
+
+        }
+        else
+        {
+            //해당안되면 체력 다시 증가
+            PilotState += 0.05f;
+            if (PilotState >= 100)
+            {
+                PilotState = 100;
+            }
+        }
+        //print(PilotState);
     }
 
     private void FixedUpdate()
@@ -241,15 +281,5 @@ public class AirplaneController : MonoBehaviour
         Roll = Mathf.Lerp(wingsLevelRoll, agressiveRoll, wingsLevelInfluence);
     }
 
-    void WEP_ON()
-    {
-        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime);
-        //이팩트 추가부분
-        //카메라 shakiung 부분
-    }
-
-    void WEP_OFF()
-    {
-        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, initialFOV, Time.deltaTime);
-    }
+    
 }

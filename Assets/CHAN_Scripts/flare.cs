@@ -5,7 +5,6 @@ using UnityEngine;
 public class flare : MonoBehaviour
 {
     Rigidbody rb;
-    Rigidbody prb;
     [SerializeField] float scale = 120;
     [SerializeField] float vel = 10;
     float curTime;
