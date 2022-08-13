@@ -66,12 +66,12 @@ public class Hud : MonoBehaviour
             mousePos.position = playerCam.WorldToScreenPoint(controller.MouseAimPos);
             mousePos.gameObject.SetActive(mousePos.position.z > 1f);
         }
-        // 쉬프트 계속누르면 씨커가 켜진다.
+        // R 계속누르면 씨커가 켜진다.
         if (Input.GetKey(KeyCode.R))
         {
             Seeking();
         }
-        // 쉬프트를 떼면 씨커 꺼진다.
+        // R 떼면 씨커 꺼진다.
         else if (Input.GetKeyUp(KeyCode.R))
         {
             isSeekerOn = false;
@@ -105,7 +105,6 @@ public class Hud : MonoBehaviour
     // 씨커 기능 (적을 탐지했을 때 깜빡거리고 타깃이 락온되면 깜빡거림 멈춤)
     void Seeking()
     {
-
 
         curTime += Time.deltaTime;
         // 해당 루프는 타겟 안잡았을때

@@ -40,9 +40,9 @@ public class CHAN_Missile : MonoBehaviour
     // 시작되자마자 미사일풀의 미사일을 비활성화 한다.
     void Awake()
     {
-        for (int i = 1; i < missilePool.Count; i++)
+        for (int i = 0; i < missilePool.Count; i++)
         {
-            missilePool[i - 1].SetActive(false);
+            missilePool[i].SetActive(false);
         }
 
 
@@ -147,8 +147,6 @@ public class CHAN_Missile : MonoBehaviour
             {
                 isBehind[i] = false;
             }
-
-
         }
     }
 
@@ -165,7 +163,7 @@ public class CHAN_Missile : MonoBehaviour
         int index = -1;
         for (int j = 0; j < target.Count; j++)
         {
-            // 만약 플레이어,타깃사이 거리가1000 m 이하이고 좌측쉬프트를 누르고 있을때
+            // 만약 플레이어,타깃사이 거리가1000 m 이하이고 R 를 누르고 있을때
             if (meToTarget[j] < 1000 && !isBehind[j] && target[j].activeSelf)
             {
                 if (index == -1) index = j;

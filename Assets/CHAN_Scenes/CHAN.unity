@@ -6160,6 +6160,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1117758343}
     - target: {fileID: 2084654464820673843, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: missilePool.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084654464820673843, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: missilePool.Array.data[0]
       value: 
       objectReference: {fileID: 23329628}
