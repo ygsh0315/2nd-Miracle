@@ -12,8 +12,11 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
     [SerializeField] float start = 0;
     [SerializeField] float end = 0;
-    
-    
+
+    [SerializeField] GameObject smoke_R= null;
+    [SerializeField] GameObject smoke_L= null;
+
+
     [SerializeField] AirplaneController controller;
     [SerializeField]  Image image;
     int n = 0;
@@ -24,6 +27,9 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         Color color = image.color;
         color.a = 0;
+        smoke_R.SetActive(false);
+        smoke_L.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -36,8 +42,6 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             if (n - controller.PilotState <= 0)
             {
                 
-                
-
             }
             
 
@@ -55,6 +59,16 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             PlayFadeOut();
             
 
+        }
+        if (controller.isSmoke)
+        {
+            smoke_R.SetActive(true);
+            smoke_L.SetActive(true);
+        }
+        else 
+        {
+            smoke_R.SetActive(false);
+            smoke_L.SetActive(false);
         }
 
        
