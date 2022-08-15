@@ -168,7 +168,6 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         Color L_Color = burn_L.startColor.color;
         R_Color.a = Mathf.Lerp(R_Color.a, 0,0.01f);
         L_Color.a = Mathf.Lerp(L_Color.a, 0,0.01f);
-        print(R_Color.a);
         if (R_Color.a < 0.01f)
         {
             R_Color.a = 0;

@@ -48,8 +48,6 @@ namespace MFlight
                 other.gameObject.GetComponent<Enemy>().hp--;
                 
             }
-            print("Hit");
-
         }
     }
 }
