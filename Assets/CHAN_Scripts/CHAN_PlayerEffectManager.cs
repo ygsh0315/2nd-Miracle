@@ -15,6 +15,8 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
     [SerializeField] GameObject smoke_R= null;
     [SerializeField] GameObject smoke_L= null;
+    [SerializeField] ParticleSystem leadSmoke_R = null;
+    [SerializeField] ParticleSystem leadSmoke_L = null;
 
 
     [SerializeField] AirplaneController controller;
@@ -29,6 +31,8 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         color.a = 0;
         smoke_R.SetActive(false);
         smoke_L.SetActive(false);
+        leadSmoke_L.Stop();
+        leadSmoke_R.Stop();
 
     }
 
@@ -70,8 +74,18 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             smoke_R.SetActive(false);
             smoke_L.SetActive(false);
         }
+        if (controller.isLeadSmoke)
+        {
+            leadSmoke_L.Play();
+            leadSmoke_R.Play();
+        }
+        else
+        {
+            leadSmoke_L.Stop();
+            leadSmoke_R.Stop();
+        }
 
-       
+
 
 
 

@@ -308,6 +308,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78a6a86f247fe14aa22c53098a7ca47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &2911247209874643644 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3785554595687578764, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+  m_PrefabInstance: {fileID: 2084654464100394544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2911247211089790100 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3785554596638253732, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+  m_PrefabInstance: {fileID: 2084654464100394544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5036054222184939214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6416933008562100478, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
@@ -396,6 +406,14 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 7997321737161891388}
+    - target: {fileID: 2360992598479408595, guid: c74f743064d024f4bb02447920c92ceb, type: 3}
+      propertyPath: leadSmoke_L
+      value: 
+      objectReference: {fileID: 2911247211089790100}
+    - target: {fileID: 2360992598479408595, guid: c74f743064d024f4bb02447920c92ceb, type: 3}
+      propertyPath: leadSmoke_R
+      value: 
+      objectReference: {fileID: 2911247209874643644}
     - target: {fileID: 4827869093877053580, guid: c74f743064d024f4bb02447920c92ceb, type: 3}
       propertyPath: m_RootOrder
       value: 3
