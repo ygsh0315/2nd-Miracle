@@ -230,6 +230,10 @@ PrefabInstance:
       propertyPath: mouseFlight
       value: 
       objectReference: {fileID: 8028309426329434916}
+    - target: {fileID: 3028867357783843838, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8219666969988282376, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Name
       value: Player
@@ -290,6 +294,10 @@ PrefabInstance:
       propertyPath: displayText
       value: 
       objectReference: {fileID: 8534804513707430559}
+    - target: {fileID: 8475262876080564475, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
 --- !u!1 &873182648126426216 stripped
@@ -318,9 +326,19 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3785554596638253732, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
   m_PrefabInstance: {fileID: 2084654464100394544}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &3956021812207912398 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3028867357783843838, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+  m_PrefabInstance: {fileID: 2084654464100394544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5036054222184939214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6416933008562100478, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+  m_PrefabInstance: {fileID: 2084654464100394544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7597573251035074251 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8475262876080564475, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
   m_PrefabInstance: {fileID: 2084654464100394544}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7997321737161891385 stripped
@@ -414,6 +432,14 @@ PrefabInstance:
       propertyPath: leadSmoke_R
       value: 
       objectReference: {fileID: 2911247209874643644}
+    - target: {fileID: 2360992598479408595, guid: c74f743064d024f4bb02447920c92ceb, type: 3}
+      propertyPath: afterBurner_L
+      value: 
+      objectReference: {fileID: 7597573251035074251}
+    - target: {fileID: 2360992598479408595, guid: c74f743064d024f4bb02447920c92ceb, type: 3}
+      propertyPath: afterBurner_R
+      value: 
+      objectReference: {fileID: 3956021812207912398}
     - target: {fileID: 4827869093877053580, guid: c74f743064d024f4bb02447920c92ceb, type: 3}
       propertyPath: m_RootOrder
       value: 3
