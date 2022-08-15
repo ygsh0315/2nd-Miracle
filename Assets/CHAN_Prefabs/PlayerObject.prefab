@@ -230,10 +230,6 @@ PrefabInstance:
       propertyPath: mouseFlight
       value: 
       objectReference: {fileID: 8028309426329434916}
-    - target: {fileID: 3028867357783843838, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.a
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8219666969988282376, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Name
       value: Player
@@ -294,10 +290,6 @@ PrefabInstance:
       propertyPath: displayText
       value: 
       objectReference: {fileID: 8534804513707430559}
-    - target: {fileID: 8475262876080564475, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.a
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
 --- !u!1 &873182648126426216 stripped
