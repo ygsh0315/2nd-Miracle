@@ -42,7 +42,7 @@ public class RadarUI : MonoBehaviour
         }
         for(int i = 0; i<EnemyLocationGroup.Count; i++)
         {
-            EnemyLocationGroup[i].transform.position =PlayerLocation.transform.position + new Vector3((Player.transform.position- DetectedEnemyList[i].transform.position ).x * -0.05f, (DetectedEnemyList[i].transform.position - Player.transform.position).z * 0.05f, 0);
+            EnemyLocationGroup[i].transform.position = PlayerLocation.transform.position + new Vector3((Player.transform.position- DetectedEnemyList[i].transform.position ).x * -0.05f, (DetectedEnemyList[i].transform.position - Player.transform.position).z * 0.05f, 0);
         }
     }
 }
