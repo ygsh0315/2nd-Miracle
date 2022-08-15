@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7422387263825927480}
   - component: {fileID: 6047779002363096359}
   - component: {fileID: 2372947320136969659}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: ELCS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
