@@ -58,6 +58,7 @@ public class AirplaneController : MonoBehaviour
     [SerializeField] public float PilotState{get;set;}
     public bool canControl;
     public bool isSmoke;
+    public bool isLeadSmoke;
 
     private void Start()
     {
@@ -226,6 +227,14 @@ public class AirplaneController : MonoBehaviour
         if (Mathf.Abs(Pitch) > 0.4f && rb.velocity.magnitude > LOCVel)
         {
             isSmoke = true;
+            if (Mathf.Abs(Pitch) > 0.7f && rb.velocity.magnitude > LOCVel+10)
+            {
+                isLeadSmoke = true;
+            }
+            else 
+            {
+                isLeadSmoke = false;
+            }
         }
         else 
         {
