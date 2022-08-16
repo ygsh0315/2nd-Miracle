@@ -5882,6 +5882,7 @@ MonoBehaviour:
   AutopilotSensitivity: 8
   SetTime: 1
   Effect: {fileID: 0}
+  acc: 0
   LOCVel: 50
   canControl: 0
   isSmoke: 0

@@ -5133,14 +5133,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
-    - target: {fileID: 2084654464820673843, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: target.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2282235037523713504, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: initialFOV
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -5184,10 +5176,6 @@ PrefabInstance:
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891385, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
