@@ -145,7 +145,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         if (controller.acc < 0.5f)
         {
-            Camera.main.fieldOfView += controller.acc * 0.02f;
+            Camera.main.fieldOfView += controller.acc * 0.01f;
             if (controller.acc < -1)
             {
                 Camera.main.fieldOfView += controller.acc * 0.02f;
