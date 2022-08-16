@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 3914648388894160806}
   - component: {fileID: 3914648388894160811}
   m_Layer: 5
-  m_Name: MouseHud
+  m_Name: mouseHud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

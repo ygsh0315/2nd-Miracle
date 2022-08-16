@@ -49,7 +49,9 @@ public class AirplaneController : MonoBehaviour
     [Header("WEP Setting")]
     [SerializeField] float SetTime = 1;
     public CHAN_PlayerEffectManager Effect;
-    
+    Vector3 lastVelocity;
+    public float acc;
+
     float curTime;
     bool isWEP = false;
 
@@ -60,6 +62,8 @@ public class AirplaneController : MonoBehaviour
     public bool isSmoke;
     public bool isLeadSmoke;
 
+
+    
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
@@ -71,9 +75,9 @@ public class AirplaneController : MonoBehaviour
 
     private void Update()
     {
+        acc = (rb.velocity.magnitude - lastVelocity.magnitude) / Time.fixedDeltaTime;
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
-
         //입력값을 받는다.
         if (canControl)
         {
@@ -240,6 +244,8 @@ public class AirplaneController : MonoBehaviour
         {
             isSmoke = false;
         }
+
+        lastVelocity = rb.velocity;
     }
 
     private void FixedUpdate()
