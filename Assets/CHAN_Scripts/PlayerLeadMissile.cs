@@ -68,7 +68,7 @@ public class PlayerLeadMissile : MonoBehaviour
         }
         if (target)
         {
-            if (distance < 15 && Vector3.Angle(transform.forward, target.transform.position - transform.position) > 15)
+            if (distance < 10 && Vector3.Angle(transform.forward, target.transform.position - transform.position) > 15)
             {
                 isClose = true;
                 dir = transform.forward;
