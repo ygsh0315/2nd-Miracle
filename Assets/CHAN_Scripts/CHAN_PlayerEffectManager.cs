@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CHAN_PlayerEffectManager : MonoBehaviour
 {
     // 여기서 플레이어 관련된 효과를 종합적으로 다룬다.
-    // 
     [SerializeField] float initialFOV = 60;
     [SerializeField] float targetFOV = 80;
 
@@ -45,76 +44,30 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (controller.PilotState <= 40)
-        {
-                PlayFadeIn();
-            if (n - controller.PilotState <= 0)
-            {
-                
-            }
-            
-
-
-            if (controller.PilotState < 10)
-            { 
-            controller.canControl = false;
-            }
-
-            n = (int)controller.PilotState;
-        }
-        else
-        {
-            controller.canControl = true;
-            PlayFadeOut();
-            
-
-        }
-        if (controller.isSmoke)
-        {
-            smoke_R.SetActive(true);
-            smoke_L.SetActive(true);
-        }
-        else 
-        {
-            smoke_R.SetActive(false);
-            smoke_L.SetActive(false);
-        }
-        if (controller.isLeadSmoke)
-        {
-            leadSmoke_L.Play();
-            leadSmoke_R.Play();
-        }
-        else
-        {
-            leadSmoke_L.Stop();
-            leadSmoke_R.Stop();
-        }
-
-
-
-
-
+        // GLOC 함수
+        GLOC();
+        // 비행운 효과 함수
+        SmokeEffect();
+        // 가속도값에따른 카메라 시야각 설정
+        CameraFOV();
     }
 
     public void WEP_ON()
     {
-        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime);
+        //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime);
         StartAfterBurner();
         
     }
 
     public void WEP_OFF()
     {
-        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, initialFOV, Time.deltaTime);
+        //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, initialFOV, Time.deltaTime);
         EndAfterBurner();
     }
     void PlayFadeIn()
     {
         // 경과 시간 계산.  
         // 2초(animTime)동안 재생될 수 있도록 animTime으로 나누기.  
-        
-
         // Image 컴포넌트의 색상 값 읽어오기.  
         Color color = image.color;
         // 알파 값 계산.  
@@ -179,6 +132,79 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         burn_R.startColor = R_Color;
         burn_L.startColor = L_Color;
 
+    }
+    void CameraFOV()
+    {
+        if (controller.acc > 2)
+        {
+            Camera.main.fieldOfView += controller.acc * 0.01f;
+            if (controller.acc > 4)
+            {
+                Camera.main.fieldOfView += controller.acc * 0.02f;
+            }
+        }
+        if (controller.acc < 0.5f)
+        {
+            Camera.main.fieldOfView += controller.acc * 0.02f;
+            if (controller.acc < -1)
+            {
+                Camera.main.fieldOfView += controller.acc * 0.02f;
+            }
+        }
+
+        if (Camera.main.fieldOfView > targetFOV)
+        {
+            Camera.main.fieldOfView = targetFOV;
+        }
+        if (Camera.main.fieldOfView < initialFOV)
+        {
+            Camera.main.fieldOfView = initialFOV;
+        }
+    }
+    void SmokeEffect()
+    {
+        if (controller.isSmoke)
+        {
+            smoke_R.SetActive(true);
+            smoke_L.SetActive(true);
+        }
+        else
+        {
+            smoke_R.SetActive(false);
+            smoke_L.SetActive(false);
+        }
+        if (controller.isLeadSmoke)
+        {
+            leadSmoke_L.Play();
+            leadSmoke_R.Play();
+        }
+        else
+        {
+            leadSmoke_L.Stop();
+            leadSmoke_R.Stop();
+        }
+    }
+    void GLOC()
+    {
+        if (controller.PilotState <= 40)
+        {
+            PlayFadeIn();
+            if (n - controller.PilotState <= 0)
+            {
+
+            }
+            if (controller.PilotState < 10)
+            {
+                controller.canControl = false;
+            }
+
+            n = (int)controller.PilotState;
+        }
+        else
+        {
+            controller.canControl = true;
+            PlayFadeOut();
+        }
     }
 
 
