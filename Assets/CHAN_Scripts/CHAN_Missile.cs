@@ -101,7 +101,6 @@ public class CHAN_Missile : MonoBehaviour
             {
                 isLaunch = true;
                 LaunchMissile(LaunchCount);
-                print(LaunchCount);
             }
             LaunchCount++;
         }
