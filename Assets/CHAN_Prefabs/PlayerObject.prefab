@@ -231,26 +231,6 @@ PrefabInstance:
       propertyPath: mouseFlight
       value: 
       objectReference: {fileID: 8028309426329434916}
-    - target: {fileID: 252362393123468421, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: ShapeModule.angle
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 252362393123468421, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5556475572217745333, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: m_MaxParticleSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5660461044614080278, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.89556754
-      objectReference: {fileID: 0}
-    - target: {fileID: 5660461044614080278, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.456
-      objectReference: {fileID: 0}
     - target: {fileID: 8219666969988282376, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Name
       value: Player
