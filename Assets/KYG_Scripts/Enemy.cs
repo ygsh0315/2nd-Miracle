@@ -220,7 +220,6 @@ public class Enemy : MonoBehaviour
 
     private void Fire()
     {
-        print("Fire");
         bulletCurrentTime += Time.deltaTime;
         if ( bulletCurrentTime > bulletDelay)
         {
@@ -235,8 +234,6 @@ public class Enemy : MonoBehaviour
     }
     private void FireMissile()
     {
-        print("Missile");
-        //StartCoroutine(MissileActive());
         missileCurrentTime += Time.deltaTime;      
 
         
@@ -253,19 +250,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-    IEnumerator MissileActive()
-    {
-        for (int i = 0; i < missilePoolSize; i++)
-        {
-            if (missilePool.Count > 0 && target && distance < missileRange
-                && Vector3.Angle(transform.forward, target.transform.position - transform.position) < 30)
-            {
-                missileFirePosition.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
-                missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<LeadMissile>().enabled = true;
-                yield return new WaitForSeconds(missileDelay);
-            }
-        }
-    }
     private void Avoid()
     {
         if (currentTime > randomDirTime)
