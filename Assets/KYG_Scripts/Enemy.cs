@@ -203,7 +203,10 @@ public class Enemy : MonoBehaviour
     
     private void Attack()
     {
-        dir = (target.transform.position - transform.position).normalized;
+        if (target)
+        {
+            dir = (target.transform.position - transform.position).normalized;
+        }
         if (distance < avoidRange)
         {
             state = EnemyState.Avoid;

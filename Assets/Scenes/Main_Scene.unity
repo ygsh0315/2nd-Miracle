@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 3142679886803288840, guid: 119b3f5af73e64f4f978d53ec3c89859, type: 3}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -613,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 3142679886803288840, guid: 119b3f5af73e64f4f978d53ec3c89859, type: 3}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileCurrentTime
@@ -1345,7 +1345,7 @@ PrefabInstance:
       objectReference: {fileID: 3142679886803288840, guid: 119b3f5af73e64f4f978d53ec3c89859, type: 3}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -2151,7 +2151,7 @@ PrefabInstance:
       objectReference: {fileID: 3142679886803288840, guid: 119b3f5af73e64f4f978d53ec3c89859, type: 3}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
