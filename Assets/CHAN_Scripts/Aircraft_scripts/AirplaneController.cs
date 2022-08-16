@@ -58,6 +58,7 @@ public class AirplaneController : MonoBehaviour
     [Header("G-LOC Setting")]
     [SerializeField] float LOCVel = 60;
     [SerializeField] public float PilotState{get;set;}
+    float Damage;
     public bool canControl;
     public bool isSmoke;
     public bool isLeadSmoke;
@@ -209,10 +210,12 @@ public class AirplaneController : MonoBehaviour
         }
 
         //여기는 G-LOC 감지하는 코드
-        if (Mathf.Abs(Pitch) > 0.95f && rb.velocity.magnitude > LOCVel)
+        Damage = Pitch * rb.velocity.magnitude * 0.001f;
+        print(Damage);
+        if ((Pitch<-0.3f)&&(rb.velocity.magnitude>LOCVel))
         {
             //파일럿의 체력이 점차 감소한다.
-            PilotState -= 0.05f;
+            PilotState += Damage;
             if (PilotState <= 0)
             {
                 PilotState = 0;
@@ -222,7 +225,8 @@ public class AirplaneController : MonoBehaviour
         else
         {
             //해당안되면 체력 다시 증가
-            PilotState += 0.05f;
+            Damage = 0;
+            PilotState += 0.07f;
             if (PilotState >= 100)
             {
                 PilotState = 100;
