@@ -25,13 +25,22 @@ public class RadarUI : MonoBehaviour
     void Update()
     {
         PlayerLocation.transform.rotation = Quaternion.Euler(0, 0, -Player.transform.rotation.eulerAngles.y);
-        foreach(GameObject Enemy in DetectedEnemyList)
+        //foreach(GameObject Enemy in DetectedEnemyList)
+        //{
+        //    if (!Enemy.gameObject)
+        //    {
+        //        Destroy(EnemyLocationGroup[DetectedEnemyList.IndexOf(Enemy)]);
+        //        EnemyLocationGroup.RemoveAt(DetectedEnemyList.IndexOf(Enemy));
+        //        DetectedEnemyList.RemoveAt(DetectedEnemyList.IndexOf(Enemy));
+        //    }
+        //}
+        for(int i = DetectedEnemyList.Count-1; i>=0; i--)
         {
-            if (!Enemy.gameObject)
+            if (!DetectedEnemyList[i])
             {
-                Destroy(EnemyLocationGroup[DetectedEnemyList.IndexOf(Enemy)]);
-                EnemyLocationGroup.RemoveAt(DetectedEnemyList.IndexOf(Enemy));
-                DetectedEnemyList.RemoveAt(DetectedEnemyList.IndexOf(Enemy));
+                Destroy(EnemyLocationGroup[i]);
+                EnemyLocationGroup.RemoveAt(i);
+                DetectedEnemyList.RemoveAt(i);
             }
         }
         if (EnemyLocationGroup.Count < DetectedEnemyList.Count)

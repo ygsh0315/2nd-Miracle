@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     //�̻��� ��ź��
     public int missilePoolSize = 4;
     //�̻��� �߻� ����
-    public float missileDelay = 0.1f;
+    public int missileDelay = 2;
 
     //�̻��� ����
     public float missileSpacing = 2f;
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
     List<GameObject> missileFirePositions = new List<GameObject>();
 
     //�̻������
-    List<GameObject> missilePool = new List<GameObject>();
+    public List<GameObject> missilePool = new List<GameObject>();
     #endregion
 
     #region �Ѿ�
@@ -200,7 +200,7 @@ public class Enemy : MonoBehaviour
             state = EnemyState.Attack;
         }
     }
-
+    
     private void Attack()
     {
         dir = (target.transform.position - transform.position).normalized;
@@ -208,12 +208,11 @@ public class Enemy : MonoBehaviour
         {
             state = EnemyState.Avoid;
         }
-        if (distance < missileRange && Vector3.Angle(transform.forward, target.transform.position) < 30f)
+        if (distance < missileRange && Vector3.Angle(transform.forward, target.transform.position-transform.position) < 30f &&missilePool.Count>0)
         {
-            FireMissile();
-
+                FireMissile();
         }
-        if (distance < fireRange)
+        if (bulletPool.Count > 0 && target && distance < fireRange && Vector3.Angle(transform.forward, target.transform.position - transform.position) < 15f)
         {
             Fire();
         }
@@ -223,7 +222,7 @@ public class Enemy : MonoBehaviour
     {
         print("Fire");
         bulletCurrentTime += Time.deltaTime;
-        if (bulletPool.Count > 0 && target && bulletCurrentTime > bulletDelay && distance < fireRange && Vector3.Angle(transform.forward, target.transform.position - transform.position) < 15f)
+        if ( bulletCurrentTime > bulletDelay)
         {
             GameObject bullet = bulletPool[0];
             bullet.SetActive(true);
@@ -234,12 +233,23 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
     private void FireMissile()
     {
         print("Missile");
-        StartCoroutine(MissileActive());
+        //StartCoroutine(MissileActive());
+        missileCurrentTime += Time.deltaTime;      
 
+        
+        for (int i = missilePool.Count-1; i>=0; i--)
+        {
+            if (missileCurrentTime > missileDelay)
+            {
+                missilePool.RemoveAt(i);
+                missileFirePosition.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<LeadMissile>().enabled = true;
+                missileCurrentTime = 0;
+            }
+        }
 
     }
 
