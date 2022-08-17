@@ -33,10 +33,7 @@ namespace MFlight
 
 
         }
-        public void RemoveTarget(GameObject t)
-        {
-            cm.target.Remove(t);
-        }
+
 
         private void OnCollisionEnter(Collision other)
         {
@@ -44,7 +41,6 @@ namespace MFlight
             {
                 GameObject explosion = Instantiate(explosionFactory);
                 explosion.transform.position = other.transform.position;
-                RemoveTarget(other.gameObject);
                 other.gameObject.GetComponent<Enemy>().hp--;
                 
             }

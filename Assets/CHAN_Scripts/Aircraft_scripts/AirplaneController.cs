@@ -211,6 +211,7 @@ public class AirplaneController : MonoBehaviour
 
         //여기는 G-LOC 감지하는 코드
         Damage = Pitch * rb.velocity.magnitude * 0.001f;
+        //print(Damage);
         if ((Pitch<-0.3f)&&(rb.velocity.magnitude>LOCVel))
         {
             //파일럿의 체력이 점차 감소한다.
