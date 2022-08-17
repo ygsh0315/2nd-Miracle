@@ -273,11 +273,11 @@ PrefabInstance:
       objectReference: {fileID: 1941718105}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -596,11 +596,11 @@ PrefabInstance:
       objectReference: {fileID: 1658263620}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -2117,11 +2117,11 @@ PrefabInstance:
       objectReference: {fileID: 788819098}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -5181,6 +5181,14 @@ PrefabInstance:
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997321737441390085, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028309426329434916, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: mouseSensitivity
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
