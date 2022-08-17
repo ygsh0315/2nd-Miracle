@@ -11,17 +11,13 @@ public class CHAN_Missile : MonoBehaviour
     [SerializeField] MouseFlightController MController;
     [SerializeField] public List<GameObject> missilePool = new List<GameObject>();
     [SerializeField] List<GameObject> fakeMissilePool = null;
-
-    [SerializeField] List<float> meToTarget = new List<float>();
-
     // 일단은 호밍 미사일이 작동하는 것을 봐야하므로 타겟을 지정해두겠다.
-    [SerializeField] public List<GameObject> target = null;
-    [SerializeField] public List<GameObject> detected = new List<GameObject>();
     [SerializeField] Vector3[] dir = new Vector3[4];
     [SerializeField] float[] angle = new float[4];
+    [SerializeField]  Collider[] detect;
+    [SerializeField] public List<GameObject> detected = new List<GameObject>();
 
     [SerializeField] Hud hud;
-    Rigidbody Trb;
     Rigidbody rb;
     Vector2 seekerPos;
     public Vector3 targetPos;
@@ -30,11 +26,8 @@ public class CHAN_Missile : MonoBehaviour
     int LaunchCount = 0;
     public bool isLocked { get; set; }
     public bool finalLocked { get; set; }
-    // public List<GameObject> enemyPool = new List<GameObject>();
-
     public bool isLaunch;
     bool[] isBehind = new bool[4];
-
     public bool readyToLanch { get; set; }
 
     // 시작되자마자 미사일풀의 미사일을 비활성화 한다.
@@ -52,33 +45,15 @@ public class CHAN_Missile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         // 시작부분에서 게임 상 존재하는 모든 타겟의 정보가 list에 저장된다.
-        for (int i = 0; i < target.Count; i++)
-        {
-            meToTarget.Add(0);
-        }
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            print(Camera.main.WorldToScreenPoint(target[0].transform.position));
-        }
-        // 조준점의 좌표를 받는다.
-        seekerPos = Camera.main.WorldToScreenPoint(MController.BoresightPos);
-        if (target.Count != 0)
-        {
-            GetTargetPos();
-        }
-        else
-        {
-            return;
-        }
-        //플레이어와 타깃들 사이 거리를 계속해서 받는 함수
         if (Input.GetKey(KeyCode.R))
         {
             Seek1();
+            
             if (detected.Count > 0)
             {
                 Seek2();
@@ -107,49 +82,16 @@ public class CHAN_Missile : MonoBehaviour
         }
     }
 
-    public void RemoveTarget(GameObject t)
-    {
-        target.Remove(t);
-    }
-
     // 발사버튼을 눌렀을 때 리스트에 담겨있는 미사일을 활성화 시키고 초기속도를 부여함
     void LaunchMissile(int Count)
     {
         fakeMissilePool[LaunchCount].SetActive(false);
 
         missilePool[Count].SetActive(true);
-        missilePool[Count].GetComponent<PlayerLeadMissile>().onDestroyed = (t) =>
-        {
-            target.Remove(t);
-        };
         missilePool[Count].transform.position = hardPoint[Count].transform.position;
         missilePool[Count].transform.rotation = hardPoint[Count].transform.rotation;
         missilePool[Count].GetComponent<Rigidbody>().velocity = rb.velocity;
-
-
-
     }
-
-    //실시간으로 타겟의 위치를 탐지하는 함수
-    void GetTargetPos()
-    {
-        for (int i = 0; i < target.Count; i++)
-        {
-            float distance = Vector3.Distance(transform.position, target[i].transform.position);
-            meToTarget[i] = distance;
-            dir[i] = target[i].transform.position - transform.position;
-            angle[i] = Vector3.Angle(transform.forward, dir[i]);
-            if (angle[i] > 90)
-            {
-                isBehind[i] = true;
-            }
-            else
-            {
-                isBehind[i] = false;
-            }
-        }
-    }
-
     void InitialSet()
     {
         detected.Clear();
@@ -160,33 +102,34 @@ public class CHAN_Missile : MonoBehaviour
     }
     void Seek1()
     {
-        int index = -1;
-        for (int j = 0; j < target.Count; j++)
+        detect = Physics.OverlapSphere(transform.position, 1000,1<<7);
+        for(int i=0;i<detect.Length;i++)
         {
-            // 만약 플레이어,타깃사이 거리가1000 m 이하이고 R 를 누르고 있을때
-            if (meToTarget[j] < 1000 && !isBehind[j] && target[j].activeSelf)
+            dir[i] = detect[i].transform.position - transform.position;
+            angle[i] = Vector3.Angle(transform.forward, dir[i]);
+            if (angle[i] > 90)
             {
-                if (index == -1) index = j;
-                else if (meToTarget[index] > meToTarget[j])
-                {
-                    index = j;
-                }
-                //감지된 적 오브젝트를 리스트에 넣고 다시 검사
+                isBehind[i] = true;
             }
-        }
-        if (index != -1)
-        {
-            detected.Add(target[index]);
+            else
+            {
+                isBehind[i] = false;
+            }
+            if (!isBehind[i])
+            { 
+                detected.Add(detect[i].transform.gameObject);
+            }
         }
     }
     void Seek2()
-    {
-        targetPos = Camera.main.WorldToScreenPoint(detected[0].transform.position);
-        // 스크린상 타겟좌표가 해당 범위안에 들었을 때 두번째 탐지 완료
-        if ((seekerPos.x - 200 < targetPos.x && targetPos.x < seekerPos.x + 200 &&
-            (seekerPos.y - 200 < targetPos.y && targetPos.y < seekerPos.y + 200)))
-        {
+    { 
 
+        targetPos = Camera.main.WorldToScreenPoint(detected[0].transform.position);
+        seekerPos = hud.boresight.position;
+        // 스크린상 타겟좌표가 해당 범위안에 들었을 때 두번째 탐지 완료
+        if ((seekerPos.x - 200 < targetPos.x && targetPos.x < seekerPos.x + 200) &&
+            (seekerPos.y - 200 < targetPos.y && targetPos.y < seekerPos.y + 200))
+        {
             isLocked = true;
             curTime += Time.deltaTime;
             //print(curTime);
@@ -203,7 +146,5 @@ public class CHAN_Missile : MonoBehaviour
             //print("2차" + curTime);
         }
     }
-
-
 }
 

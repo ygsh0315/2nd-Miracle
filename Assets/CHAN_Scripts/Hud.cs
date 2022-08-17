@@ -63,7 +63,7 @@ public class Hud : MonoBehaviour
 
         if (mousePos != null)
         {
-            mousePos.position = playerCam.WorldToScreenPoint(controller.MouseAimPos);
+            mousePos.position = playerCam.WorldToScreenPoint(controller.MouseAimPos)+new Vector3(0,-4,0);
             mousePos.gameObject.SetActive(mousePos.position.z > 1f);
         }
         // R 계속누르면 씨커가 켜진다.
