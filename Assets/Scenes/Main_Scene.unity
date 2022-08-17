@@ -5492,7 +5492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2084654464820673743, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: hp
-      value: 10
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 2084654464820673843, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: target.Array.size
