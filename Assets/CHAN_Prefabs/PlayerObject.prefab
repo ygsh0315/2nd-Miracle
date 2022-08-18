@@ -850,9 +850,89 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164514503091164, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 3377164515370437504, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437505, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3377164515370437506, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3914648388894160807, guid: 2aef543d1ce83f441bb292a4f90bbf57, type: 3}
       propertyPath: m_Pivot.x
