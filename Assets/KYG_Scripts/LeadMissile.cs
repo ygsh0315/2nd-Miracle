@@ -24,6 +24,8 @@ public class LeadMissile : MonoBehaviour
 
     float ratio;
 
+    float dot;
+
     GameObject LCS;
 
     bool isClose = false;
@@ -61,8 +63,8 @@ public class LeadMissile : MonoBehaviour
                 //Debug.DrawLine(transform.position, impactPoint, Color.magenta);
             }
         }
-
-       if(distance<15 && Vector3.Angle(transform.forward, target.transform.position - transform.position) > 15)
+        dot = Vector3.Dot(transform.forward, (target.transform.position - transform.position).normalized);
+       if(distance<10)
         {
             isClose = true;
             dir = transform.forward;

@@ -64,7 +64,7 @@ public class PlayerLeadMissile : MonoBehaviour
         }
         if (target)
         {
-            if (distance < 15 && Vector3.Angle(transform.forward, target.transform.position - transform.position) > 15)
+            if (distance < 10)
             {
                 isClose = true;
                 dir = transform.forward;
@@ -78,7 +78,14 @@ public class PlayerLeadMissile : MonoBehaviour
     {
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
-        collision.gameObject.GetComponent<Enemy>().hp--;
+        if (collision.gameObject.GetComponent<Enemy>())
+        {
+            collision.gameObject.GetComponent<Enemy>().hp--;
+        }
+        else
+        {
+            Destroy(collision.gameObject);
+        }
         Destroy(gameObject);
     }
 }

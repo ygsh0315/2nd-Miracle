@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     #endregion
     public GameObject target;
 
+    public GameObject ENF;
+
     public float speed = 100;
 
     public float detactRange = 1000;
@@ -182,7 +184,7 @@ public class Enemy : MonoBehaviour
     private void Idle()
     {
 
-        if (currentTime > idleTime)
+        if (currentTime > idleTime || !ENF)
         {
             state = EnemyState.Detact;
         }
@@ -203,7 +205,10 @@ public class Enemy : MonoBehaviour
     
     private void Attack()
     {
-        dir = (target.transform.position - transform.position).normalized;
+        if (target)
+        {
+            dir = (target.transform.position - transform.position).normalized;
+        }
         if (distance < avoidRange)
         {
             state = EnemyState.Avoid;

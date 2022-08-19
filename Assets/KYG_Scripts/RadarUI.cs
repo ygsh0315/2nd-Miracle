@@ -10,7 +10,6 @@ public class RadarUI : MonoBehaviour
     public Image EnemyLocation;
     public List<GameObject> DetectedEnemyList = new List<GameObject>();
     public List<Image> EnemyLocationGroup = new List<Image>();
-
     private void Awake()
     {
         Instance = this;
@@ -52,6 +51,15 @@ public class RadarUI : MonoBehaviour
         for(int i = 0; i<EnemyLocationGroup.Count; i++)
         {
             EnemyLocationGroup[i].transform.position = PlayerLocation.transform.position + new Vector3((Player.transform.position- DetectedEnemyList[i].transform.position ).x * -0.05f, (DetectedEnemyList[i].transform.position - Player.transform.position).z * 0.05f, 0);
+            if (EnemyLocationGroup[i].transform.position.x>200 || EnemyLocationGroup[i].transform.position.y>200)
+            {
+                EnemyLocationGroup[i].GetComponent<Image>().enabled = false;
+            }
+            else
+            {
+                EnemyLocationGroup[i].GetComponent<Image>().enabled = true;
+            }
         }
+        
     }
 }
