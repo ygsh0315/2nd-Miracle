@@ -26,8 +26,6 @@ public class Radar : MonoBehaviour
         Collider[] detectedEnemy = Physics.OverlapSphere(transform.position, detectRange,Enemy);
         foreach(Collider Enemy in detectedEnemy)
         {
-            print(detectedEnemy.Length);
-            print(detectedEnemy[0].name);
             if (!RadarUI.Instance.DetectedEnemyList.Contains(Enemy.transform.gameObject))
             {
                 RadarUI.Instance.DetectedEnemyList.Add(Enemy.transform.gameObject);
