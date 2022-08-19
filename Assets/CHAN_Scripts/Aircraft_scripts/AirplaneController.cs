@@ -83,11 +83,11 @@ public class AirplaneController : MonoBehaviour
     {
         if (thrustPercent > 0&&!isWEP)
         {
-            sound.state = CHAN_SoundManager.State.Normal;
+            sound.moveState = CHAN_SoundManager.MoveState.Normal;
         }
         else if (thrustPercent<= 0)
         {
-            sound.state = CHAN_SoundManager.State.Idle;
+            sound.moveState = CHAN_SoundManager.MoveState.Idle;
         }
         acc = (rb.velocity.magnitude - lastVelocity.magnitude) / Time.fixedDeltaTime;
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
@@ -153,7 +153,7 @@ public class AirplaneController : MonoBehaviour
                     delayTime += Time.deltaTime;
                     if (delayTime > 2)
                     {
-                        sound.state = CHAN_SoundManager.State.AfterBurner;
+                        sound.moveState = CHAN_SoundManager.MoveState.AfterBurner;
                         delayTime = 0;
                     }
 

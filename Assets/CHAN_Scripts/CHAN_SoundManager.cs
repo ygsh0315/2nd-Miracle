@@ -5,14 +5,22 @@ using UnityEngine;
 
 public class CHAN_SoundManager : MonoBehaviour
 {
-    
-    [SerializeField]public AudioClip[] audioClips=null;
+    public static CHAN_SoundManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+    [SerializeField] public AudioClip[] audioClips = null;
     public AudioSource boost;
     public AudioSource flare;
+    public AudioSource GLOC;
+    public AudioSource gun;
 
 
     AudioSource moveSource;
-    public enum State
+    [SerializeField] AudioSource attackSource;
+    public enum MoveState
     { 
         Idle,
         Normal,
@@ -26,32 +34,67 @@ public class CHAN_SoundManager : MonoBehaviour
         Flare,
         Warning
     }
-    public State state;
+    public MoveState moveState;
+    public enum AttackState
+    { 
+        Idle,
+        gun,
+        seeking,
+        Lock,
+        Launch
+    }
+    public AttackState attackState;
+    bool turn;
+    float curTime;
     void Start()
     {
         moveSource = gameObject.AddComponent<AudioSource>();
         boost = gameObject.AddComponent<AudioSource>();
         flare = gameObject.AddComponent<AudioSource>();
+        GLOC= gameObject.AddComponent<AudioSource>();
+        attackSource = gameObject.AddComponent<AudioSource>();
     }
     public  void Statemachine()
     {
-        switch (state)
+        switch (moveState)
         {
-            case State.Idle:
+            case MoveState.Idle:
                 moveSource.clip = audioClips[0];
                 break;
-            case State.Normal:
+            case MoveState.Normal:
                 moveSource.clip = audioClips[1];
                 break;
-            case State.AfterBurner:
+            case MoveState.AfterBurner:
                 moveSource.clip = audioClips[2];
                 moveSource.loop = true;
                 break;
         }
         if (!moveSource.isPlaying)
         { 
-            moveSource.Play();
-            
+            moveSource.Play();  
+        }
+
+        switch (attackState)
+        {
+            case AttackState.Idle:
+                attackSource.Stop();
+                break;
+            case AttackState.gun:
+                attackSource.clip = audioClips[6];
+                break;
+            case AttackState.seeking:
+                attackSource.clip = audioClips[7];
+                break;
+            case AttackState.Lock:
+                attackSource.clip = audioClips[8];
+                break;
+            case AttackState.Launch:
+                attackSource.clip = audioClips[9];
+                break;
+        }
+        if (!attackSource.isPlaying)
+        {
+            attackSource.Play();
         }
     }
     void Update()
@@ -59,15 +102,20 @@ public class CHAN_SoundManager : MonoBehaviour
         Statemachine();
     }
 
-    public void AfterBurner()
+    public void Gloc()
     {
-        StartCoroutine(Boost());
+        curTime += Time.deltaTime;
+        if (curTime > 3)
+        {
+            turn = false;
+            curTime = 0;
+        }
+        if (!turn)
+        {
+            flare.PlayOneShot(audioClips[5], 1);
+            turn = true;
+        }
     }
-    public IEnumerator Boost()
-    { 
-        //boost.PlayOneShot(audioClips[3], 1);
-        yield return new WaitForSeconds(0.5f);
-        
-    }
+    
 
 }

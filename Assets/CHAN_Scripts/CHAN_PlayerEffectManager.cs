@@ -21,6 +21,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
 
     [SerializeField] AirplaneController controller;
+    [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     int n = 0;
 
@@ -192,6 +193,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         if (controller.PilotState <= 40)
         {
             PlayFadeIn();
+            sound.Gloc();
             if (n - controller.PilotState <= 0)
             {
 
