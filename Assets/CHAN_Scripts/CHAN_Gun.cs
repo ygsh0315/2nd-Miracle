@@ -36,6 +36,7 @@ namespace MFlight
 
                 if (curTime > delayTime)
                 {
+                    CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.gun;
                     GameObject bullet = bulletPool[0];
                     bullet.SetActive(true);
                     bulletPool.Remove(bullet);
@@ -45,6 +46,11 @@ namespace MFlight
                     curTime = 0;
                 }
             }
+            if (Input.GetMouseButtonUp(0))
+            {
+                CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.Idle;
+            }
+
         }
     }
 }

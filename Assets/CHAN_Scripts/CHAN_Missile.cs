@@ -53,7 +53,7 @@ public class CHAN_Missile : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             Seek1();
-            
+            CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.seeking;
             if (detected.Count > 0)
             {
                 Seek2();
@@ -75,6 +75,7 @@ public class CHAN_Missile : MonoBehaviour
             else
             {
                 isLaunch = true;
+                CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.Launch;
                 LaunchMissile(LaunchCount);
             }
             LaunchCount++;
@@ -93,6 +94,7 @@ public class CHAN_Missile : MonoBehaviour
     }
     void InitialSet()
     {
+        CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.Idle;
         detected.Clear();
         finalLocked = false;
         isLocked = false;
@@ -135,6 +137,7 @@ public class CHAN_Missile : MonoBehaviour
             //그 후 2초가 경과하면 발사준비 완료
             if (curTime > setTime)
             {
+                CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.Lock;
                 finalLocked = true;
             }
         }
