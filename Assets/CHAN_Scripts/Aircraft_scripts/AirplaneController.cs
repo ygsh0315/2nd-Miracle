@@ -53,7 +53,7 @@ public class AirplaneController : MonoBehaviour
     public float acc;
 
     float curTime;
-    bool isWEP = false;
+    public bool isWEP = false;
 
     [Header("G-LOC Setting")]
     [SerializeField] float LOCVel = 60;
@@ -63,8 +63,13 @@ public class AirplaneController : MonoBehaviour
     public bool isSmoke;
     public bool isLeadSmoke;
 
+    [Header("Audio")]
+    [SerializeField] CHAN_SoundManager sound = null;
 
+    bool turn;
+    float delayTime;
     
+
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
@@ -76,6 +81,14 @@ public class AirplaneController : MonoBehaviour
 
     private void Update()
     {
+        if (thrustPercent > 0&&!isWEP)
+        {
+            sound.moveState = CHAN_SoundManager.MoveState.Normal;
+        }
+        else if (thrustPercent<= 0)
+        {
+            sound.moveState = CHAN_SoundManager.MoveState.Idle;
+        }
         acc = (rb.velocity.magnitude - lastVelocity.magnitude) / Time.fixedDeltaTime;
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
@@ -132,10 +145,23 @@ public class AirplaneController : MonoBehaviour
                 if (curTime > SetTime)
                 {
                     isWEP = true;
-                    thrustPercent = 1.5f;
+                    if (!turn)
+                    {
+                        sound.boost.PlayOneShot(sound.audioClips[3], 1);
+                        turn = true; 
+                    }
+                    delayTime += Time.deltaTime;
+                    if (delayTime > 2)
+                    {
+                        sound.moveState = CHAN_SoundManager.MoveState.AfterBurner;
+                        delayTime = 0;
+                    }
+
+                    thrustPercent = 1.2f;
                 }
                 else
                 {
+                    
                     thrustPercent = 1;
                 }
             }
@@ -147,6 +173,7 @@ public class AirplaneController : MonoBehaviour
         else if(thrustPercent>1)
         {
             isWEP = false;
+            turn = false;
             thrustPercent = 1;
             curTime = 0;
         }

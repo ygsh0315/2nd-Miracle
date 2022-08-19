@@ -21,10 +21,14 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
 
     [SerializeField] AirplaneController controller;
+    [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     int n = 0;
-    
+
    
+    
+
+
 
     [SerializeField] float fadeSpeed;
 
@@ -39,11 +43,15 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         leadSmoke_R.Stop();
         
 
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        
+        
         // GLOC 함수
         GLOC();
         // 비행운 효과 함수
@@ -54,14 +62,12 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
     public void WEP_ON()
     {
-        //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime);
         StartAfterBurner();
         
     }
 
     public void WEP_OFF()
     {
-        //Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, initialFOV, Time.deltaTime);
         EndAfterBurner();
     }
     void PlayFadeIn()
@@ -85,8 +91,6 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         // 경과 시간 계산.  
         // 2초(animTime)동안 재생될 수 있도록 animTime으로 나누기.  
-        
-
         // Image 컴포넌트의 색상 값 읽어오기.  
         Color color = image.color;
         // 알파 값 계산.  
@@ -189,6 +193,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         if (controller.PilotState <= 40)
         {
             PlayFadeIn();
+            sound.Gloc();
             if (n - controller.PilotState <= 0)
             {
 
