@@ -2,10 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MissionManager : MonoBehaviour
 {
     public static MissionManager instance;
+    [SerializeField] Text playTime;
+    float min;
+    float sec;
+    string msec;
     private void Awake()
     {
         if (instance == null)
@@ -13,6 +18,7 @@ public class MissionManager : MonoBehaviour
             instance = this;
         }
     }
+
     //이것은 미션매니저
     // 미션1: 제한시간 안에 타겟지점에 도착하라
     // 미션2: 목표물을 파괴해라
@@ -20,6 +26,7 @@ public class MissionManager : MonoBehaviour
     // 미션4: 항모에 착함해라
     public enum State
     { 
+        Idle,
         missionStart,
         mission1,
         mission2,
@@ -34,15 +41,14 @@ public class MissionManager : MonoBehaviour
     public int missionCount;
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        StateMachine();
         if (missionCount == 10)
-        { 
-            
+        {
             
         }
     }
@@ -51,10 +57,13 @@ public class MissionManager : MonoBehaviour
     {
         switch (state)
         {
+            case State.Idle:
+                break;
             case State.missionStart:
                 MissionStart();
                 break;
             case State.mission1:
+                Mission1Start();
                 break;
             case State.mission2:
                 break;
@@ -64,14 +73,37 @@ public class MissionManager : MonoBehaviour
                 break;
             case State.End:
                 break;
-
         }
     }
+
+
 
     private void MissionStart()
     {
         // 미션을 시작
         // 제한시간안에 링을 통과하라고 지령
-        // 타이머 시작 
+        // mission1으로 전환
+        print("111111111");
+        state = State.mission1;
+        min = 0;
+        sec = 0;
+
+
+    }
+    private void Mission1Start()
+    {
+        // 타이머 시작
+        // second
+        sec = sec + Time.deltaTime;
+        if (sec > 60)
+        {
+            min ++;
+            sec = 0;
+        }
+        // ms
+        msec = string.Format("{0:.00}", Time.time % 1).Replace(".", "");
+
+        playTime.text = $"{min}:{(int)sec}:{msec}";
+
     }
 }
