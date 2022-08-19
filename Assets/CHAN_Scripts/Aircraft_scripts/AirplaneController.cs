@@ -132,7 +132,7 @@ public class AirplaneController : MonoBehaviour
                 if (curTime > SetTime)
                 {
                     isWEP = true;
-                    thrustPercent = 1.2f;
+                    thrustPercent = 1.5f;
                 }
                 else
                 {
