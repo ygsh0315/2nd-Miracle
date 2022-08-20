@@ -71,20 +71,23 @@ public class AirplaneController : MonoBehaviour
     int brakeSet;
     bool turn;
     float delayTime;
+    bool isground;
+    float waitTime;
+
     
 
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
         rb = GetComponent<Rigidbody>();
-        
         PilotState = 100;
         brakeSet = -1;
 
     }
-
+    
     private void Update()
     {
+        ControlVelocity();
         if (thrustPercent > 0&&!isWEP)
         {
             sound.moveState = CHAN_SoundManager.MoveState.Normal;
@@ -94,7 +97,6 @@ public class AirplaneController : MonoBehaviour
             sound.moveState = CHAN_SoundManager.MoveState.Idle;
         }
         acc = (rb.velocity.magnitude - lastVelocity.magnitude) / Time.fixedDeltaTime;
-        print(acc);
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
         //입력값을 받는다.
@@ -162,8 +164,15 @@ public class AirplaneController : MonoBehaviour
                         sound.moveState = CHAN_SoundManager.MoveState.AfterBurner;
                         delayTime = 0;
                     }
-
-                    thrustPercent = 2f;
+                    if (isground)
+                    {
+                        thrustPercent = 4f;
+                    }
+                    else
+                    {
+                        thrustPercent = 2f;
+                    }
+                    
                 }
                 else
                 {
@@ -206,16 +215,42 @@ public class AirplaneController : MonoBehaviour
             brakeSet *= -1;
             if (brakeSet == -1)
             {
-                brake[0].material.dynamicFriction = 100;
-                brake[1].material.dynamicFriction = 100;
+                if (rb.velocity.magnitude < 0.2f)
+                {
+                    isground = true;
+                    brake[0].material.staticFriction = 100;
+                    brake[1].material.staticFriction = 100;
+                    brake[2].material.staticFriction = 100;
+                    rb.drag = 100;
+                    print("1111");
+                }
+                else 
+                {
+                    brake[0].material.dynamicFriction = 100;
+                    brake[1].material.dynamicFriction = 100;
+                    brake[2].material.dynamicFriction = 100;
+                }
+                
             }
             else if (brakeSet == 1)
             {
+                
                 brake[0].material.dynamicFriction = 0;
                 brake[1].material.dynamicFriction = 0;
+                brake[2].material.dynamicFriction = 0;
+                rb.drag = 0;
             }
             //브레이크 on 되면 마찰 부여
             //브레이크 off 되면 마찰 해제
+        }
+        if (brakeSet == 1)
+        {
+            waitTime += Time.deltaTime;
+            if (waitTime > 2)
+            {
+                isground = false;
+                waitTime = 0;
+            }
         }
         // 출력값을 UI로 출력해 주는 부분 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
@@ -309,12 +344,6 @@ public class AirplaneController : MonoBehaviour
     {
         SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
         aircraftPhysics.SetThrustPercent(thrustPercent);
-        // foreach (var wheel in wheels)
-        // {
-        //     wheel.brakeTorque = brakesTorque;
-        //     // small torque to wake up wheel collider
-        //     wheel.motorTorque = 0.01f;
-        // }
     }
     // 입력값을 받아서 기동 방향 결정해주는 함수(상태머신이다.)
     // 내가 입력한 키가 yaw, pitch, roll인지 이 함수를 통해 판별해줌
@@ -375,9 +404,29 @@ public class AirplaneController : MonoBehaviour
         {
             print("충돌");
             canControl = false;
-
         }
     }
+    void ControlVelocity()
+    {
+        //비행기 속도가 일정속도 이상으로 증가 할 때 drag값을 증가시키는 함수
+        //만약 속도값이 100이 넘어갈때 Drag값을 증가시킨다
+        if (rb.velocity.magnitude > 125)
+        {
+            rb.drag = Mathf.Lerp(rb.drag, 1, Time.deltaTime);
+            if (rb.drag >= 1)
+            {
+                rb.drag = 1;
+            }
 
+        }
+        else if (rb.velocity.magnitude < 115&&!isground)
+        {
+            rb.drag = Mathf.Lerp(rb.drag, 0, Time.deltaTime);
+            if (rb.drag <= 0)
+            {
+                rb.drag = 0;
+            }
+        }
+    }
 
 }

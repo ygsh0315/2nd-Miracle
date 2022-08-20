@@ -592,7 +592,7 @@ PrefabInstance:
       objectReference: {fileID: 8534804513707430559}
     - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: brake.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: brake.Array.data[0]
@@ -602,6 +602,10 @@ PrefabInstance:
       propertyPath: brake.Array.data[1]
       value: 
       objectReference: {fileID: 7997321738497419084}
+    - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: brake.Array.data[2]
+      value: 
+      objectReference: {fileID: 7997321738983640136}
     - target: {fileID: 8219666970877465320, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: InputMultiplyer
       value: 2
@@ -686,6 +690,11 @@ SphereCollider:
 --- !u!135 &7997321738497419084 stripped
 SphereCollider:
   m_CorrespondingSourceObject: {fileID: 8219666970246054268, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+  m_PrefabInstance: {fileID: 2084654464100394544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &7997321738983640136 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 8219666970329737848, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
   m_PrefabInstance: {fileID: 2084654464100394544}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3070235399591952403
