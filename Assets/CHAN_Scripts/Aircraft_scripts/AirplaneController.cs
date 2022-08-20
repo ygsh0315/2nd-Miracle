@@ -40,7 +40,7 @@ public class AirplaneController : MonoBehaviour
     float brakesTorque;
     // 스크립트 가져오겠다는 뜻
     AircraftPhysics aircraftPhysics;
-    Rigidbody rb;
+    public Rigidbody rb { get; set; }
     private bool rollOverride = false;
     private bool pitchOverride = false;
     [SerializeField]
@@ -53,7 +53,7 @@ public class AirplaneController : MonoBehaviour
     public float acc;
 
     float curTime;
-    bool isWEP = false;
+    public bool isWEP = false;
 
     [Header("G-LOC Setting")]
     [SerializeField] float LOCVel = 60;
@@ -63,19 +63,35 @@ public class AirplaneController : MonoBehaviour
     public bool isSmoke;
     public bool isLeadSmoke;
 
-
+    [Header("Audio")]
+    [SerializeField] CHAN_SoundManager sound = null;
+    [Header("brake")]
+    [SerializeField] Collider[] brake;
+    int brakeSet;
+    bool turn;
+    float delayTime;
     
+
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
         rb = GetComponent<Rigidbody>();
         
         PilotState = 100;
+        brakeSet = -1;
 
     }
 
     private void Update()
     {
+        if (thrustPercent > 0&&!isWEP)
+        {
+            sound.moveState = CHAN_SoundManager.MoveState.Normal;
+        }
+        else if (thrustPercent<= 0)
+        {
+            sound.moveState = CHAN_SoundManager.MoveState.Idle;
+        }
         acc = (rb.velocity.magnitude - lastVelocity.magnitude) / Time.fixedDeltaTime;
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
@@ -132,10 +148,23 @@ public class AirplaneController : MonoBehaviour
                 if (curTime > SetTime)
                 {
                     isWEP = true;
+                    if (!turn)
+                    {
+                        sound.boost.PlayOneShot(sound.audioClips[3], 1);
+                        turn = true; 
+                    }
+                    delayTime += Time.deltaTime;
+                    if (delayTime > 2)
+                    {
+                        sound.moveState = CHAN_SoundManager.MoveState.AfterBurner;
+                        delayTime = 0;
+                    }
+
                     thrustPercent = 1.2f;
                 }
                 else
                 {
+                    
                     thrustPercent = 1;
                 }
             }
@@ -147,6 +176,7 @@ public class AirplaneController : MonoBehaviour
         else if(thrustPercent>1)
         {
             isWEP = false;
+            turn = false;
             thrustPercent = 1;
             curTime = 0;
         }
@@ -169,14 +199,26 @@ public class AirplaneController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            brakesTorque = brakesTorque > 0 ? 0 : 100f;
+            brakeSet *= -1;
+            if (brakeSet == -1)
+            {
+                brake[0].material.dynamicFriction = 100;
+                brake[1].material.dynamicFriction = 100;
+            }
+            else if (brakeSet == 1)
+            {
+                brake[0].material.dynamicFriction = 0;
+                brake[1].material.dynamicFriction = 0;
+            }
+            //브레이크 on 되면 마찰 부여
+            //브레이크 off 되면 마찰 해제
         }
         // 출력값을 UI로 출력해 주는 부분 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
         displayText.text += "HP: " + (int)(PilotState) + "%\n";
-        displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
+        displayText.text += brakeSet == -1 ? "B: ON" : "B: OFF";
 
         if (transform.position.y > 100)
         {
@@ -254,7 +296,6 @@ public class AirplaneController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 
         SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
         aircraftPhysics.SetThrustPercent(thrustPercent);
         // foreach (var wheel in wheels)
