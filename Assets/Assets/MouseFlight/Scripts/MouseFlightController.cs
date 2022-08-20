@@ -186,8 +186,7 @@ public class MouseFlightController : MonoBehaviour
         }
     }
 
-    // Thanks to Rory Driscoll
-    // http://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
+
     /// <summary>
     /// Creates dampened motion between a and b that is framerate independent.
     /// </summary>
