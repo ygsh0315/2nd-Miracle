@@ -40,7 +40,7 @@ public class AirplaneController : MonoBehaviour
     float brakesTorque;
     // 스크립트 가져오겠다는 뜻
     AircraftPhysics aircraftPhysics;
-    Rigidbody rb;
+    public Rigidbody rb { get; set; }
     private bool rollOverride = false;
     private bool pitchOverride = false;
     [SerializeField]
@@ -65,7 +65,9 @@ public class AirplaneController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] CHAN_SoundManager sound = null;
-
+    [Header("brake")]
+    [SerializeField] Collider[] brake;
+    int brakeSet;
     bool turn;
     float delayTime;
     
@@ -76,6 +78,7 @@ public class AirplaneController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         
         PilotState = 100;
+        brakeSet = -1;
 
     }
 
@@ -196,14 +199,26 @@ public class AirplaneController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            brakesTorque = brakesTorque > 0 ? 0 : 100f;
+            brakeSet *= -1;
+            if (brakeSet == -1)
+            {
+                brake[0].material.dynamicFriction = 100;
+                brake[1].material.dynamicFriction = 100;
+            }
+            else if (brakeSet == 1)
+            {
+                brake[0].material.dynamicFriction = 0;
+                brake[1].material.dynamicFriction = 0;
+            }
+            //브레이크 on 되면 마찰 부여
+            //브레이크 off 되면 마찰 해제
         }
         // 출력값을 UI로 출력해 주는 부분 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
         displayText.text += "HP: " + (int)(PilotState) + "%\n";
-        displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
+        displayText.text += brakeSet == -1 ? "B: ON" : "B: OFF";
 
         if (transform.position.y > 100)
         {
@@ -281,7 +296,6 @@ public class AirplaneController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // 
         SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
         aircraftPhysics.SetThrustPercent(thrustPercent);
         // foreach (var wheel in wheels)

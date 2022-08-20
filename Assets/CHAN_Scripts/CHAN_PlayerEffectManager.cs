@@ -23,6 +23,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
+    [SerializeField] Text warningText;
     int n = 0;
 
    
@@ -41,7 +42,9 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         smoke_L.SetActive(false);
         leadSmoke_L.Stop();
         leadSmoke_R.Stop();
-        
+        warningText.enabled = false;
+
+
 
 
     }
@@ -192,6 +195,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         if (controller.PilotState <= 40)
         {
+            StartCoroutine(WarningUI("조종사 의식저하 9G", 1));
             PlayFadeIn();
             sound.Gloc();
             if (n - controller.PilotState <= 0)
@@ -207,8 +211,35 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         else
         {
+            StopAllCoroutines();
+            if (warningText.enabled)
+            {
+                warningText.enabled = false;
+            }
             controller.canControl = true;
             PlayFadeOut();
+        }
+    }
+    IEnumerator WarningUI(string say, float blinkTime)
+    {
+        // 위 함수는 경고문구
+        // 깜빡거리면서 빨간글씨로 UI로 뜨게 한다.
+        float curTime = 0;
+        while (true)
+        { 
+            curTime += Time.fixedDeltaTime;
+            if (curTime > blinkTime)
+            {
+                warningText.enabled = true;
+                warningText.text = say;
+            }
+            if (curTime > blinkTime * 2)
+            {
+                warningText.enabled = false;
+                curTime = 0;
+            }
+            yield return null;
+        
         }
     }
 

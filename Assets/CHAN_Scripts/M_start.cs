@@ -10,7 +10,6 @@ public class M_start : MonoBehaviour
         if (other.gameObject.layer==LayerMask.NameToLayer("Player"))
         {
             MissionManager.instance.state = MissionManager.State.missionStart;
-            print("¥Í¿Ω");
         }
     }
 }
