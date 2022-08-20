@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] ParticleSystem afterBurner_L = null;
     [SerializeField] ParticleSystem leadSmoke_R = null;
     [SerializeField] ParticleSystem leadSmoke_L = null;
+    [SerializeField] ParticleSystem burning1 = null;
+    [SerializeField] ParticleSystem burning2 = null;
 
 
     [SerializeField] AirplaneController controller;
@@ -26,12 +29,12 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] Text warningText;
     int n = 0;
 
-   
-    
-
-
-
     [SerializeField] float fadeSpeed;
+
+    public bool isDie;
+    float curTime;
+    [SerializeField] float DelayToExplosion;
+
 
 
     void Start()
@@ -43,6 +46,9 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         leadSmoke_L.Stop();
         leadSmoke_R.Stop();
         warningText.enabled = false;
+        burning1.Play();
+        burning2.Play();
+
 
 
 
@@ -52,26 +58,36 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
-        
         // GLOC 함수
         GLOC();
         // 비행운 효과 함수
         SmokeEffect();
         // 가속도값에따른 카메라 시야각 설정
         CameraFOV();
+
+        if (isDie)
+        {
+            StartDie();
+        }
     }
+
+
 
     public void WEP_ON()
     {
-        StartAfterBurner();
+        if (!isDie)
+        { 
+            StartAfterBurner();
+        }
         
     }
 
     public void WEP_OFF()
     {
-        EndAfterBurner();
+        if (!isDie)
+        { 
+            EndAfterBurner();
+        }
     }
     void PlayFadeIn()
     {
@@ -170,7 +186,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     }
     void SmokeEffect()
     {
-        if (controller.isSmoke)
+        if (controller.isSmoke&&!isDie)
         {
             smoke_R.SetActive(true);
             smoke_L.SetActive(true);
@@ -180,7 +196,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             smoke_R.SetActive(false);
             smoke_L.SetActive(false);
         }
-        if (controller.isLeadSmoke)
+        if (controller.isLeadSmoke&&!isDie)
         {
             leadSmoke_L.Play();
             leadSmoke_R.Play();
@@ -243,9 +259,20 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
     }
 
+    private void StartDie()
+    {
+        //여기서 불타는 이팩트 추가 할 예정 
+        burning1.Play();
+        burning2.Play();
+        curTime += Time.deltaTime;
+        if (curTime > DelayToExplosion)
+        {
+            //그리고 일정시간 지나면 폭발함
+            //그리고 폭발 사운드
+        }
 
-
-
-
+        // 카메라는 그자리에서 대기
+        // 미션 매니저에게 게임오버 반환
+    }
 
 }

@@ -18,9 +18,10 @@ public class PlayerHP : MonoBehaviour
             hp = value;
             if(hp<=0)
             {
-                GameObject explosion = Instantiate(explosionFactory);
-                explosion.transform.position = transform.position;
-                Destroy(gameObject);
+                gameObject.GetComponent<AirplaneController>().canControl = false;
+                //GameObject explosion = Instantiate(explosionFactory);
+                //explosion.transform.position = transform.position;
+                //Destroy(gameObject);
             }
         }
     }
@@ -32,15 +33,6 @@ public class PlayerHP : MonoBehaviour
             Instance = this;
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
