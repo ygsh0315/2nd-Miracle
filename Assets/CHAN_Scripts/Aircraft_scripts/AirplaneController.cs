@@ -31,8 +31,9 @@ public class AirplaneController : MonoBehaviour
     public float Roll;
     [Range(0, 1)]
     public float Flap;
-    [SerializeField]
-    Text displayText = null;
+
+    [SerializeField] Text displayText = null;
+    [SerializeField] Text displayText2 = null;
 
     // 출력 퍼센테이지
     float thrustPercent;
@@ -254,13 +255,20 @@ public class AirplaneController : MonoBehaviour
             }
         }
         // 출력값을 UI로 출력해 주는 부분 
-        displayText.text = "속도 : " + ((int)rb.velocity.magnitude*6).ToString("D3") + " km/h\n";
-        displayText.text += "고도 : " + ((int)transform.position.y).ToString("D3") + " m\n";
-        displayText.text += "스로틀 : " + (int)(thrustPercent * 100) + "%\n";
-        displayText.text += "조종사 의식: " + (int)(PilotState) + "%\n";
-        displayText.text += "기총 : " + (GetComponent<CHAN_Gun>().leftAmmo) + "\n";
-        displayText.text += "미사일 : " + (GetComponent<CHAN_Missile>().leftMissile) + "\n";
-        displayText.text += brakeSet == -1 ? "브레이크: ON" : "브레이크: OFF";
+        displayText.text = "속도\n";
+        displayText.text += "고도\n";
+        displayText.text += "스로틀\n";
+        displayText.text += "조종사 의식\n";
+        displayText.text += "기총\n";
+        displayText.text += "미사일\n";
+        displayText.text += "브레이크";
+        displayText2.text =((int)rb.velocity.magnitude * 6).ToString("D3") + " km/h\n";
+        displayText2.text +=((int)transform.position.y).ToString("D3") + " m\n";
+        displayText2.text +=(int)(thrustPercent * 100) + "%\n";
+        displayText2.text +=(int)(PilotState) + "%\n";
+        displayText2.text +=(GetComponent<CHAN_Gun>().leftAmmo) + "\n";
+        displayText2.text +=(GetComponent<CHAN_Missile>().leftMissile) + "\n";
+        displayText2.text += brakeSet == -1 ? "ON" : "OFF";
 
         if (transform.position.y > 100)
         {
