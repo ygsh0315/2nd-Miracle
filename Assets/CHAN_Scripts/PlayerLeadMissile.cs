@@ -29,6 +29,7 @@ public class PlayerLeadMissile : MonoBehaviour
     bool isClose = false;
 
     public GameObject explosionFactory;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,8 @@ public class PlayerLeadMissile : MonoBehaviour
         cm = player.GetComponent<CHAN_Missile>();
         target = cm.detected[0];
         ELCS = target.transform.GetChild(0);
+        audio = GetComponent<AudioSource>();
+        audio.Play();
     }
 
     // Update is called once per frame
