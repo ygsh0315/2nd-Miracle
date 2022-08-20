@@ -77,17 +77,19 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         if (!isDie)
         { 
-            StartAfterBurner();
+            
         }
-        
+        StartAfterBurner();
+
     }
 
     public void WEP_OFF()
     {
         if (!isDie)
         { 
-            EndAfterBurner();
+           
         }
+        EndAfterBurner();
     }
     void PlayFadeIn()
     {

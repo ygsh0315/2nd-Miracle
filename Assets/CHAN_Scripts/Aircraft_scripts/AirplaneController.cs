@@ -62,6 +62,7 @@ public class AirplaneController : MonoBehaviour
     public bool canControl;
     public bool isSmoke;
     public bool isLeadSmoke;
+    [SerializeField]  bool isFlap;
 
     [Header("Audio")]
     [SerializeField] CHAN_SoundManager sound = null;
@@ -100,7 +101,7 @@ public class AirplaneController : MonoBehaviour
         if (canControl)
         {
             Pitch = Input.GetAxis("Vertical");
-            Pitch = Mathf.Clamp(Pitch, -1, 0.3f);
+            Pitch = Mathf.Clamp(Pitch, -1, 0.2f);
             Roll = Input.GetAxis("Horizontal");
             Yaw = Input.GetAxis("Yaw");
 
@@ -162,7 +163,7 @@ public class AirplaneController : MonoBehaviour
                         delayTime = 0;
                     }
 
-                    thrustPercent = 1.5f;
+                    thrustPercent = 2f;
                 }
                 else
                 {
@@ -197,6 +198,7 @@ public class AirplaneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Flap = Flap > 0 ? 0 : 0.3f;
+            isFlap = Flap > 0 ? true : false;
         }
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -259,7 +261,14 @@ public class AirplaneController : MonoBehaviour
         if ((Pitch<-0.3f)&&(rb.velocity.magnitude>LOCVel))
         {
             //파일럿의 체력이 점차 감소한다.
-            PilotState += Damage;
+            if (isFlap)
+            {
+                PilotState += (Damage * 2.5f);
+            }
+            else
+            {
+                PilotState += Damage;
+            }
             if (PilotState <= 0)
             {
                 PilotState = 0;

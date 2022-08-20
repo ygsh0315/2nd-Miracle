@@ -494,6 +494,10 @@ PrefabInstance:
       propertyPath: mouseFlight
       value: 
       objectReference: {fileID: 8028309426329434916}
+    - target: {fileID: 252362393123468421, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 455810053005794168, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -505,6 +509,14 @@ PrefabInstance:
     - target: {fileID: 3028867357783843832, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660461044614080278, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660461044614080278, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.13
       objectReference: {fileID: 0}
     - target: {fileID: 5746415891402857735, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: sound
