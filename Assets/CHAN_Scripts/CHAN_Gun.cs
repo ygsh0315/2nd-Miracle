@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace MFlight
-{
+
     public class CHAN_Gun : MonoBehaviour
     {
         [SerializeField] private MouseFlightController mouseFlight = null;
@@ -13,6 +12,7 @@ namespace MFlight
         [SerializeField] float multifly = 0.01f;
         float curTime;
         [SerializeField] float delayTime = 0.1f;
+        public int leftAmmo;
 
         void Start()
         {
@@ -22,6 +22,7 @@ namespace MFlight
                 bulletPool.Add(bullet);
                 bullet.SetActive(false);
             }
+            leftAmmo = bulletPool.Count;
         }
         
         // Update is called once per frame
@@ -40,6 +41,7 @@ namespace MFlight
                     GameObject bullet = bulletPool[0];
                     bullet.SetActive(true);
                     bulletPool.Remove(bullet);
+                    leftAmmo--;
                     bullet.transform.position = firePos.position;
                     //여기서 랜덤요소를 추가한다
                     bullet.transform.forward = transform.forward + dir;
@@ -53,4 +55,4 @@ namespace MFlight
 
         }
     }
-}
+

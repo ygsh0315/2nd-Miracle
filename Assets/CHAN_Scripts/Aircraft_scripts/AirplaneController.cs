@@ -74,7 +74,8 @@ public class AirplaneController : MonoBehaviour
     bool isground;
     float waitTime;
 
-    
+    [SerializeField] GameObject missile;
+
 
     private void Start()
     {
@@ -253,11 +254,13 @@ public class AirplaneController : MonoBehaviour
             }
         }
         // 출력값을 UI로 출력해 주는 부분 
-        displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
-        displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
-        displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
-        displayText.text += "HP: " + (int)(PilotState) + "%\n";
-        displayText.text += brakeSet == -1 ? "B: ON" : "B: OFF";
+        displayText.text = "속도 : " + ((int)rb.velocity.magnitude*6).ToString("D3") + " km/h\n";
+        displayText.text += "고도 : " + ((int)transform.position.y).ToString("D3") + " m\n";
+        displayText.text += "스로틀 : " + (int)(thrustPercent * 100) + "%\n";
+        displayText.text += "조종사 의식: " + (int)(PilotState) + "%\n";
+        displayText.text += "기총 : " + (GetComponent<CHAN_Gun>().leftAmmo) + "\n";
+        displayText.text += "미사일 : " + (GetComponent<CHAN_Missile>().leftMissile) + "\n";
+        displayText.text += brakeSet == -1 ? "브레이크: ON" : "브레이크: OFF";
 
         if (transform.position.y > 100)
         {

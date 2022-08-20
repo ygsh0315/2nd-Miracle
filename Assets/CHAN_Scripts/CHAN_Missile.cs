@@ -29,6 +29,7 @@ public class CHAN_Missile : MonoBehaviour
     public bool isLaunch;
     bool[] isBehind = new bool[4];
     public bool readyToLanch { get; set; }
+    public float leftMissile;
 
     // 시작되자마자 미사일풀의 미사일을 비활성화 한다.
     void Awake()
@@ -45,6 +46,7 @@ public class CHAN_Missile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         // 시작부분에서 게임 상 존재하는 모든 타겟의 정보가 list에 저장된다.
+        leftMissile = missilePool.Count;
     }
 
 
@@ -77,6 +79,7 @@ public class CHAN_Missile : MonoBehaviour
                 isLaunch = true;
                 CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.Launch;
                 LaunchMissile(LaunchCount);
+                leftMissile--;
             }
             LaunchCount++;
         }
