@@ -93,12 +93,14 @@ public class AirplaneController : MonoBehaviour
             sound.moveState = CHAN_SoundManager.MoveState.Idle;
         }
         acc = (rb.velocity.magnitude - lastVelocity.magnitude) / Time.fixedDeltaTime;
+        print(acc);
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
         //입력값을 받는다.
         if (canControl)
         {
             Pitch = Input.GetAxis("Vertical");
+            Pitch = Mathf.Clamp(Pitch, -1, 0.3f);
             Roll = Input.GetAxis("Horizontal");
             Yaw = Input.GetAxis("Yaw");
 
@@ -160,7 +162,7 @@ public class AirplaneController : MonoBehaviour
                         delayTime = 0;
                     }
 
-                    thrustPercent = 1.2f;
+                    thrustPercent = 1.5f;
                 }
                 else
                 {
@@ -354,6 +356,8 @@ public class AirplaneController : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             print("물 접촉");
+            canControl = false;
+            //이팩트 매니저에게 불타는 애니메이션 실행 호출
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -361,6 +365,8 @@ public class AirplaneController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             print("충돌");
+            canControl = false;
+
         }
     }
 

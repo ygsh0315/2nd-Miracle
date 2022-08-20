@@ -46,8 +46,8 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         leadSmoke_L.Stop();
         leadSmoke_R.Stop();
         warningText.enabled = false;
-        burning1.Play();
-        burning2.Play();
+        //burning1.Play();
+        //burning2.Play();
 
 
 
@@ -158,22 +158,19 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     }
     void CameraFOV()
     {
-        if (controller.acc > 2)
-        {
-            Camera.main.fieldOfView += controller.acc * 0.01f;
-            if (controller.acc > 4)
+        // 가속도 -2~2 까지는 안전구간
+        // 기 이상 이하부터 카메라 FOV 바뀌도록 유도
+        
+            
+            if (controller.acc > 2)
             {
                 Camera.main.fieldOfView += controller.acc * 0.02f;
             }
-        }
-        if (controller.acc < 0.5f)
-        {
-            Camera.main.fieldOfView += controller.acc * 0.01f;
-            if (controller.acc < -1)
+            if (controller.acc < -2)
             {
                 Camera.main.fieldOfView += controller.acc * 0.02f;
             }
-        }
+
 
         if (Camera.main.fieldOfView > targetFOV)
         {
