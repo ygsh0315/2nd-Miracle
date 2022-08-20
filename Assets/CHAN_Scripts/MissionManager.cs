@@ -14,6 +14,14 @@ public class MissionManager : MonoBehaviour
     [SerializeField] GameObject TargetBuilding;
     [SerializeField] GameObject Enemys;
 
+    [Header("narration Set")]
+    [SerializeField] string M_1Text = "";
+    [SerializeField] string M_2Text = "";
+    [SerializeField] string M_3Text = "";
+    [SerializeField] string M_4Text = "";
+    [SerializeField] string M_5Text = "";
+    [SerializeField] float playTime;
+
     [SerializeField] AirplaneController controller;
     GameObject player;
 
@@ -117,7 +125,7 @@ public class MissionManager : MonoBehaviour
         // 미션을 시작
         // 제한시간안에 링을 통과하라고 지령
         // mission1으로 전환
-        StartCoroutine(NarrationSay("제한 시간안에 목표물에 도달하라!", 10));
+        StartCoroutine(NarrationSay(M_1Text, playTime));
         waitTime += Time.deltaTime;
         if(waitTime>2)
         {
@@ -167,7 +175,7 @@ public class MissionManager : MonoBehaviour
         {
             // 시간안에 모든 링 통과하면 다음 미션 시작
             // 링 갯수가 상시 변할 수 있으므로 계층구조에 존재하는 갯수를 파악하는 방법은?
-            StartCoroutine(NarrationSay("목표 건물을 폭파시켜라", 10));
+            StartCoroutine(NarrationSay(M_2Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
@@ -184,7 +192,7 @@ public class MissionManager : MonoBehaviour
         //만약 건물을 파괴했다면 해당 미션 클리어 
         if (!TargetBuilding)
         {
-            StartCoroutine(NarrationSay("빠르게 후퇴하라!", 10));
+            StartCoroutine(NarrationSay(M_3Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
@@ -204,7 +212,7 @@ public class MissionManager : MonoBehaviour
         
         if (mission3Trigger.transform.childCount == 0)
         {
-            StartCoroutine(NarrationSay("적기 출현!! 모두 섬멸하라!!", 10));
+            StartCoroutine(NarrationSay(M_4Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
@@ -221,7 +229,7 @@ public class MissionManager : MonoBehaviour
         //적기를 모두 격추하면 마지막 미션으로
         if (Enemys.transform.childCount == 0)
         {
-            StartCoroutine(NarrationSay("항모로 복귀하라", 10));
+            StartCoroutine(NarrationSay(M_5Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
