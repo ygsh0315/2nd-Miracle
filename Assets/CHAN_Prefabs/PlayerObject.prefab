@@ -877,6 +877,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3604766741522343758}
     m_Modifications:
+    - target: {fileID: 2066979583, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 2282235037523713504}
     - target: {fileID: 2066979587, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: hud
       value: 
@@ -1402,7 +1406,7 @@ PrefabInstance:
       objectReference: {fileID: 968736430}
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: engineStartUpTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: audioClips.Array.data[0]
@@ -1420,6 +1424,10 @@ PrefabInstance:
       propertyPath: audioClips.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 35ad12da230653b47a9fbd06526b6286, type: 3}
+    - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
+      propertyPath: audioClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 857a05ad28318a54a90daee616496061, type: 3}
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: audioClips.Array.data[9]
       value: 

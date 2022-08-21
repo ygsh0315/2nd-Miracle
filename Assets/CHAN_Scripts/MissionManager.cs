@@ -18,7 +18,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] string M_1Text = "";
     [SerializeField] string M_2Text = "";
     [SerializeField] string M_3Text = "";
-    [SerializeField] string M_4Text = "";
+    //[SerializeField] string M_4Text = "";
     [SerializeField] string M_5Text = "";
     [SerializeField] float playTime;
 
@@ -56,7 +56,7 @@ public class MissionManager : MonoBehaviour
         mission1,
         mission2,
         mission3,
-        mission4,
+        //mission4,
         mission5,
         End,
         missionFail
@@ -103,9 +103,9 @@ public class MissionManager : MonoBehaviour
             case State.mission3:
                 M_3Start();
                 break;
-            case State.mission4:
-                M_4Start();
-                break;
+            //case State.mission4:
+            //    M_4Start();
+            //    break;
             case State.mission5:
                 M_5Start();
                 break;
@@ -218,7 +218,7 @@ public class MissionManager : MonoBehaviour
             {
                 waitTime = 0;
                 CountDown.enabled = false;
-                state = State.mission4;
+                state = State.mission5;
             }
             
         }
