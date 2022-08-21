@@ -3156,6 +3156,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 519972520, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: engineStartUpTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 519972520, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: audioClips.Array.data[7]
       value: 
       objectReference: {fileID: 8300000, guid: 857a05ad28318a54a90daee616496061, type: 3}

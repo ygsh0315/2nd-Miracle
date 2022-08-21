@@ -102,10 +102,13 @@ public class Enemy : MonoBehaviour
 
     Rigidbody rb;
 
+    AudioSource audio;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         target = GameObject.Find("Player");
         sc.transform.position = transform.position + transform.forward.normalized * speed * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
@@ -274,7 +277,7 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-
+        audio.Play();
         FlightEffect.SetActive(false);
         DestroyEffect.SetActive(true);
         rb.AddForce(transform.forward * speed * 100);
