@@ -77,7 +77,6 @@ public class CHAN_Missile : MonoBehaviour
             else
             {
                 isLaunch = true;
-                CHAN_SoundManager.instance.attackState = CHAN_SoundManager.AttackState.Launch;
                 LaunchMissile(LaunchCount);
                 leftMissile--;
             }

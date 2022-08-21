@@ -27,11 +27,7 @@ public class CHAN_SoundManager : MonoBehaviour
         AfterBurner,
         Explosion,
         Gun,
-        Seek,
-        Lock,
-        Launch,
         GLOC,
-        Flare,
         Warning
     }
     public MoveState moveState;
@@ -40,8 +36,7 @@ public class CHAN_SoundManager : MonoBehaviour
         Idle,
         gun,
         seeking,
-        Lock,
-        Launch
+        Lock
     }
     public AttackState attackState;
     bool turn;
@@ -68,6 +63,9 @@ public class CHAN_SoundManager : MonoBehaviour
                 moveSource.clip = audioClips[2];
                 moveSource.loop = true;
                 break;
+            case MoveState.Explosion:
+                moveSource.clip = audioClips[9];
+                break;
         }
         if (!moveSource.isPlaying)
         { 
@@ -87,9 +85,6 @@ public class CHAN_SoundManager : MonoBehaviour
                 break;
             case AttackState.Lock:
                 attackSource.clip = audioClips[8];
-                break;
-            case AttackState.Launch:
-                attackSource.clip = audioClips[9];
                 break;
         }
         if (!attackSource.isPlaying)

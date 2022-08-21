@@ -406,7 +406,9 @@ public class AirplaneController : MonoBehaviour
         {
             print("물 접촉");
             canControl = false;
-            //이팩트 매니저에게 불타는 애니메이션 실행 호출
+            Effect.isDie=true;
+
+    //이팩트 매니저에게 불타는 애니메이션 실행 호출
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -415,6 +417,7 @@ public class AirplaneController : MonoBehaviour
         {
             print("충돌");
             canControl = false;
+            Effect.isDie = true;
         }
     }
     void ControlVelocity()
