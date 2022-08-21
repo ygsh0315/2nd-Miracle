@@ -19,9 +19,7 @@ public class PlayerHP : MonoBehaviour
             if(hp<=0)
             {
                 gameObject.GetComponent<AirplaneController>().canControl = false;
-                //GameObject explosion = Instantiate(explosionFactory);
-                //explosion.transform.position = transform.position;
-                //Destroy(gameObject);
+               
             }
         }
     }
