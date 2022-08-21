@@ -279,6 +279,12 @@ MonoBehaviour:
   mission3Trigger: {fileID: 7564102359848929722}
   TargetBuilding: {fileID: 0}
   Enemys: {fileID: 0}
+  M_1Text: 
+  M_2Text: 
+  M_3Text: 
+  M_4Text: 
+  M_5Text: 
+  playTime: 0
   controller: {fileID: 0}
   min: 2
   sec: 0
@@ -561,10 +567,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8972517374949165681}
     m_Modifications:
-    - target: {fileID: 16687596037873252, guid: 0d997edf6281c164ba5f604a2836093f, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3869450221282923552, guid: 0d997edf6281c164ba5f604a2836093f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -620,23 +622,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3869450221282923552, guid: 0d997edf6281c164ba5f604a2836093f, type: 3}
   m_PrefabInstance: {fileID: 1088073410685250347}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8932425114357159182 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8426169276942548517, guid: 0d997edf6281c164ba5f604a2836093f, type: 3}
-  m_PrefabInstance: {fileID: 1088073410685250347}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &41954312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932425114357159182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 851891c145045b74692273a666049931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8439253254864410305
 PrefabInstance:
   m_ObjectHideFlags: 0
