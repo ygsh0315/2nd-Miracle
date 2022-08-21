@@ -25,7 +25,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] GameObject player;
 
 
-   [SerializeField] AirplaneController controller;
+    [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     [SerializeField] Text warningText;

@@ -212,7 +212,7 @@ public class MissionManager : MonoBehaviour
         
         if (mission3Trigger.transform.childCount == 0)
         {
-            StartCoroutine(NarrationSay(M_4Text, playTime));
+            StartCoroutine(NarrationSay(M_5Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
