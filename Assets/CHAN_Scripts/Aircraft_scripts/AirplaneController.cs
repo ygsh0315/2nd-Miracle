@@ -56,12 +56,13 @@ public class AirplaneController : MonoBehaviour
 
     [Header("G-LOC Setting")]
     [SerializeField] float LOCVel = 60;
-    [SerializeField] public float PilotState{get;set;}
+    [SerializeField] public float PilotState { get; set; }
     float Damage;
     public bool canControl;
+    public bool isStart;
     public bool isSmoke;
     public bool isLeadSmoke;
-    [SerializeField]  bool isFlap;
+    [SerializeField] bool isFlap;
 
     [Header("Audio")]
     [SerializeField] CHAN_SoundManager sound = null;
@@ -69,9 +70,9 @@ public class AirplaneController : MonoBehaviour
     [SerializeField] Collider[] brake;
     int brakeSet;
     bool turn;
-    float delayTime;
     bool isground;
     float waitTime;
+    public float  tp{get{return thrustPercent;}}
 
     [SerializeField] GameObject missile;
 
@@ -82,13 +83,14 @@ public class AirplaneController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         PilotState = 100;
         brakeSet = -1;
+        isStart = false;
 
     }
     
     private void Update()
     {
         ControlVelocity();
-        //print(rb.velocity.magnitude);
+        print(isStart);
         if (thrustPercent > 0&&!isWEP)
         {
             sound.moveState = CHAN_SoundManager.MoveState.Normal;
@@ -101,7 +103,7 @@ public class AirplaneController : MonoBehaviour
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
         //입력값을 받는다.
-        if (canControl)
+        if (canControl&&isStart)
         {
             Pitch = Input.GetAxis("Vertical");
             Pitch = Mathf.Clamp(Pitch, -1, 0.2f);
@@ -146,7 +148,7 @@ public class AirplaneController : MonoBehaviour
         }
         
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift)&&canControl&&isStart)
         {
             if (thrustPercent > 1)
             {
@@ -154,17 +156,7 @@ public class AirplaneController : MonoBehaviour
                 if (curTime > SetTime)
                 {
                     isWEP = true;
-                    if (!turn)
-                    {
-                        sound.boost.PlayOneShot(sound.audioClips[3], 1);
-                        turn = true; 
-                    }
-                    delayTime += Time.deltaTime;
-                    if (delayTime > 2)
-                    {
-                        sound.moveState = CHAN_SoundManager.MoveState.AfterBurner;
-                        delayTime = 0;
-                    }
+                    sound.boostTurn = true;
                     if (isground)
                     {
                         thrustPercent = 4f;
@@ -189,9 +181,12 @@ public class AirplaneController : MonoBehaviour
         else if(thrustPercent>1)
         {
             isWEP = false;
-            turn = false;
             thrustPercent = 1;
             curTime = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            sound.boostTurn = false; ;
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -271,7 +266,9 @@ public class AirplaneController : MonoBehaviour
         displayText2.text += (brakeSet == -1 ? "ON" : "OFF") + "\n";
         displayText2.text += isFlap == true ? "올림" : "접음";
 
+
         if (transform.position.y > 50 && rb.velocity.magnitude > 60)
+
         {
             Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
             Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);

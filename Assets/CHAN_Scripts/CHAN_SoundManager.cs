@@ -12,7 +12,8 @@ public class CHAN_SoundManager : MonoBehaviour
             instance = this;
     }
     [SerializeField] public AudioClip[] audioClips = null;
-    public AudioSource boost;
+    [SerializeField] AirplaneController controller;
+    [SerializeField] float engineStartUpTime;
     public AudioSource flare;
     public AudioSource GLOC;
     public AudioSource gun;
@@ -23,11 +24,11 @@ public class CHAN_SoundManager : MonoBehaviour
     [SerializeField] AudioSource startSource;
     [SerializeField] AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
+    [SerializeField] AudioSource AfterBurnerSource;
     public enum MoveState
     { 
         Idle,
         Normal,
-        AfterBurner,
         Explosion,
         Gun,
         GLOC,
@@ -43,49 +44,29 @@ public class CHAN_SoundManager : MonoBehaviour
     }
     public AttackState attackState;
     bool turn;
+    public bool boostTurn;
     float curTime;
     float waitTime;
+    [SerializeField] float soundPitch_min=0.7f;
+    [SerializeField] float soundPitch_max=1.6f;
+
     void Start()
     {
-        
-        boost = gameObject.AddComponent<AudioSource>();
         flare = gameObject.AddComponent<AudioSource>();
         GLOC= gameObject.AddComponent<AudioSource>();
         moveSource.volume = 0;
+        AfterBurnerSource.volume = 0;
     }
     public  void Statemachine()
     {
         switch (moveState)
         {
             case MoveState.Idle:
-                startSource.clip = audioClips[0];
-                waitTime += Time.deltaTime;
-                if (waitTime > 10)
-                {
-                    moveSource.clip = audioClips[1];
-                    if (!moveSource.isPlaying)
-                    {
-                        moveSource.Play();
-                    }
-                    moveSource.volume += 0.01f;
-                    if (moveSource.volume >= 1)
-                    {
-                        moveSource.volume = 1;
-                        startSource.Stop();
-                        moveState = MoveState.Normal;
-                    }
-                }
-                if (!startSource.isPlaying)
-                { 
-                    startSource.Play();
-                }
+                EngineStart();
                 break;
             case MoveState.Normal:
                 engineNormal();
-                break;
-            case MoveState.AfterBurner:
-                moveSource.clip = audioClips[2];
-                moveSource.loop = true;
+                AfterBurner(0.002f);
                 break;
             case MoveState.Explosion:
                 moveSource.clip = audioClips[9];
@@ -116,8 +97,39 @@ public class CHAN_SoundManager : MonoBehaviour
 
     private void engineNormal()
     {
-        moveSource.clip = audioClips[1];
-        
+        moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp;
+        if (!moveSource.isPlaying)
+        {
+            moveSource.Play();
+        }
+    }
+    void EngineStart()
+    {
+        startSource.clip = audioClips[0];
+        waitTime += Time.deltaTime;
+        if (waitTime > engineStartUpTime)
+        {
+            moveSource.clip = audioClips[1];
+            moveSource.pitch = 0.7f;
+            if (!moveSource.isPlaying)
+            {
+                moveSource.Play();
+            }
+            startSource.volume -= 0.001f;
+            moveSource.volume += 0.001f;
+            if (moveSource.volume >= 1)
+            {
+                moveSource.volume = 1;
+                startSource.Stop();
+                controller.isStart = true;
+                moveState = MoveState.Normal;
+                waitTime = 0;
+            }
+        }
+        if (!startSource.isPlaying)
+        {
+            startSource.Play();
+        }
     }
 
     void Update()
@@ -137,6 +149,30 @@ public class CHAN_SoundManager : MonoBehaviour
         {
             flare.PlayOneShot(audioClips[5], 1);
             turn = true;
+        }
+    }
+    void AfterBurner(float multi)
+    {
+
+        if (boostTurn)
+        {
+            AfterBurnerSource.clip = audioClips[3];
+            AfterBurnerSource.Play();
+            AfterBurnerSource.volume += multi;
+            if (AfterBurnerSource.volume > 0.9f)
+            {
+                AfterBurnerSource.volume =0.9f;
+            }
+            AfterBurnerSource.loop = true;
+        }
+        else
+        {
+            AfterBurnerSource.volume -= multi;
+            if (AfterBurnerSource.volume < 0)
+            {
+                AfterBurnerSource.Stop();
+            }
+            
         }
     }
     

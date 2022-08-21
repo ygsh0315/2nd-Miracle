@@ -30,6 +30,7 @@ public class PlayerLeadMissile : MonoBehaviour
 
     public GameObject explosionFactory;
     AudioSource audio;
+    [SerializeField]AudioClip[] audioClips;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class PlayerLeadMissile : MonoBehaviour
         target = cm.detected[0];
         ELCS = target.transform.GetChild(0);
         audio = GetComponent<AudioSource>();
+        audio.clip = audioClips[0];
         audio.Play();
     }
 
@@ -80,6 +82,7 @@ public class PlayerLeadMissile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject explosion = Instantiate(explosionFactory);
+        audio.PlayOneShot(audioClips[1], 1);
         explosion.transform.position = collision.transform.position;
         if (collision.gameObject.GetComponent<Enemy>())
         {
