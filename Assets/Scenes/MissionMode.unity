@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &82749882
 Transform:
   m_ObjectHideFlags: 0
@@ -1115,8 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 117056528}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: M_1Text
-      value: "\uC81C\uD55C\uC2DC\uAC04 \uC548\uC5D0 \uBAA9\uD45C\uC9C0\uC810\uAE4C\uC9C0
-        \uC774\uB3D9\uD558\uC2ED\uC2DC\uC624!"
+      value: "\uBAA9\uD45C\uC9C0\uC810\uAE4C\uC9C0 \uC774\uB3D9\uD558\uC2ED\uC2DC\uC624!"
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: M_2Text
@@ -1124,15 +1123,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: M_3Text
-      value: "\uC801\uAD70\uC744 \uD53C\uD574 \uC548\uC804\uD558\uAC8C \uADC0\uD658\uD558\uC2ED\uC2DC\uC624!"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: M_4Text
-      value: 
+      value: "\uC801\uAD70\uC744 \uBB34\uCC0C\uB974\uC2ED\uC2DC\uC624!"
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: M_5Text
-      value: 
+      value: "\uD56D\uACF5\uBAA8\uD568\uC73C\uB85C \uC548\uC804\uD558\uAC8C \uADC0\uD658\uD558\uC2ED\uC2DC\uC624!"
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: playTime
@@ -2179,11 +2178,11 @@ PrefabInstance:
       objectReference: {fileID: 2115637985}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -2463,7 +2462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668769864}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 188.16162, y: -235.7, z: 492.1001}
+  m_LocalPosition: {x: 171.1, y: -235.7, z: 507.4}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3563,11 +3562,11 @@ PrefabInstance:
       objectReference: {fileID: 152200605}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -4120,11 +4119,11 @@ PrefabInstance:
       objectReference: {fileID: 1344509227}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -5918,11 +5917,11 @@ PrefabInstance:
       objectReference: {fileID: 40267971}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -6269,16 +6268,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.44
       objectReference: {fileID: 0}
     - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.22
+      value: 1.21
       objectReference: {fileID: 0}
     - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6306,6 +6317,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127259910473379640, guid: 767597e072693b34c8f989d33b23361a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3715700832870663046, guid: 767597e072693b34c8f989d33b23361a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5607374428385261387, guid: 767597e072693b34c8f989d33b23361a, type: 3}

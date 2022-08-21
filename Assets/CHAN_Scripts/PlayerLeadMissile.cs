@@ -67,14 +67,14 @@ public class PlayerLeadMissile : MonoBehaviour
                 //Debug.DrawLine(transform.position, impactPoint, Color.magenta);
             }
         }
-        if (target)
-        {
-            if (distance < 10)
-            {
-                isClose = true;
-                dir = transform.forward;
-            }
-        }
+        //if (target)
+        //{
+        //    if (distance < 10)
+        //    {
+        //        isClose = true;
+        //        dir = transform.forward;
+        //    }
+        //}
 
         transform.forward = Vector3.Lerp(transform.forward, dir, 10 * Time.deltaTime);
         transform.position += transform.forward.normalized * LMspeed * Time.deltaTime;

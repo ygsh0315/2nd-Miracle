@@ -17,8 +17,8 @@ public class MissionManager : MonoBehaviour
     [Header("narration Set")]
     [SerializeField] string M_1Text = "";
     [SerializeField] string M_2Text = "";
-    [SerializeField] string M_3Text = "";
-    //[SerializeField] string M_4Text = "";
+    //[SerializeField] string M_3Text = "";
+    [SerializeField] string M_4Text = "";
     [SerializeField] string M_5Text = "";
     [SerializeField] float playTime;
 
@@ -55,8 +55,8 @@ public class MissionManager : MonoBehaviour
         missionStart,
         mission1,
         mission2,
-        mission3,
-        //mission4,
+        //mission3,
+        mission4,
         mission5,
         End,
         missionFail
@@ -100,17 +100,17 @@ public class MissionManager : MonoBehaviour
             case State.mission2:
                 M_2Start();
                 break;
-            case State.mission3:
-                M_3Start();
-                break;
-            //case State.mission4:
-            //    M_4Start();
+            //case State.mission3:
+            //    M_3Start();
             //    break;
+            case State.mission4:
+                M_4Start();
+                break;
             case State.mission5:
                 M_5Start();
                 break;
             case State.End:
-                print("end");
+                Ending();
                 break;
             case State.missionFail:
                 MissionFail();
@@ -119,6 +119,7 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    
 
     private void M_Start()
     {
@@ -192,13 +193,13 @@ public class MissionManager : MonoBehaviour
         //만약 건물을 파괴했다면 해당 미션 클리어 
         if (!TargetBuilding)
         {
-            StartCoroutine(NarrationSay(M_3Text, playTime));
+            StartCoroutine(NarrationSay(M_4Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
                 waitTime = 0;
                 CountDown.enabled = false;
-                state = State.mission3;
+                state = State.mission4;
             }
             
         }
@@ -212,7 +213,7 @@ public class MissionManager : MonoBehaviour
         
         if (mission3Trigger.transform.childCount == 0)
         {
-            StartCoroutine(NarrationSay(M_4Text, playTime));
+            StartCoroutine(NarrationSay(M_5Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
@@ -256,6 +257,11 @@ public class MissionManager : MonoBehaviour
             }
             
         }
+    }
+
+    private void Ending()
+    {
+        print("Mission Complete");
     }
     // 해당 함수는 항공기가 터지거나, 미션에 실패했을 경우 발동되는 함수
     private void MissionFail()
