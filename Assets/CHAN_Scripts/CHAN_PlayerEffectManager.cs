@@ -20,10 +20,12 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] ParticleSystem leadSmoke_R = null;
     [SerializeField] ParticleSystem leadSmoke_L = null;
     [SerializeField] ParticleSystem burning1 = null;
-    [SerializeField] ParticleSystem burning2 = null;
+    //[SerializeField] ParticleSystem burning2 = null;
+    [SerializeField] GameObject explosionFactory;
+    [SerializeField] GameObject player;
 
 
-    [SerializeField] AirplaneController controller;
+   [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     [SerializeField] Text warningText;
@@ -32,7 +34,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] float fadeSpeed;
 
     public bool isDie;
-    float curTime;
+    float delay;
     [SerializeField] float DelayToExplosion;
 
 
@@ -46,16 +48,9 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         leadSmoke_L.Stop();
         leadSmoke_R.Stop();
         warningText.enabled = false;
-        //burning1.Play();
-        //burning2.Play();
-
-
-
-
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         // GLOC 함수
@@ -64,7 +59,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         SmokeEffect();
         // 가속도값에따른 카메라 시야각 설정
         CameraFOV();
-
+       
         if (isDie)
         {
             StartDie();
@@ -75,20 +70,11 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
     public void WEP_ON()
     {
-        if (!isDie)
-        { 
-            
-        }
         StartAfterBurner();
-
     }
 
     public void WEP_OFF()
     {
-        if (!isDie)
-        { 
-           
-        }
         EndAfterBurner();
     }
     void PlayFadeIn()
@@ -258,18 +244,21 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
     }
 
-    private void StartDie()
+    public void StartDie()
     {
         //여기서 불타는 이팩트 추가 할 예정 
         burning1.Play();
-        burning2.Play();
-        curTime += Time.deltaTime;
-        if (curTime > DelayToExplosion)
+        //burning2.Play();
+        delay += Time.deltaTime;
+        if (delay > DelayToExplosion)
         {
-            //그리고 일정시간 지나면 폭발함
-            //그리고 폭발 사운드
+            CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
+            GameObject explosion = Instantiate(explosionFactory);
+            print(explosion);
+            explosion.transform.position = player.transform.position;
+            player.SetActive(false);
+            delay = 0;
         }
-
         // 카메라는 그자리에서 대기
         // 미션 매니저에게 게임오버 반환
     }
