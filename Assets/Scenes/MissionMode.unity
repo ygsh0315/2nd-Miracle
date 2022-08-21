@@ -1338,9 +1338,17 @@ PrefabInstance:
       value: 1230435
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
+      propertyPath: playTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: controller
       value: 
       objectReference: {fileID: 1729041648}
+    - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
+      propertyPath: missionCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923281, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: m_Name
       value: MissionManager

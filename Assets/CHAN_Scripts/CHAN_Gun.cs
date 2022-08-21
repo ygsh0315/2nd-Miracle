@@ -29,7 +29,7 @@ using UnityEngine;
         void Update()
         {
             curTime += Time.deltaTime;
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0)&&GetComponent<AirplaneController>().isStart)
             {
                 float x = Random.Range(-10, 10) * multifly;
                 float y = Random.Range(-10, 10) * multifly;
