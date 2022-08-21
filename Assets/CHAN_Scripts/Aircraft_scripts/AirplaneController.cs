@@ -270,7 +270,7 @@ public class AirplaneController : MonoBehaviour
         displayText2.text +=(GetComponent<CHAN_Missile>().leftMissile) + "\n";
         displayText2.text += brakeSet == -1 ? "ON" : "OFF";
 
-        if (transform.position.y > 100)
+        if (transform.position.y > 90)
         {
             Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
             Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);
@@ -280,7 +280,7 @@ public class AirplaneController : MonoBehaviour
             rightWheel.localRotation = Quaternion.Lerp(rightWheel.localRotation, Quaternion.Euler(0, 0, -145), 1f * Time.deltaTime);
            
         }
-        else
+        else if(transform.position.y < 100&&rb.velocity.magnitude<65)
         {
             Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
             Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);
