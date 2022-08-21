@@ -9,7 +9,7 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     //감지고도
-    public float DetectingAltitude = 5f;
+    float DetectingAltitude;
     //감지범위
     public float DetectingRange = 100f;
     //감지여부
@@ -54,6 +54,7 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DetectingAltitude = transform.position.y;
         target = GameObject.FindWithTag("Player").transform;
         //target = GameObject.Find("Enemy").transform;
         launcher = transform.GetChild(0);
