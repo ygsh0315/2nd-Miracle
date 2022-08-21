@@ -90,7 +90,7 @@ public class AirplaneController : MonoBehaviour
     private void Update()
     {
         ControlVelocity();
-        print(isStart);
+        //print(isStart);
         if (thrustPercent > 0&&!isWEP)
         {
             sound.moveState = CHAN_SoundManager.MoveState.Normal;

@@ -1,21 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public bool IsPause;
     public GameObject PauseMenu;
+    public GameObject Manual;
+    public GameObject text;
+    public GameObject Radar;
+    Image ManualImage;
     // Start is called before the first frame update
     void Start()
     {
         IsPause = false;
         PauseMenu.SetActive(false);
+        ManualImage = Manual.GetComponent<Image>();
+        ManualImage.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.F3))
+        {
+            ManualImage.enabled = true;
+            text.SetActive(false);
+            Radar.SetActive(false);
+        }
+        else
+        {
+            ManualImage.enabled = false;
+            text.SetActive(true);
+            Radar.SetActive(true);
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (IsPause == false)
@@ -34,5 +52,6 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+       
     }
 }
