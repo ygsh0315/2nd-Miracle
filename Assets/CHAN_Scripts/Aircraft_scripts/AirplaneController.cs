@@ -271,11 +271,9 @@ public class AirplaneController : MonoBehaviour
         displayText2.text += (brakeSet == -1 ? "ON" : "OFF") + "\n";
         displayText2.text += isFlap == true ? "올림" : "접음";
 
-<<<<<<< HEAD
-        if (transform.position.y > 90)
-=======
+
         if (transform.position.y > 50 && rb.velocity.magnitude > 60)
->>>>>>> main
+
         {
             Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
             Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);
