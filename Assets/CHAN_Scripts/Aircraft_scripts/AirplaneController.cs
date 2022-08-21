@@ -37,8 +37,6 @@ public class AirplaneController : MonoBehaviour
 
     // 출력 퍼센테이지
     float thrustPercent;
-    // 브레이크 토크
-    float brakesTorque;
     // 스크립트 가져오겠다는 뜻
     AircraftPhysics aircraftPhysics;
     public Rigidbody rb { get; set; }
@@ -90,6 +88,7 @@ public class AirplaneController : MonoBehaviour
     private void Update()
     {
         ControlVelocity();
+        print(rb.velocity.magnitude);
         if (thrustPercent > 0&&!isWEP)
         {
             sound.moveState = CHAN_SoundManager.MoveState.Normal;
@@ -261,16 +260,18 @@ public class AirplaneController : MonoBehaviour
         displayText.text += "조종사 의식\n";
         displayText.text += "기총\n";
         displayText.text += "미사일\n";
-        displayText.text += "브레이크";
+        displayText.text += "브레이크\n";
+        displayText.text += "플랩";
         displayText2.text =((int)rb.velocity.magnitude * 6).ToString("D3") + " km/h\n";
         displayText2.text +=((int)transform.position.y).ToString("D3") + " m\n";
         displayText2.text +=(int)(thrustPercent * 100) + "%\n";
         displayText2.text +=(int)(PilotState) + "%\n";
         displayText2.text +=(GetComponent<CHAN_Gun>().leftAmmo) + "\n";
         displayText2.text +=(GetComponent<CHAN_Missile>().leftMissile) + "\n";
-        displayText2.text += brakeSet == -1 ? "ON" : "OFF";
+        displayText2.text += (brakeSet == -1 ? "ON" : "OFF") + "\n";
+        displayText2.text += isFlap == true ? "올림" : "접음";
 
-        if (transform.position.y > 90)
+        if (transform.position.y > 50 && rb.velocity.magnitude > 60)
         {
             Transform frontWheel = transform.GetChild(1).GetChild(0).GetChild(1);
             Transform leftWheel = transform.GetChild(1).GetChild(0).GetChild(3);

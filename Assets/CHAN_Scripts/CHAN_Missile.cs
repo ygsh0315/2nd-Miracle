@@ -12,8 +12,8 @@ public class CHAN_Missile : MonoBehaviour
     [SerializeField] public List<GameObject> missilePool = new List<GameObject>();
     [SerializeField] List<GameObject> fakeMissilePool = null;
     // 일단은 호밍 미사일이 작동하는 것을 봐야하므로 타겟을 지정해두겠다.
-    [SerializeField] Vector3[] dir = new Vector3[4];
-    [SerializeField] float[] angle = new float[4];
+    [SerializeField] Vector3[] dir;
+    [SerializeField] float[] angle;
     [SerializeField]  Collider[] detect;
     [SerializeField] public List<GameObject> detected = new List<GameObject>();
 
@@ -27,7 +27,7 @@ public class CHAN_Missile : MonoBehaviour
     public bool isLocked { get; set; }
     public bool finalLocked { get; set; }
     public bool isLaunch;
-    bool[] isBehind = new bool[4];
+    bool[] isBehind ;
     public bool readyToLanch { get; set; }
     public float leftMissile;
 
@@ -106,7 +106,10 @@ public class CHAN_Missile : MonoBehaviour
     void Seek1()
     {
         detect = Physics.OverlapSphere(transform.position, 1000,1<<7);
-        for(int i=0;i<detect.Length;i++)
+        dir = new Vector3[detect.Length];
+        angle = new float[detect.Length];
+        isBehind=new bool[detect.Length];
+        for (int i=0;i<detect.Length;i++)
         {
             dir[i] = detect[i].transform.position - transform.position;
             angle[i] = Vector3.Angle(transform.forward, dir[i]);

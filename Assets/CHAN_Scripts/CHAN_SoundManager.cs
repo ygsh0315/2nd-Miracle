@@ -18,7 +18,10 @@ public class CHAN_SoundManager : MonoBehaviour
     public AudioSource gun;
 
 
-    AudioSource moveSource;
+
+
+    [SerializeField] AudioSource startSource;
+    [SerializeField] AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
     public enum MoveState
     { 
@@ -41,23 +44,44 @@ public class CHAN_SoundManager : MonoBehaviour
     public AttackState attackState;
     bool turn;
     float curTime;
+    float waitTime;
     void Start()
     {
-        moveSource = gameObject.AddComponent<AudioSource>();
+        
         boost = gameObject.AddComponent<AudioSource>();
         flare = gameObject.AddComponent<AudioSource>();
         GLOC= gameObject.AddComponent<AudioSource>();
-        attackSource = gameObject.AddComponent<AudioSource>();
+        moveSource.volume = 0;
     }
     public  void Statemachine()
     {
         switch (moveState)
         {
             case MoveState.Idle:
-                moveSource.clip = audioClips[0];
+                startSource.clip = audioClips[0];
+                waitTime += Time.deltaTime;
+                if (waitTime > 10)
+                {
+                    moveSource.clip = audioClips[1];
+                    if (!moveSource.isPlaying)
+                    {
+                        moveSource.Play();
+                    }
+                    moveSource.volume += 0.01f;
+                    if (moveSource.volume >= 1)
+                    {
+                        moveSource.volume = 1;
+                        startSource.Stop();
+                        moveState = MoveState.Normal;
+                    }
+                }
+                if (!startSource.isPlaying)
+                { 
+                    startSource.Play();
+                }
                 break;
             case MoveState.Normal:
-                moveSource.clip = audioClips[1];
+                engineNormal();
                 break;
             case MoveState.AfterBurner:
                 moveSource.clip = audioClips[2];
@@ -67,10 +91,7 @@ public class CHAN_SoundManager : MonoBehaviour
                 moveSource.clip = audioClips[9];
                 break;
         }
-        if (!moveSource.isPlaying)
-        { 
-            moveSource.Play();  
-        }
+        
 
         switch (attackState)
         {
@@ -92,6 +113,13 @@ public class CHAN_SoundManager : MonoBehaviour
             attackSource.Play();
         }
     }
+
+    private void engineNormal()
+    {
+        moveSource.clip = audioClips[1];
+        
+    }
+
     void Update()
     {
         Statemachine();
