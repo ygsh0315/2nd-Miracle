@@ -20,7 +20,6 @@ public class CHAN_SoundManager : MonoBehaviour
 
 
 
-
     [SerializeField] AudioSource startSource;
     [SerializeField] AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
@@ -56,6 +55,7 @@ public class CHAN_SoundManager : MonoBehaviour
         GLOC= gameObject.AddComponent<AudioSource>();
         moveSource.volume = 0;
         AfterBurnerSource.volume = 0;
+        waitTime = 0;
     }
     public  void Statemachine()
     {
@@ -107,7 +107,7 @@ public class CHAN_SoundManager : MonoBehaviour
     {
         startSource.clip = audioClips[0];
         waitTime += Time.deltaTime;
-        if (waitTime > engineStartUpTime)
+        if (waitTime >= engineStartUpTime)
         {
             moveSource.clip = audioClips[1];
             moveSource.pitch = 0.7f;
@@ -122,8 +122,6 @@ public class CHAN_SoundManager : MonoBehaviour
                 moveSource.volume = 1;
                 startSource.Stop();
                 controller.isStart = true;
-                moveState = MoveState.Normal;
-                waitTime = 0;
             }
         }
         if (!startSource.isPlaying)

@@ -309,7 +309,6 @@ public class MissionManager : MonoBehaviour
         while (true)
         {
             delay += Time.fixedDeltaTime;
-            print(delay);
             if (delay > t)
             {
                 Narration.enabled = false;
