@@ -881,6 +881,10 @@ PrefabInstance:
       propertyPath: effect
       value: 
       objectReference: {fileID: 2282235037523713504}
+    - target: {fileID: 2066979583, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 7997321737161891388}
     - target: {fileID: 2066979587, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: hud
       value: 
@@ -999,7 +1003,7 @@ PrefabInstance:
       objectReference: {fileID: 2282235037523713504}
     - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: LOCVel
-      value: 100
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: controller
@@ -1029,6 +1033,10 @@ PrefabInstance:
       propertyPath: brake.Array.data[2]
       value: 
       objectReference: {fileID: 7997321738983640136}
+    - target: {fileID: 8219666969988282383, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: thrust
+      value: 6000
+      objectReference: {fileID: 0}
     - target: {fileID: 8219666970877465320, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: InputMultiplyer
       value: 2
@@ -1406,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 968736430}
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: engineStartUpTime
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: audioClips.Array.data[0]
@@ -1887,6 +1895,10 @@ PrefabInstance:
     - target: {fileID: 7564102361227923281, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: m_Name
       value: MissionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564102361227923281, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923295, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: m_RootOrder

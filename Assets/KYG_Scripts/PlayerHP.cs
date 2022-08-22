@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerHP : MonoBehaviour
 {
     public GameObject explosionFactory;
+    [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_PlayerEffectManager effect;
     public int hp = 10;
     public int HP
@@ -19,7 +20,8 @@ public class PlayerHP : MonoBehaviour
             hp = value;
             if(hp<=0)
             {
-                gameObject.GetComponent<AirplaneController>().canControl = false;
+                controller.isHit = true; 
+                
                 effect.StartDie();  
             }
         }

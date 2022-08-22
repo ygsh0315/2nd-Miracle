@@ -69,7 +69,7 @@ public class AirplaneController : MonoBehaviour
     [Header("brake")]
     [SerializeField] Collider[] brake;
     int brakeSet;
-    bool turn;
+    public bool isHit;
     bool isground;
     float waitTime;
     public float  tp{get{return thrustPercent;}}
@@ -84,11 +84,13 @@ public class AirplaneController : MonoBehaviour
         PilotState = 100;
         brakeSet = -1;
         isStart = false;
+        isHit = false;
 
     }
     
     private void Update()
     {
+        print("canControl:" + canControl);
         ControlVelocity();
         //print(isStart);
         if (thrustPercent > 0&&!isWEP)
@@ -103,7 +105,7 @@ public class AirplaneController : MonoBehaviour
         sc.transform.position = transform.position + transform.forward.normalized * rb.velocity.magnitude * 0.01f;
         sc.GetComponent<SphereCollider>().radius = LeadMissile.LMspeed * 0.01f;
         //입력값을 받는다.
-        if (canControl&&isStart)
+        if (canControl&&isStart&&!isHit)
         {
             Pitch = Input.GetAxis("Vertical");
             Pitch = Mathf.Clamp(Pitch, -1, 0.2f);
@@ -148,7 +150,7 @@ public class AirplaneController : MonoBehaviour
         }
         
 
-        if (Input.GetKey(KeyCode.LeftShift)&&canControl&&isStart)
+        if (Input.GetKey(KeyCode.LeftShift)&&canControl&&isStart&&!isHit)
         {
             if (thrustPercent > 1)
             {
@@ -159,7 +161,7 @@ public class AirplaneController : MonoBehaviour
                     sound.boostTurn = true;
                     if (isground)
                     {
-                        thrustPercent = 4f;
+                        thrustPercent = 5f;
                     }
                     else
                     {
@@ -218,7 +220,6 @@ public class AirplaneController : MonoBehaviour
                     brake[1].material.staticFriction = 100;
                     brake[2].material.staticFriction = 100;
                     rb.drag = 100;
-                    print("1111");
                 }
                 else 
                 {
@@ -345,6 +346,10 @@ public class AirplaneController : MonoBehaviour
         {
             isSmoke = false;
         }
+        if (isHit)
+        {
+            thrustPercent = 0;
+        }
 
         lastVelocity = rb.velocity;
     }
@@ -403,7 +408,7 @@ public class AirplaneController : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
             print("물 접촉");
-            canControl = false;
+            isHit = true;
             Effect.isDie=true;
 
     //이팩트 매니저에게 불타는 애니메이션 실행 호출
@@ -414,7 +419,7 @@ public class AirplaneController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             print("충돌");
-            canControl = false;
+            isHit = true;
             Effect.isDie = true;
         }
     }

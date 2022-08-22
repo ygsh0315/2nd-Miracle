@@ -2807,17 +2807,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
---- !u!114 &746176993 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2282235037523713504, guid: e8b044d65762edb44afbec7318805888, type: 3}
-  m_PrefabInstance: {fileID: 2084742840}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a429613bd1a0ef844a8b4e221334b018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &746555358 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1486773793965065253, guid: e8b044d65762edb44afbec7318805888, type: 3}
@@ -6577,22 +6566,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 519972520, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: engineStartUpTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044859902, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1131061785111078004, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
-    - target: {fileID: 2084654464820673743, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: effect
-      value: 
-      objectReference: {fileID: 746176993}
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -6636,14 +6613,6 @@ PrefabInstance:
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891388, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: LOCVel
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891391, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: thrust
-      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
