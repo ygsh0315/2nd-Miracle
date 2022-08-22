@@ -16,7 +16,7 @@ public class CHAN_flareSet : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 500; i++)
         {
             GameObject flare = Instantiate(flareFac);
             flarePool.Add(flare);

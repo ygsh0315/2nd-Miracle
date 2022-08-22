@@ -1110,6 +1110,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
+      propertyPath: min
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564102361227923280, guid: 57dfc85de1ab5c148b9160014df5576b, type: 3}
       propertyPath: Enemys
       value: 
       objectReference: {fileID: 117056528}
@@ -2166,7 +2170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: idleTime
-      value: 120
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
@@ -2178,11 +2182,11 @@ PrefabInstance:
       objectReference: {fileID: 2115637985}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 0
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -2755,11 +2759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3539,7 +3543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: idleTime
-      value: 120
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
@@ -3551,11 +3555,11 @@ PrefabInstance:
       objectReference: {fileID: 152200605}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 0
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -4096,7 +4100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: idleTime
-      value: 120
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
@@ -4108,11 +4112,11 @@ PrefabInstance:
       objectReference: {fileID: 1344509227}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 0
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -5894,7 +5898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: idleTime
-      value: 120
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
@@ -5906,11 +5910,11 @@ PrefabInstance:
       objectReference: {fileID: 40267971}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: bulletPoolSize
-      value: 0
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missilePoolSize
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893551, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: m_Constraints
@@ -6570,6 +6574,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
+    - target: {fileID: 2084654464820673743, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: hp
+      value: 100000
+      objectReference: {fileID: 0}
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -6613,6 +6621,14 @@ PrefabInstance:
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979207037111307188, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997321737161891388, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: LOCVel
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}

@@ -383,11 +383,11 @@ public class AirplaneController : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying)
-            SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    if (!Application.isPlaying)
+    //        SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
+    //}
 
     private void RunAutopilot(Vector3 flyTarget, out float Yaw, out float Pitch, out float Roll)
     {
