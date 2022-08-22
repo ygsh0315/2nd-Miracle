@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MissionMode.unity
     guid: 0a8cbe08ec55fff46b3578e49ee5a460
+  - enabled: 1
+    path: Assets/Scenes/Ending_Scene.unity
+    guid: 9706b18c1c5f7da4ca4dbfbe68327788
   m_configObjects: {}

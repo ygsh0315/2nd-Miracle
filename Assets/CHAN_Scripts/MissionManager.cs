@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MissionManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] GameObject mission3Trigger;
     [SerializeField] GameObject TargetBuilding;
     [SerializeField] GameObject Enemys;
+    
 
     [Header("narration Set")]
     [SerializeField] string M_1Text = "";
@@ -261,7 +263,7 @@ public class MissionManager : MonoBehaviour
 
     private void Ending()
     {
-        print("Mission Complete");
+        SceneManager.LoadScene("Ending_Scene");
     }
     // 해당 함수는 항공기가 터지거나, 미션에 실패했을 경우 발동되는 함수
     private void MissionFail()
