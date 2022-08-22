@@ -188,7 +188,7 @@ public class AirplaneController : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            sound.boostTurn = false; ;
+            sound.boostTurn = false; 
         }
         if (Input.GetKey(KeyCode.LeftControl))
         {
