@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool IsPause;
@@ -34,6 +35,10 @@ public class GameManager : MonoBehaviour
             text.SetActive(true);
             Radar.SetActive(true);
         }
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SceneManager.LoadScene("MissionMode");
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (IsPause == false)
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour
                 PauseMenu.SetActive(true);
                 Time.timeScale = 0;
                 IsPause = true;
+                Cursor.visible = true;
                 return;
             }
 
@@ -49,6 +55,7 @@ public class GameManager : MonoBehaviour
                 PauseMenu.SetActive(false);
                 Time.timeScale = 1;
                 IsPause = false;
+                Cursor.visible = false;
                 return;
             }
         }
