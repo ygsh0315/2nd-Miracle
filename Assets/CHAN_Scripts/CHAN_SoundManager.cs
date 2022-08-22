@@ -123,7 +123,7 @@ public class CHAN_SoundManager : MonoBehaviour
                 startSource.Stop();
                 controller.isStart = true;
                 moveState = MoveState.Normal;
-                waitTime = 0;
+
             }
         }
         if (!startSource.isPlaying)

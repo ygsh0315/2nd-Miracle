@@ -84,6 +84,7 @@ public class AirplaneController : MonoBehaviour
         PilotState = 100;
         brakeSet = -1;
         isStart = false;
+        canControl = true;
 
     }
     
@@ -329,10 +330,10 @@ public class AirplaneController : MonoBehaviour
                 PilotState = 100;
             }
         }
-        if (Mathf.Abs(Pitch) > 0.4f && rb.velocity.magnitude > LOCVel)
+        if (Mathf.Abs(Pitch) > 0.4f && rb.velocity.magnitude > LOCVel-10)
         {
             isSmoke = true;
-            if (Mathf.Abs(Pitch) > 0.7f && rb.velocity.magnitude > LOCVel+10)
+            if (Mathf.Abs(Pitch) > 0.7f && rb.velocity.magnitude > LOCVel)
             {
                 isLeadSmoke = true;
             }
