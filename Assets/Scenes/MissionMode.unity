@@ -9295,11 +9295,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7997321737161891388, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: LOCVel
+<<<<<<< Updated upstream
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7997321737161891391, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: thrust
       value: 5000
+=======
+      value: 80
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}

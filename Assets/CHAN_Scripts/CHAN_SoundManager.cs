@@ -22,7 +22,7 @@ public class CHAN_SoundManager : MonoBehaviour
 
 
     [SerializeField] AudioSource startSource;
-    [SerializeField] AudioSource moveSource;
+    [SerializeField] public  AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
     [SerializeField] AudioSource AfterBurnerSource;
     public enum MoveState
@@ -95,6 +95,7 @@ public class CHAN_SoundManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     private void engineNormal()
     {
         moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp;
@@ -103,6 +104,9 @@ public class CHAN_SoundManager : MonoBehaviour
             moveSource.Play();
         }
     }
+=======
+
+>>>>>>> Stashed changes
     void EngineStart()
     {
         startSource.clip = audioClips[0];
@@ -131,6 +135,27 @@ public class CHAN_SoundManager : MonoBehaviour
             startSource.Play();
         }
     }
+    private void engineNormal()
+    {
+        if (controller.isWEP)
+        {
+            if(controller.isground)
+            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.2f;
+            else 
+            {
+                moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.5f;
+            }
+        }
+        else
+        {
+            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp ;
+        }
+
+        if (!moveSource.isPlaying)
+        {
+            moveSource.Play();
+        }
+    }
 
     void Update()
     {
@@ -147,7 +172,12 @@ public class CHAN_SoundManager : MonoBehaviour
         }
         if (!turn)
         {
+<<<<<<< Updated upstream
             flare.PlayOneShot(audioClips[5], 1);
+=======
+            GLOC.PlayOneShot(audioClips[5], 0.6f);
+            GLOC.pitch = 0.6f;
+>>>>>>> Stashed changes
             turn = true;
         }
     }
