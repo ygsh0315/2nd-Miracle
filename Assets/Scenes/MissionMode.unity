@@ -4264,17 +4264,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &1352015809 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7831483129789072532, guid: e8b044d65762edb44afbec7318805888, type: 3}
-  m_PrefabInstance: {fileID: 2084742840}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1374405680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6481,26 +6470,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 968736430, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: m_Pitch
-      value: 1.25
-      objectReference: {fileID: 0}
     - target: {fileID: 1131061785111078004, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
-    - target: {fileID: 2084654464820673743, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: hp
-      value: 100000
+    - target: {fileID: 2264954863662682805, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3448160655011948809, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: mc
-      value: 
-      objectReference: {fileID: 2084742841}
-    - target: {fileID: 3448160655011948809, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: PlayerVision
-      value: 
-      objectReference: {fileID: 1352015809}
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -6545,21 +6522,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7979207037111307188, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: far clip plane
-      value: 1500
+    - target: {fileID: 5904992236752234885, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891388, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: LOCVel
-      value: 110
+    - target: {fileID: 5936818964604272934, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7404441382545788602, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 98e5305606edd434a870bca05879e4e4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
---- !u!20 &2084742841 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7979207037111307188, guid: e8b044d65762edb44afbec7318805888, type: 3}
-  m_PrefabInstance: {fileID: 2084742840}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2097165560
 PrefabInstance:
   m_ObjectHideFlags: 0
