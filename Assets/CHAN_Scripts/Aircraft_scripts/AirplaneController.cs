@@ -70,7 +70,7 @@ public class AirplaneController : MonoBehaviour
     [SerializeField] Collider[] brake;
     int brakeSet;
     public bool isHit;
-    bool isground;
+    public bool isground;
     float waitTime;
     public float  tp{get{return thrustPercent;}}
 
