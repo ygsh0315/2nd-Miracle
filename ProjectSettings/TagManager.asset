@@ -17,7 +17,7 @@ TagManager:
   - Enemy
   - Missile
   - EnemyBullet
-  - Floor
+  - Environment
   - PlayerMissile
   - LCS
   - 

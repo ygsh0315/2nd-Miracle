@@ -100,6 +100,8 @@ public class Enemy : MonoBehaviour
 
     public int hp = 1;
 
+    RaycastHit EnvironmentDistance;
+
     Rigidbody rb;
 
     AudioSource audio;
@@ -208,11 +210,13 @@ public class Enemy : MonoBehaviour
     
     private void Attack()
     {
+        int LayerMask = (1<<10 | 1<<4);
+        Physics.Raycast(transform.position, target.transform.position - transform.position, out EnvironmentDistance, LayerMask);
         if (target)
         {
             dir = (target.transform.position - transform.position).normalized;
         }
-        if (distance < avoidRange)
+        if (distance < avoidRange || EnvironmentDistance.distance<avoidRange)
         {
             state = EnemyState.Avoid;
         }

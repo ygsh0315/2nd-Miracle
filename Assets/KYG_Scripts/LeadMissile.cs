@@ -63,11 +63,12 @@ public class LeadMissile : MonoBehaviour
                 //Debug.DrawLine(transform.position, impactPoint, Color.magenta);
             }
         }
-        dot = Vector3.Dot(transform.forward, (target.transform.position - transform.position).normalized);
-       if(distance<10)
+        //dot = Vector3.Dot(transform.forward, (target.transform.position - transform.position).normalized);
+        if (distance < 10)
         {
             isClose = true;
             dir = transform.forward;
+            Destroy(gameObject, 2f);
         }
 
         transform.forward = Vector3.Lerp(transform.forward, dir, 10 * Time.deltaTime);
