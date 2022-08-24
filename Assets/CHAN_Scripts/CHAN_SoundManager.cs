@@ -95,7 +95,18 @@ public class CHAN_SoundManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+    private void engineNormal()
+    {
+        moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp;
+        if (!moveSource.isPlaying)
+        {
+            moveSource.Play();
+        }
+    }
+=======
 
+>>>>>>> Stashed changes
     void EngineStart()
     {
         startSource.clip = audioClips[0];
@@ -161,10 +172,12 @@ public class CHAN_SoundManager : MonoBehaviour
         }
         if (!turn)
         {
-
+<<<<<<< Updated upstream
+            flare.PlayOneShot(audioClips[5], 1);
+=======
             GLOC.PlayOneShot(audioClips[5], 0.6f);
             GLOC.pitch = 0.6f;
-
+>>>>>>> Stashed changes
             turn = true;
         }
     }
