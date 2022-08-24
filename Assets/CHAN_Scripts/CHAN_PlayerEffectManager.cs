@@ -25,7 +25,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] GameObject player;
 
 
-    [SerializeField] AirplaneController controller;
+   [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     [SerializeField] Text warningText;
@@ -35,7 +35,6 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
 
     public bool isDie;
     float delay;
-    [SerializeField] float LOCmultipler = 1;
     [SerializeField] float DelayToExplosion;
 
 
@@ -200,12 +199,6 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             StartCoroutine(WarningUI("조종사 의식저하 9G", 1));
             PlayFadeIn();
             sound.Gloc();
-            LOCmultipler -= 0.002f;
-            sound.moveSource.pitch *= LOCmultipler;
-            if(LOCmultipler < 0.3f)
-            {
-                LOCmultipler = 0.3f;
-            }
             if (n - controller.PilotState <= 0)
             {
 
@@ -219,12 +212,6 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         else
         {
-            LOCmultipler += 0.002f;
-            sound.moveSource.pitch *= LOCmultipler;
-            if (LOCmultipler > 1f)
-            {
-                LOCmultipler = 1f;
-            }
             StopAllCoroutines();
             if (warningText.enabled)
             {

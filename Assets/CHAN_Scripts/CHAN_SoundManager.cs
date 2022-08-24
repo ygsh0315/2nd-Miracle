@@ -20,9 +20,8 @@ public class CHAN_SoundManager : MonoBehaviour
 
 
 
-
     [SerializeField] AudioSource startSource;
-    [SerializeField] public  AudioSource moveSource;
+    [SerializeField] AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
     [SerializeField] AudioSource AfterBurnerSource;
     public enum MoveState
@@ -56,6 +55,7 @@ public class CHAN_SoundManager : MonoBehaviour
         GLOC= gameObject.AddComponent<AudioSource>();
         moveSource.volume = 0;
         AfterBurnerSource.volume = 0;
+        waitTime = 0;
     }
     public  void Statemachine()
     {
@@ -66,7 +66,7 @@ public class CHAN_SoundManager : MonoBehaviour
                 break;
             case MoveState.Normal:
                 engineNormal();
-                AfterBurner(0.002f);
+                AfterBurner(0.007f);
                 break;
             case MoveState.Explosion:
                 moveSource.clip = audioClips[9];
@@ -95,12 +95,27 @@ public class CHAN_SoundManager : MonoBehaviour
         }
     }
 
-
+    private void engineNormal()
+    {
+        if (controller.isWEP)
+        {
+            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.2f;
+        }
+        else 
+        {
+            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp;
+        }
+        
+        if (!moveSource.isPlaying)
+        {
+            moveSource.Play();
+        }
+    }
     void EngineStart()
     {
         startSource.clip = audioClips[0];
         waitTime += Time.deltaTime;
-        if (waitTime > engineStartUpTime)
+        if (waitTime >= engineStartUpTime)
         {
             moveSource.clip = audioClips[1];
             moveSource.pitch = 0.7f;
@@ -115,34 +130,11 @@ public class CHAN_SoundManager : MonoBehaviour
                 moveSource.volume = 1;
                 startSource.Stop();
                 controller.isStart = true;
-                moveState = MoveState.Normal;
-
             }
         }
         if (!startSource.isPlaying)
         {
             startSource.Play();
-        }
-    }
-    private void engineNormal()
-    {
-        if (controller.isWEP)
-        {
-            if(controller.isground)
-            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.2f;
-            else 
-            {
-                moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.5f;
-            }
-        }
-        else
-        {
-            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp ;
-        }
-
-        if (!moveSource.isPlaying)
-        {
-            moveSource.Play();
         }
     }
 
@@ -161,26 +153,24 @@ public class CHAN_SoundManager : MonoBehaviour
         }
         if (!turn)
         {
-
-            GLOC.PlayOneShot(audioClips[5], 0.6f);
-            GLOC.pitch = 0.6f;
-
+            flare.PlayOneShot(audioClips[5], 0.6f);
             turn = true;
         }
     }
     void AfterBurner(float multi)
     {
 
-        if (boostTurn)
+        if (!boostTurn)
         {
             AfterBurnerSource.clip = audioClips[3];
             AfterBurnerSource.Play();
-            AfterBurnerSource.volume += multi;
-            if (AfterBurnerSource.volume > 0.9f)
-            {
-                AfterBurnerSource.volume =0.9f;
-            }
             AfterBurnerSource.loop = true;
+            AfterBurnerSource.volume += multi;
+            if (AfterBurnerSource.volume > 1f)
+            {
+                AfterBurnerSource.volume =1f;
+            }
+            
         }
         else
         {

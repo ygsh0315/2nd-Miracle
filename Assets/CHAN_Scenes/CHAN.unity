@@ -3155,10 +3155,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 519972520, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: engineStartUpTime
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1044859903, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: Enemys
       value: 
@@ -3214,14 +3210,6 @@ PrefabInstance:
     - target: {fileID: 3604766741522343758, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891388, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: LOCVel
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891391, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: thrust
-      value: 6000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
