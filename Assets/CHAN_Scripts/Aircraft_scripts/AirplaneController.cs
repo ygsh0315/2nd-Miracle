@@ -69,13 +69,10 @@ public class AirplaneController : MonoBehaviour
     [Header("brake")]
     [SerializeField] Collider[] brake;
     int brakeSet;
-<<<<<<< Updated upstream
+
     bool turn;
-    bool isground;
-=======
     public bool isHit;
     public bool isground;
->>>>>>> Stashed changes
     float waitTime;
     public float  tp{get{return thrustPercent;}}
 
