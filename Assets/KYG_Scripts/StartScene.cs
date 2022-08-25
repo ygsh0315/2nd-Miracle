@@ -7,6 +7,7 @@ public class StartScene : MonoBehaviour
 {
     public GameObject tutorialBtn;
     public GameObject missionBtn;
+    public GameObject DogFightBtn;
     public GameObject exitBtn;
     public AudioSource pointerHoverSound;
     public AudioSource pointerClickSound;
@@ -22,6 +23,7 @@ public class StartScene : MonoBehaviour
         gameObject.SetActive(false);
         tutorialBtn.SetActive(true);
         missionBtn.SetActive(true);
+        DogFightBtn.SetActive(true);
         exitBtn.SetActive(true);
     }
     
@@ -35,6 +37,11 @@ public class StartScene : MonoBehaviour
     {
         pointerClickSound.Play();
         SceneManager.LoadScene("MissionMode");
+    }
+    public void OnDogFightBtn()
+    {
+        pointerClickSound.Play();
+        SceneManager.LoadScene("DogFight_Scene");
     }
     public void OnExitBtn()
     {
