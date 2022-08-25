@@ -13,19 +13,21 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] float start = 0;
     [SerializeField] float end = 0;
 
-    [SerializeField] GameObject smoke_R= null;
-    [SerializeField] GameObject smoke_L= null;
+    [SerializeField] ParticleSystem smoke_R= null;
+    [SerializeField] ParticleSystem smoke_L = null;
     [SerializeField] ParticleSystem afterBurner_R = null;
     [SerializeField] ParticleSystem afterBurner_L = null;
-    [SerializeField] ParticleSystem leadSmoke_R = null;
     [SerializeField] ParticleSystem leadSmoke_L = null;
+    [SerializeField] ParticleSystem leadSmoke_R = null;
+    [SerializeField] ParticleSystem entireSmoke_L = null;
+    [SerializeField] ParticleSystem entireSmoke_R = null;
     [SerializeField] ParticleSystem burning1 = null;
     //[SerializeField] ParticleSystem burning2 = null;
     [SerializeField] GameObject explosionFactory;
     [SerializeField] GameObject player;
 
 
-   [SerializeField] AirplaneController controller;
+    [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     [SerializeField] Text warningText;
@@ -43,10 +45,13 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         Color color = image.color;
         color.a = 0;
-        smoke_R.SetActive(false);
-        smoke_L.SetActive(false);
+        smoke_R.Stop();
+        smoke_L.Stop();
         leadSmoke_L.Stop();
         leadSmoke_R.Stop();
+        entireSmoke_L.Stop();
+        entireSmoke_R.Stop();
+
         warningText.enabled = false;
 
     }
@@ -171,15 +176,17 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     }
     void SmokeEffect()
     {
-        if (controller.isSmoke&&!isDie)
+        if (controller.rb.velocity.magnitude>60)
         {
-            smoke_R.SetActive(true);
-            smoke_L.SetActive(true);
+            smoke_R.Play();
+            smoke_L.Play();
+            smoke_L.gravityModifier = controller.Pitch * 0.7f;
+            smoke_R.gravityModifier = controller.Pitch * 0.7f;
         }
         else
         {
-            smoke_R.SetActive(false);
-            smoke_L.SetActive(false);
+            smoke_R.Stop();
+            smoke_L.Stop();
         }
         if (controller.isLeadSmoke&&!isDie)
         {
@@ -190,6 +197,16 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         {
             leadSmoke_L.Stop();
             leadSmoke_R.Stop();
+        }
+        if (controller.isSmoke && !isDie)
+        {
+            entireSmoke_L.Play();
+            entireSmoke_R.Play();
+        }
+        else 
+        {
+            entireSmoke_L.Stop();
+            entireSmoke_R.Stop();
         }
     }
     void GLOC()
