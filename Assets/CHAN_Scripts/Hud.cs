@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class Hud : MonoBehaviour
 {
 
     [Header("Components")]
     [SerializeField] private MouseFlightController mouseFlight = null;
     [SerializeField] private CHAN_Missile cm = null;
+    [SerializeField] Collider[] detect;
+    [SerializeField] Vector3[] dir;
+    [SerializeField] float[] angle;
+    bool[] isBehind;
+    GameObject[] targetIcons;
 
     [Header("HUD Elements")]
     [SerializeField] public RectTransform boresight = null;
@@ -16,6 +22,9 @@ public class Hud : MonoBehaviour
     [SerializeField] private RectTransform seeker = null;
     [SerializeField] private RectTransform targetBox = null;
     [SerializeField] private RectTransform targetRedBox = null;
+    [SerializeField] private GameObject enemyPools = null;
+    [SerializeField] private GameObject targetIcon = null;
+    [SerializeField] private GameObject player = null;
 
     bool isSeekerOn = false;
     public bool targetLock = false;
@@ -37,11 +46,50 @@ public class Hud : MonoBehaviour
         targetRedBox.gameObject.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+
+
     }
 
+    void Start()
+    {
+        targetIcons = new GameObject[enemyPools.transform.childCount];
+        for (int i = 0; i < enemyPools.transform.childCount; i++)
+        {
+            targetIcons[i] = Instantiate(targetIcon,transform);
+            targetIcons[i].SetActive(false);
+        }
+    }
     private void Update()
     {
+        detect = Physics.OverlapSphere(player.transform.position, 5000, 1 << 7);
+        dir = new Vector3[detect.Length];
+        angle = new float[detect.Length];
+        isBehind = new bool[detect.Length];
+        for (int i = 0; i < detect.Length; i++)
+        {
+            dir[i] = detect[i].transform.position - player.transform.position;
+            angle[i] = Vector3.Angle(transform.forward, dir[i]);
+            if (angle[i] > 90)
+            {
+                isBehind[i] = true;
+            }
+            else
+            {
+                isBehind[i] = false;
+            }
+            print(isBehind[i]);
+            if (!isBehind[i])
+            {
+                targetIcons[i].transform.position = Camera.main.WorldToScreenPoint(detect[i].transform.position);
+                targetIcons[i].SetActive(true);
 
+            }
+            else if(isBehind[i])
+            {
+                
+                targetIcons[i].SetActive(false);
+            }
+        }
         if (mouseFlight == null || playerCam == null)
             return;
 

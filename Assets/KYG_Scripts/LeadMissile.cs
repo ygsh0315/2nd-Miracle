@@ -78,7 +78,7 @@ public class LeadMissile : MonoBehaviour
     {
         GameObject explosion = Instantiate(explosionFactory);
         explosion.transform.position = collision.transform.position;
-        print(collision.gameObject.name);
+        //print(collision.gameObject.name);
         if(collision.gameObject.name == "Player")
         {
         PlayerHP.Instance.HP -= 100;
