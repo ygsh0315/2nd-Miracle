@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    #region ��������
+    #region Enemy FSM
     public enum EnemyState
     {
         Detact,
@@ -15,6 +15,11 @@ public class Enemy : MonoBehaviour
         Destroy
     }
 
+    public enum AvoidState
+    {
+        EnemyAvoid,
+        EnvironmentAvoid
+    }
     public EnemyState state = EnemyState.Idle;
     #endregion
     public GameObject target;
@@ -34,7 +39,7 @@ public class Enemy : MonoBehaviour
     public float avoidRange = 100;
 
 
-    #region �̻���
+    #region missile
 
     //�̻��� ��ź��
     public int missilePoolSize = 4;
@@ -64,7 +69,7 @@ public class Enemy : MonoBehaviour
     public List<GameObject> missilePool = new List<GameObject>();
     #endregion
 
-    #region �Ѿ�
+    #region bullet
     //�Ѿ˰���
     public GameObject bulletFactory;
     //�Ѿ����
@@ -100,7 +105,7 @@ public class Enemy : MonoBehaviour
 
     public int hp = 1;
 
-    RaycastHit EnvironmentDistance;
+    RaycastHit EnvironmentInfo;
 
     Rigidbody rb;
 
@@ -151,6 +156,9 @@ public class Enemy : MonoBehaviour
             state = EnemyState.Destroy;
           
         }
+        Physics.Raycast(transform.position, transform.forward, out EnvironmentInfo, LayerMask);
+        print(EnvironmentInfo.transform.gameObject.name);
+        print(EnvironmentInfo.distance);
         
         //print(Vector3.Angle(transform.forward, target.transform.position) < 30f);
         //print(Vector3.Angle(transform.forward, target.transform.position));
@@ -175,9 +183,18 @@ public class Enemy : MonoBehaviour
         }
         if (target && state != EnemyState.Idle && state != EnemyState.Destroy)
         {
-            distance = (target.transform.position - transform.position).magnitude;
+            if (Physics.Raycast(transform.position, transform.forward, out EnvironmentInfo, LayerMask))
+            {
+                distance = EnvironmentInfo.distance;
+            }
+            else
+            {
+                distance = (target.transform.position - transform.position).magnitude;
+
+            }
             transform.forward = Vector3.Lerp(transform.forward, dir, 1 * Time.deltaTime);
-            transform.position += transform.forward * speed * Time.deltaTime;
+            //transform.position += transform.forward * speed * Time.deltaTime;
+            rb.velocity = transform.forward * speed;
         }
         if (hp <= 0)
         {
@@ -195,30 +212,33 @@ public class Enemy : MonoBehaviour
         }
     }
 
+        int LayerMask = (1 << 10 | 1 << 4);
     private void Detact()
     {
+        
+        
         if (distance < detactRange)
         {
             dir = (target.transform.position - transform.position).normalized;
 
         }
+        
         if (distance < attackRange)
         {
             state = EnemyState.Attack;
+            
         }
     }
     
     private void Attack()
     {
-        int LayerMask = (1<<10 | 1<<4);
-        Physics.Raycast(transform.position, target.transform.position - transform.position, out EnvironmentDistance, LayerMask);
+        if (distance < avoidRange)
+        {
+            state = EnemyState.Avoid;
+        }
         if (target)
         {
             dir = (target.transform.position - transform.position).normalized;
-        }
-        if (distance < avoidRange || EnvironmentDistance.distance<avoidRange)
-        {
-            state = EnemyState.Avoid;
         }
         if (distance < missileRange && Vector3.Angle(transform.forward, target.transform.position-transform.position) < 30f &&missilePool.Count>0)
         {
