@@ -96,7 +96,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         // 계산한 알파 값 다시 설정.  
         image.color = color;
-        print(color.a);
+        //print(color.a);
         // Debug.Log(time);
     }
     void PlayFadeOut()

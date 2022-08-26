@@ -67,8 +67,8 @@ public class Hud : MonoBehaviour
         isBehind = new bool[detect.Length];
         for (int i = 0; i < detect.Length; i++)
         {
-            dir[i] = detect[i].transform.position - player.transform.position;
-            angle[i] = Vector3.Angle(transform.forward, dir[i]);
+            dir[i] = (detect[i].transform.position - Camera.main.transform.position).normalized;
+            angle[i] = Vector3.Angle(Camera.main.transform.forward, dir[i]);
             if (angle[i] > 90)
             {
                 isBehind[i] = true;
