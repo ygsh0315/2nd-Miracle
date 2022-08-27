@@ -14,6 +14,7 @@ public class CHAN_SoundManager : MonoBehaviour
     [SerializeField] public AudioClip[] audioClips = null;
     [SerializeField] AirplaneController controller;
     [SerializeField] float engineStartUpTime;
+
     public AudioSource flare;
     public AudioSource GLOC;
     public AudioSource gun;
@@ -25,6 +26,7 @@ public class CHAN_SoundManager : MonoBehaviour
     [SerializeField] public AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
     [SerializeField] AudioSource AfterBurnerSource;
+    [SerializeField] public AudioSource missileAlarmSource;
     public enum MoveState
     {
         Idle,
@@ -239,7 +241,10 @@ public class CHAN_SoundManager : MonoBehaviour
             }
             //여기서는 원상복구 시킨다.
         }
-        
     }
-
+    // 플레이어 감지범위에서 미사일이 검출되면 사운드가 울리도록 만들것
+    //감지범위가 1000이면 미사일 경고가 울림
+    //감지범위가 300이면 다른 경고가 울림
+    
+        
 }
