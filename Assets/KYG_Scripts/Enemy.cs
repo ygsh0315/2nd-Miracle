@@ -276,6 +276,8 @@ public class Enemy : MonoBehaviour
                 missilePool.RemoveAt(i);
                 missileFirePosition.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
                 missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<LeadMissile>().enabled = true;
+                missileFirePosition.transform.GetChild(i).GetChild(0).transform.parent = null;
+                missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
                 missileCurrentTime = 0;
             }
         }
