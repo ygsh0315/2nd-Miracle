@@ -20,6 +20,7 @@ public class CHAN_SoundManager : MonoBehaviour
 
 
 
+
     [SerializeField] AudioSource startSource;
     [SerializeField] public AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
@@ -48,6 +49,8 @@ public class CHAN_SoundManager : MonoBehaviour
     public bool boostTurn;
     float curTime;
     float waitTime;
+    float pitchMultiplier;
+
     [SerializeField] float soundPitch_min = 0.7f;
     [SerializeField] float soundPitch_max = 1.6f;
 
@@ -138,27 +141,20 @@ public class CHAN_SoundManager : MonoBehaviour
     }
     private void engineNormal()
     {
-        if (!GlocTurn)
+        // Gloc 걸렸을 때 비례하면서 감소하도록 구현하자
+        if (controller.isWEP)
         {
-            if (controller.isWEP)
-            {
-                if (controller.isground)
-                    moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.2f;
-                else
-                {
-                    moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.5f;
-                }
-            }
+            if (controller.isground)
+                moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.2f;
             else
             {
-                moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp;
+                moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * 0.5f * pitchMultiplier;
             }
         }
         else
         {
-            moveSource.pitch = Mathf.Lerp(moveSource.pitch, 0.2f, Time.deltaTime * 2);
+            moveSource.pitch = soundPitch_min + (soundPitch_max - soundPitch_min) * controller.tp * pitchMultiplier;
         }
-        
         if (!moveSource.isPlaying)
         {
             moveSource.Play();
@@ -168,6 +164,7 @@ public class CHAN_SoundManager : MonoBehaviour
     void Update()
     {
         Statemachine();
+        SetGlocPitch();
     }
 
     public void Gloc()
@@ -180,7 +177,6 @@ public class CHAN_SoundManager : MonoBehaviour
         }
         if (!turn)
         {
-
             GLOC.PlayOneShot(audioClips[4], 0.6f);
             GLOC.pitch = 0.6f;
             turn = true;
@@ -188,54 +184,62 @@ public class CHAN_SoundManager : MonoBehaviour
     }
     void AfterBurner(float multi)
     {
-        if (!GlocTurn)
+        AfterBurnerSource.pitch = 2 * pitchMultiplier;
+        if (boostTurn)
         {
-            AfterBurnerSource.pitch = Mathf.Lerp(moveSource.pitch, 2f, Time.deltaTime * 2);
-            if(AfterBurnerSource.pitch>1.9f)
+            AfterBurnerSource.clip = audioClips[2];
+            if (!AfterBurnerSource.isPlaying)
             {
-                AfterBurnerSource.pitch = 2;
+                AfterBurnerSource.Play();
             }
-            if (boostTurn)
+            AfterBurnerSource.volume += multi;
+            moveSource.volume -= 0.5f * multi;
+            if (AfterBurnerSource.volume > 1f)
             {
-                AfterBurnerSource.clip = audioClips[2];
-                if (!AfterBurnerSource.isPlaying)
-                {
-                    AfterBurnerSource.Play();
-                }
-                AfterBurnerSource.volume += multi;
-                moveSource.volume -= multi;
-                if (AfterBurnerSource.volume > 1f)
-                {
-                    AfterBurnerSource.volume = 1f;
-                }
-                if (moveSource.volume < 0.2f)
-                {
-                    moveSource.volume = 0.2f;
-                }
-                AfterBurnerSource.loop = true;
+                AfterBurnerSource.volume = 1f;
             }
-            else
+            if (moveSource.volume < 0.2f)
             {
+                moveSource.volume = 0.2f;
+            }
+            AfterBurnerSource.loop = true;
+        }
+        else
+        {
+            AfterBurnerSource.volume -= multi;
+            moveSource.volume += multi;
+            if (AfterBurnerSource.volume <= 0)
+            {
+                AfterBurnerSource.Stop();
+            }
+            if (moveSource.volume > 0.9f)
+            {
+                moveSource.volume = 0.9f;
+            }
 
-                AfterBurnerSource.volume -= multi;
-                moveSource.volume += multi;
-                if (AfterBurnerSource.volume <= 0)
-                {
-                    AfterBurnerSource.Stop();
-                }
-                if (moveSource.volume > 0.9f)
-                {
-                    moveSource.volume = 0.9f;
-                }
-
+        }
+    }
+    void SetGlocPitch()
+    {
+        if (GlocTurn)
+        {
+            //여기서는 pitch multiplier 감소되도록 만든다. 최소값 0.2가 되도록 만든다.
+            pitchMultiplier = Mathf.Lerp(pitchMultiplier, 0.2f, Time.deltaTime);
+            if (pitchMultiplier <0.2f)
+            {
+                pitchMultiplier = 0.2f;
             }
         }
         else
         {
-            AfterBurnerSource.pitch = Mathf.Lerp(moveSource.pitch, 0.2f, Time.deltaTime * 2);
+            pitchMultiplier = Mathf.Lerp(pitchMultiplier, 1f, Time.deltaTime);
+            if (pitchMultiplier > 0.95f)
+            {
+                pitchMultiplier = 1;
+            }
+            //여기서는 원상복구 시킨다.
         }
         
     }
-
 
 }
