@@ -2167,6 +2167,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
+      propertyPath: avoidRange
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
       value: 2
       objectReference: {fileID: 0}
@@ -4008,6 +4012,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
+      propertyPath: avoidRange
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
       value: 2
       objectReference: {fileID: 0}
@@ -5806,6 +5814,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
+      propertyPath: avoidRange
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741096685032893549, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
       propertyPath: missileDelay
       value: 2
       objectReference: {fileID: 0}
@@ -6470,6 +6482,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 519972520, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: engineStartUpTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1131061785111078004, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_Name
       value: PlayerObject
@@ -6534,6 +6550,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 98e5305606edd434a870bca05879e4e4, type: 2}
+    - target: {fileID: 7997321737161891390, guid: e8b044d65762edb44afbec7318805888, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
 --- !u!1001 &2097165560

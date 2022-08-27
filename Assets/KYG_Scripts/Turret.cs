@@ -143,6 +143,7 @@ public class Turret : MonoBehaviour
             {
                 GameObject missile = missilePool[0];
                 missile.SetActive(true);
+                missile.GetComponent<Rigidbody>().isKinematic = false;
                 missile.transform.position = firePosition.position;
                 missile.transform.forward = launcher.transform.forward;
                 missilePool.RemoveAt(0);

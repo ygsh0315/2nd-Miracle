@@ -105,7 +105,11 @@ public class Enemy : MonoBehaviour
 
     public int hp = 1;
 
+    Ray detectRay;
+
     RaycastHit EnvironmentInfo;
+
+    LayerMask layerMask;
 
     Rigidbody rb;
 
@@ -156,9 +160,6 @@ public class Enemy : MonoBehaviour
             state = EnemyState.Destroy;
           
         }
-        Physics.Raycast(transform.position, transform.forward, out EnvironmentInfo, LayerMask);
-        print(EnvironmentInfo.transform.gameObject.name);
-        print(EnvironmentInfo.distance);
         
         //print(Vector3.Angle(transform.forward, target.transform.position) < 30f);
         //print(Vector3.Angle(transform.forward, target.transform.position));
@@ -183,15 +184,7 @@ public class Enemy : MonoBehaviour
         }
         if (target && state != EnemyState.Idle && state != EnemyState.Destroy)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out EnvironmentInfo, LayerMask))
-            {
-                distance = EnvironmentInfo.distance;
-            }
-            else
-            {
-                distance = (target.transform.position - transform.position).magnitude;
-
-            }
+            distance = (target.transform.position - transform.position).magnitude;  
             transform.forward = Vector3.Lerp(transform.forward, dir, 1 * Time.deltaTime);
             //transform.position += transform.forward * speed * Time.deltaTime;
             rb.velocity = transform.forward * speed;
@@ -200,6 +193,10 @@ public class Enemy : MonoBehaviour
         {
             state = EnemyState.Destroy;
         }
+        layerMask = 1 << 4 | 1 << 10;
+        detectRay = new Ray(transform.position, transform.forward);
+        Physics.Raycast(detectRay, out EnvironmentInfo,detactRange, layerMask);
+        //Debug.DrawRay(transform.position, transform.forward * avoidRange, Color.red);
     }
 
     
@@ -212,27 +209,30 @@ public class Enemy : MonoBehaviour
         }
     }
 
-        int LayerMask = (1 << 10 | 1 << 4);
     private void Detact()
-    {
-        
-        
+    {     
         if (distance < detactRange)
         {
             dir = (target.transform.position - transform.position).normalized;
-
         }
-        
+        if (EnvironmentInfo.transform && EnvironmentInfo.distance < avoidRange)
+        {
+            state = EnemyState.Avoid;
+        }
         if (distance < attackRange)
         {
-            state = EnemyState.Attack;
-            
+            state = EnemyState.Attack;         
         }
+        
     }
     
     private void Attack()
     {
         if (distance < avoidRange)
+        {
+            state = EnemyState.Avoid;
+        }
+        if(EnvironmentInfo.transform&& EnvironmentInfo.distance < avoidRange)
         {
             state = EnemyState.Avoid;
         }
@@ -276,26 +276,99 @@ public class Enemy : MonoBehaviour
                 missilePool.RemoveAt(i);
                 missileFirePosition.transform.GetChild(i).GetChild(0).GetChild(0).gameObject.SetActive(true);
                 missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<LeadMissile>().enabled = true;
+                missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<Rigidbody>().isKinematic = false;               
                 missileFirePosition.transform.GetChild(i).GetChild(0).transform.parent = null;
-                missileFirePosition.transform.GetChild(i).GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
                 missileCurrentTime = 0;
             }
         }
 
     }
-
+    
     private void Avoid()
     {
-        if (currentTime > randomDirTime)
+        if (EnvironmentInfo.transform && EnvironmentInfo.distance < avoidRange)
         {
-            dir = Random.insideUnitSphere.normalized;
-            currentTime = 0;
-        }
+            dir = SetDir();
+        //print("WHY");
+        //    for (int i = 0; i < avoidRange; i++)
+        //    {
+        //        for(int j = 0; j<avoidRange; j++)
+        //        {
+                    
+        //            Ray avoidRay = new Ray(transform.position, transform.position + new Vector3(j, i, avoidRange));
+        //            Debug.DrawRay(transform.position, new Vector3(j, i, avoidRange) * avoidRange, Color.red);
+        //            Physics.Raycast(avoidRay, out avoidInfo, 10, layerMask);
+        //            if (!avoidInfo.transform)
+        //            {
+        //                dir = new Vector3(j, i, avoidRange).normalized;
+        //            }
+        //        }
+        //        for (int k = 0; k > -avoidRange; k--)
+        //        {
 
-        if (distance > avoidRange * 5)
+        //            Ray avoidRay = new Ray(transform.position, transform.position + new Vector3(k, i, avoidRange));
+        //            Debug.DrawRay(transform.position, new Vector3(k, i, avoidRange) * avoidRange, Color.red);
+        //            Physics.Raycast(avoidRay, out avoidInfo, 10, layerMask);
+        //            if (!avoidInfo.transform)
+        //            {
+        //                dir = new Vector3(k, i, avoidRange).normalized;
+        //            }
+        //        }
+        //        if (!avoidInfo.transform)
+        //        {
+        //            break;
+        //        }
+        //    }
+            
+        }
+        else
+        {
+            print("this");
+            if (currentTime > randomDirTime)
+            {
+                dir = Random.insideUnitSphere.normalized;
+                currentTime = 0;
+            }
+        }
+        print(!avoidInfo.transform && !EnvironmentInfo.transform && distance > avoidRange * 5);
+        //print(avoidInfo.transform.gameObject.name);
+        //print(EnvironmentInfo.transform.gameObject.name);
+        if (!avoidInfo.transform && !EnvironmentInfo.transform && distance > avoidRange * 5)
         {
             state = EnemyState.Detact;
         }
+    }
+    RaycastHit avoidInfo;
+    public Vector3 SetDir()
+    {
+        Vector3 avoidDir = Vector3.zero;
+        Ray avoidDetectRay;
+        for(int i = 0; i<avoidRange; i++)
+        {
+            for(int j = 0; j<avoidRange; j++)
+            {
+                avoidDetectRay = new Ray(transform.position, transform.forward + new Vector3(j, i, avoidRange));
+                Physics.Raycast(avoidDetectRay, out avoidInfo, avoidRange, layerMask);
+                Debug.DrawRay(transform.position, transform.forward + new Vector3(j, i, avoidRange), Color.red);
+                if (!avoidInfo.transform)
+                {
+                    avoidDir = transform.forward + new Vector3(j, i, avoidRange);
+                    break;
+                }
+            }
+            for(int k = 0; k>-avoidRange; k--)
+            {
+                avoidDetectRay = new Ray(transform.position, transform.forward + new Vector3(k, i, transform.position.z + avoidRange));
+                Physics.Raycast(avoidDetectRay, out avoidInfo, avoidRange, layerMask);
+                Debug.DrawRay(transform.position, transform.forward + new Vector3(k, i, avoidRange), Color.red);
+                if (!avoidInfo.transform)
+                {
+                    avoidDir = transform.forward + new Vector3(k, i, avoidRange);
+                    break;
+                }
+            }
+        }
+        return avoidDir;
     }
     private void Destroy()
     {
