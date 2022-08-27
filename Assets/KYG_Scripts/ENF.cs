@@ -6,6 +6,7 @@ public class ENF : MonoBehaviour
 {
     Transform ELCS;
     public GameObject explosionFactory;
+    public bool isTargetHit;
     // Start is called before the first frame update
     void Start()
     {

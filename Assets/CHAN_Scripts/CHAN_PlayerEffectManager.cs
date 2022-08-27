@@ -36,6 +36,8 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] float fadeSpeed;
 
     public bool isDie;
+    bool hitTurn;
+    bool dieTurn;
     float delay;
     [SerializeField] float DelayToExplosion;
 
@@ -216,6 +218,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             StartCoroutine(WarningUI("조종사 의식저하 9G", 1));
             PlayFadeIn();
             sound.Gloc();
+            sound.GlocTurn = true;
             if (n - controller.PilotState <= 0)
             {
 
@@ -229,6 +232,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         else
         {
+            sound.GlocTurn = false;
             StopAllCoroutines();
             if (warningText.enabled)
             {
@@ -265,17 +269,26 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         //여기서 불타는 이팩트 추가 할 예정 
         burning1.Play();
-        //burning2.Play();
-        delay += Time.deltaTime;
-        if (delay > DelayToExplosion)
+        if (!hitTurn)
         {
-            CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
-            GameObject explosion = Instantiate(explosionFactory);
-            print(explosion);
-            explosion.transform.position = player.transform.position;
-            player.SetActive(false);
-            delay = 0;
+            AudioSource playerHit=player.AddComponent<AudioSource>();
+            playerHit.PlayOneShot(CHAN_SoundManager.instance.audioClips[9], 1);
+            hitTurn = true;
         }
+        //burning2.Play();
+        if (!dieTurn)
+        {
+            delay += Time.deltaTime;
+            if (delay > DelayToExplosion)
+            {
+                CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
+                GameObject explosion = Instantiate(explosionFactory);
+                explosion.transform.position = player.transform.position;
+                player.SetActive(false);
+                dieTurn = true;
+            }
+        }
+       
         // 카메라는 그자리에서 대기
         // 미션 매니저에게 게임오버 반환
     }

@@ -87,11 +87,26 @@ public class PlayerLeadMissile : MonoBehaviour
         if (collision.gameObject.GetComponent<Enemy>())
         {
             collision.gameObject.GetComponent<Enemy>().hp--;
+            Destroy(gameObject);
         }
-        else
+        else if (collision.gameObject.GetComponent<ENF>())
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<ENF>().isTargetHit = true;
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        // 현재 지형지물까지 없어지는 이슈 발생
+        // 지형지물 닿으면 그냥 자폭하게 둚
+        // 하지만 목표물, 적 비행기 내부의 ELCS 가 접촉하도록만들어야 함
+        //접촉한 물체가 지형지물 일 경우 자폭
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
+            print("지형닿음");
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

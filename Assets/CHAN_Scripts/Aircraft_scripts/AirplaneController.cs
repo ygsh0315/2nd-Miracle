@@ -419,8 +419,12 @@ public class AirplaneController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            print("충돌");
+            //print("충돌");
             isHit = true;
+            Effect.isDie = true;
+        }
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
             Effect.isDie = true;
         }
     }
