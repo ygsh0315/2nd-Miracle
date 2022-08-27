@@ -41,13 +41,8 @@ public class Hud : MonoBehaviour
 
     private void Awake()
     {
-        if (mouseFlight == null)
-            Debug.LogError(name + ": Hud - Mouse Flight Controller not assigned!");
         //mouse flightcontroller에서 사용중인 Camera를 불러온다.
         playerCam = mouseFlight.GetComponentInChildren<Camera>();
-
-        if (playerCam == null)
-            Debug.LogError(name + ": Hud - No camera found on assigned Mouse Flight Controller!");
         //seeker.gameObject.SetActive(false);
         targetBox.gameObject.SetActive(false);
         targetRedBox.gameObject.SetActive(false);
@@ -72,7 +67,7 @@ public class Hud : MonoBehaviour
             targetNameTexts[i].SetActive(false);
         }
     }
-    private void Update()
+    void Update()
     {
         EnemyIndicator();
         if (mouseFlight == null || playerCam == null)

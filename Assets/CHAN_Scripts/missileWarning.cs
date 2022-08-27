@@ -6,32 +6,56 @@ public class missileWarning : MonoBehaviour
 {
     [SerializeField] Collider[] enemyMissiles;
     [SerializeField] Collider[] missileClose;
-    float[] distance; 
+
+    AudioSource Launch;
+    AudioSource Close;
+    bool isLaunch;
+    bool isClose;
     void Start()
     {
-        
+        Launch = CHAN_SoundManager.instance.missileAlarmSource.AddComponent<AudioSource>();
+        Close = CHAN_SoundManager.instance.missileAlarmSource.AddComponent<AudioSource>();
+        Launch.clip = CHAN_SoundManager.instance.audioClips[10];
+        Close.clip= CHAN_SoundManager.instance.audioClips[11];
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         enemyMissiles = Physics.OverlapSphere(transform.position, 1000, 1 << 8);
-        missileClose = Physics.OverlapSphere(transform.position, 300, 1 << 8);
+        missileClose = Physics.OverlapSphere(transform.position, 100, 1 << 8);
         if (enemyMissiles.Length > 0)
         {
-            CHAN_SoundManager.instance.missileAlarmSource.clip = CHAN_SoundManager.instance.audioClips[10];
-            if (missileClose.Length > 0)
+            isLaunch = true;
+        }
+        else
+        {
+            isLaunch = false;
+        }
+        if (missileClose.Length > 0)
+        {
+            isClose = true;
+        }
+        else
+        {
+            isClose = false;
+        }
+
+        if (isLaunch&&!isClose)
+        {
+            if (!Launch.isPlaying)
             {
-                CHAN_SoundManager.instance.missileAlarmSource.clip = CHAN_SoundManager.instance.audioClips[11];
+                Close.Stop();
+                Launch.Play();
             }
         }
-        if (!CHAN_SoundManager.instance.missileAlarmSource.isPlaying)
+        if (isLaunch && isClose)
         {
-            CHAN_SoundManager.instance.missileAlarmSource.Play();
+            if (!Close.isPlaying)
+            {
+                Launch.Stop();
+                Close.Play();
+            }
         }
-
-
     }
 }

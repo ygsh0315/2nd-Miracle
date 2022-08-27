@@ -5,11 +5,25 @@ using UnityEngine;
 
 public class CHAN_SoundManager : MonoBehaviour
 {
+    //public Dictionary<string, AudioClip> audioClipDic = new Dictionary<string, AudioClip>();
+    //public Dictionary<string, AudioSource> audioSourceDic = new Dictionary<string, AudioSource>();
     public static CHAN_SoundManager instance;
     private void Awake()
     {
-        if (instance == null)
             instance = this;
+        //여기서 오디오 클립, 소스컴포넌트를 호출한다.
+
+        //AudioSource[] sources = GetComponentsInChildren<AudioSource>();
+
+        ////각 오디온클립, 오디오소스의 정보를 딕셔너리에 저장함
+        //foreach (AudioClip clip in audioClips)
+        //{
+        //    audioClipDic.Add(clip.name, clip);
+        //}
+        //foreach (AudioSource source in sources)
+        //{
+        //    audioSourceDic.Add(source.name, source);
+        //}
     }
     [SerializeField] public AudioClip[] audioClips = null;
     [SerializeField] AirplaneController controller;
@@ -21,12 +35,12 @@ public class CHAN_SoundManager : MonoBehaviour
 
 
 
-
+    // 그렇게되면 여기 부분은 생략이 가능하게 된다.
     [SerializeField] AudioSource startSource;
     [SerializeField] public AudioSource moveSource;
     [SerializeField] AudioSource attackSource;
     [SerializeField] AudioSource AfterBurnerSource;
-    [SerializeField] public AudioSource missileAlarmSource;
+    [SerializeField] public GameObject missileAlarmSource;
     public enum MoveState
     {
         Idle,
@@ -133,7 +147,6 @@ public class CHAN_SoundManager : MonoBehaviour
                 startSource.Stop();
                 controller.isStart = true;
                 moveState = MoveState.Normal;
-
             }
         }
         if (!startSource.isPlaying)
@@ -245,6 +258,7 @@ public class CHAN_SoundManager : MonoBehaviour
     // 플레이어 감지범위에서 미사일이 검출되면 사운드가 울리도록 만들것
     //감지범위가 1000이면 미사일 경고가 울림
     //감지범위가 300이면 다른 경고가 울림
-    
+    public void PlaySound()
+    { }
         
 }

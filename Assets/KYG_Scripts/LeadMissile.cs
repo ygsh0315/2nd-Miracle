@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //���� �����ϴ� �̻���
 
@@ -31,12 +32,20 @@ public class LeadMissile : MonoBehaviour
     bool isClose = false;
 
     public GameObject explosionFactory;
+
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Player");
 
         LCS = GameObject.Find("LCS");
+        //생성되자마자 텍스트 아이콘을 생성시킨다.
+        // 해당아이콘의 위치는 현재 미사일의 위치를 스크린 좌표로 나타낸 위치이다.
+        //없어지면 해당 아이콘을 지운다.
+
+
+
+
     }
 
     // Update is called once per frame
