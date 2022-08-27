@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -14,7 +15,7 @@ public class Hud : MonoBehaviour
     [SerializeField] Vector3[] dir;
     [SerializeField] float[] angle;
     bool[] isBehind;
-    GameObject[] targetIcons;
+    public GameObject[] targetIcons;
 
     [Header("HUD Elements")]
     [SerializeField] public RectTransform boresight = null;
@@ -77,26 +78,27 @@ public class Hud : MonoBehaviour
             {
                 isBehind[i] = false;
             }
-            print(isBehind[i]);
-            if (!isBehind[i])
+            if (!isBehind[i]&&!detect[i].gameObject.GetComponent<Enemy>().isHit)
             {
                 targetIcons[i].transform.position = Camera.main.WorldToScreenPoint(detect[i].transform.position);
                 targetIcons[i].SetActive(true);
 
             }
-            else if(isBehind[i])
+            else if (isBehind[i])
             {
-                
                 targetIcons[i].SetActive(false);
             }
+            if (detect[i].gameObject.GetComponent<Enemy>().isHit)
+            {
+                targetIcons[i].SetActive(false);
+            }
+
+            // 만약 중간에 타깃이 죽으면 색깔을 다른색으로 바꾼다. 
         }
         if (mouseFlight == null || playerCam == null)
             return;
 
         UpdateGraphics(mouseFlight);
-
-
-
 
     }
 
