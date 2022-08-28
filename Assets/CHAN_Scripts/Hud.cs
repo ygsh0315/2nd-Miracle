@@ -34,6 +34,7 @@ public class Hud : MonoBehaviour
 
     bool isSeekerOn = false;
     public bool targetLock = false;
+    float entireEnemy;
     float curTime = 0;
 
     private Camera playerCam = null;
@@ -55,7 +56,7 @@ public class Hud : MonoBehaviour
         targetIcons = new GameObject[enemyPools.transform.childCount];
         targetDistanceTexts = new GameObject[enemyPools.transform.childCount];
         targetNameTexts=new GameObject[enemyPools.transform.childCount];
-
+        entireEnemy = enemyPools.transform.childCount;
 
         for (int i = 0; i < enemyPools.transform.childCount; i++)
         {
@@ -169,6 +170,12 @@ public class Hud : MonoBehaviour
         angle = new float[detect.Length];
         isBehind = new bool[detect.Length];
         distance = new float[detect.Length];
+        for (int j = 0; j < entireEnemy; j++)
+        {
+            targetNameTexts[j].SetActive(false);
+            targetIcons[j].SetActive(false);
+            targetDistanceTexts[j].SetActive(false);
+        }
         for (int i = 0; i < (detect.Length); i++)
         {
             dir[i] = (detect[i].transform.position - Camera.main.transform.position).normalized;
@@ -176,7 +183,6 @@ public class Hud : MonoBehaviour
             distance[i] = Vector3.Distance(player.transform.position, detect[i].transform.position);
             targetDistanceTexts[i].GetComponent<Text>().text = (distance[i]*0.002f).ToString("0.00")+"  km";
             
-
             if (angle[i] > 90)
             {
                 isBehind[i] = true;
@@ -185,12 +191,7 @@ public class Hud : MonoBehaviour
             {
                 isBehind[i] = false;
             }
-            for (int j = 0; j < enemyPools.transform.childCount; j++)
-            {
-                targetNameTexts[i].SetActive(false);
-                targetIcons[i].SetActive(false);
-                targetDistanceTexts[i].SetActive(false);
-            }
+            
             // 여기에서 타깃 건물과 적을 분리한다.
             if (detect[i].gameObject.CompareTag("targetBuilding"))
             {
