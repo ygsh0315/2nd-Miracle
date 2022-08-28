@@ -284,13 +284,15 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
                 CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
                 GameObject explosion = Instantiate(explosionFactory);
                 explosion.transform.position = player.transform.position;
+                MissionManager.instance.state = MissionManager.State.missionFail;
                 player.SetActive(false);
                 dieTurn = true;
             }
         }
        
         // 카메라는 그자리에서 대기
-        // 미션 매니저에게 게임오버 반환
+        // 미션 매니저에게 게임오버 반
     }
+
 
 }
