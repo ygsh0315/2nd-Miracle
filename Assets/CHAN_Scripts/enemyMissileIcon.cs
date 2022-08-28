@@ -44,8 +44,8 @@ public class enemyMissileIcon : MonoBehaviour
         }
         
     }
-    private void OnDestroy()
-    {
-        icon.SetActive(false);
-    }
+    //private void OnDestroy()
+    //{
+    //    icon.SetActive(false);
+    //}
 }
