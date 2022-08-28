@@ -1,5 +1,3 @@
-
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -196,7 +194,7 @@ public class Enemy : MonoBehaviour
         layerMask = 1 << 4 | 1 << 10;
         detectRay = new Ray(transform.position, transform.forward);
         Physics.Raycast(detectRay, out EnvironmentInfo,detactRange, layerMask);
-        //Debug.DrawRay(transform.position, transform.forward * avoidRange, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * avoidRange, Color.red);
     }
 
     
@@ -288,52 +286,19 @@ public class Enemy : MonoBehaviour
     {
         if (EnvironmentInfo.transform && EnvironmentInfo.distance < avoidRange)
         {
-            dir = SetDir();
-        //print("WHY");
-        //    for (int i = 0; i < avoidRange; i++)
-        //    {
-        //        for(int j = 0; j<avoidRange; j++)
-        //        {
-                    
-        //            Ray avoidRay = new Ray(transform.position, transform.position + new Vector3(j, i, avoidRange));
-        //            Debug.DrawRay(transform.position, new Vector3(j, i, avoidRange) * avoidRange, Color.red);
-        //            Physics.Raycast(avoidRay, out avoidInfo, 10, layerMask);
-        //            if (!avoidInfo.transform)
-        //            {
-        //                dir = new Vector3(j, i, avoidRange).normalized;
-        //            }
-        //        }
-        //        for (int k = 0; k > -avoidRange; k--)
-        //        {
-
-        //            Ray avoidRay = new Ray(transform.position, transform.position + new Vector3(k, i, avoidRange));
-        //            Debug.DrawRay(transform.position, new Vector3(k, i, avoidRange) * avoidRange, Color.red);
-        //            Physics.Raycast(avoidRay, out avoidInfo, 10, layerMask);
-        //            if (!avoidInfo.transform)
-        //            {
-        //                dir = new Vector3(k, i, avoidRange).normalized;
-        //            }
-        //        }
-        //        if (!avoidInfo.transform)
-        //        {
-        //            break;
-        //        }
-        //    }
-            
+            dir = SetDir();         
         }
         else
         {
-            print("this");
             if (currentTime > randomDirTime)
             {
                 dir = Random.insideUnitSphere.normalized;
                 currentTime = 0;
             }
         }
-        print(!avoidInfo.transform && !EnvironmentInfo.transform && distance > avoidRange * 5);
         //print(avoidInfo.transform.gameObject.name);
         //print(EnvironmentInfo.transform.gameObject.name);
-        if (!avoidInfo.transform && !EnvironmentInfo.transform && distance > avoidRange * 5)
+        if (!EnvironmentInfo.transform && distance > avoidRange * 3)
         {
             state = EnemyState.Detact;
         }
@@ -343,27 +308,16 @@ public class Enemy : MonoBehaviour
     {
         Vector3 avoidDir = Vector3.zero;
         Ray avoidDetectRay;
-        for(int i = 0; i<avoidRange; i++)
+        for(int i = 0; i<avoidRange * 5; i+=5)
         {
-            for(int j = 0; j<avoidRange; j++)
+            for(int j = -(int)avoidRange * 5; j<avoidRange * 5; j+=5)
             {
-                avoidDetectRay = new Ray(transform.position, transform.forward + new Vector3(j, i, avoidRange));
+                avoidDetectRay = new Ray(transform.position, transform.position + new Vector3(j, i, 0));
                 Physics.Raycast(avoidDetectRay, out avoidInfo, avoidRange, layerMask);
-                Debug.DrawRay(transform.position, transform.forward + new Vector3(j, i, avoidRange), Color.red);
-                if (!avoidInfo.transform)
+                //Debug.DrawRay(transform.position, transform.position + new Vector3(j, i, 0), Color.red, avoidRange);
+                avoidDir = (transform.forward + new Vector3(j, i, 0)).normalized;
+        if (!avoidInfo.transform)
                 {
-                    avoidDir = transform.forward + new Vector3(j, i, avoidRange);
-                    break;
-                }
-            }
-            for(int k = 0; k>-avoidRange; k--)
-            {
-                avoidDetectRay = new Ray(transform.position, transform.forward + new Vector3(k, i, transform.position.z + avoidRange));
-                Physics.Raycast(avoidDetectRay, out avoidInfo, avoidRange, layerMask);
-                Debug.DrawRay(transform.position, transform.forward + new Vector3(k, i, avoidRange), Color.red);
-                if (!avoidInfo.transform)
-                {
-                    avoidDir = transform.forward + new Vector3(k, i, avoidRange);
                     break;
                 }
             }
