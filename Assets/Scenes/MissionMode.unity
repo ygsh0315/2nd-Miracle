@@ -5921,10 +5921,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1044859902, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1131061785111078004, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: m_Name
       value: PlayerObject
@@ -5977,10 +5973,6 @@ PrefabInstance:
       propertyPath: enemyPools
       value: 
       objectReference: {fileID: 117056528}
-    - target: {fileID: 8875339385299280571, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b044d65762edb44afbec7318805888, type: 3}
 --- !u!1001 &2097165560
