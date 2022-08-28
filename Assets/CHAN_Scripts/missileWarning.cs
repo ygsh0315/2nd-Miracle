@@ -11,12 +11,14 @@ public class missileWarning : MonoBehaviour
     AudioSource Close;
     bool isLaunch;
     bool isClose;
+    GameObject player;
     void Start()
     {
         Launch = CHAN_SoundManager.instance.missileAlarmSource.AddComponent<AudioSource>();
         Close = CHAN_SoundManager.instance.missileAlarmSource.AddComponent<AudioSource>();
         Launch.clip = CHAN_SoundManager.instance.audioClips[10];
         Close.clip= CHAN_SoundManager.instance.audioClips[11];
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -40,22 +42,30 @@ public class missileWarning : MonoBehaviour
         {
             isClose = false;
         }
-
-        if (isLaunch&&!isClose)
+        if (player.activeSelf)
         {
-            if (!Launch.isPlaying)
+            if (isLaunch && !isClose)
             {
-                Close.Stop();
-                Launch.Play();
+                if (!Launch.isPlaying)
+                {
+                    Close.Stop();
+                    Launch.Play();
+                }
+            }
+            if (isLaunch && isClose)
+            {
+                if (!Close.isPlaying)
+                {
+                    Launch.Stop();
+                    Close.Play();
+                }
             }
         }
-        if (isLaunch && isClose)
+        else
         {
-            if (!Close.isPlaying)
-            {
-                Launch.Stop();
-                Close.Play();
-            }
+            print("Á¤Áö");
+            Launch.Stop();
+            Close.Stop();
         }
     }
 }

@@ -82,8 +82,8 @@ public class PlayerLeadMissile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject explosion = Instantiate(explosionFactory);
-        audio.PlayOneShot(audioClips[1], 1);
         explosion.transform.position = collision.transform.position;
+        audio.PlayOneShot(audioClips[1], 1);
         if (collision.gameObject.GetComponent<Enemy>())
         {
             collision.gameObject.GetComponent<Enemy>().hp--;
@@ -92,6 +92,7 @@ public class PlayerLeadMissile : MonoBehaviour
         else if (collision.gameObject.GetComponent<ENF>())
         {
             collision.gameObject.GetComponent<ENF>().isTargetHit = true;
+            
             Destroy(gameObject);
         }
         // 현재 지형지물까지 없어지는 이슈 발생

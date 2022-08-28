@@ -209,7 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea21acc47e0675647a51bd1a84b65594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionFactory: {fileID: 1134129239631916, guid: 1143a49ffea07224f800b628954167de, type: 3}
+  explosionFactory: {fileID: 100002, guid: 6ecf76dc4f268d340b2666896a954bcc, type: 3}
+  isTargetHit: 0
+  clip: {fileID: 0}
 --- !u!1001 &3924103874923814635
 PrefabInstance:
   m_ObjectHideFlags: 0
