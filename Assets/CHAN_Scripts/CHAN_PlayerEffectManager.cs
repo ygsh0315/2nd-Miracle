@@ -291,7 +291,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
        
         // 카메라는 그자리에서 대기
-        // 미션 매니저에게 게임오버 반환
+        // 미션 매니저에게 게임오버 반
     }
 
 

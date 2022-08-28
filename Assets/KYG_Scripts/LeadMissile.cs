@@ -98,9 +98,9 @@ public class LeadMissile : MonoBehaviour
         }
         
     }
-    private void OnDestroy()
-    {
-        GameObject explosion = Instantiate(explosionFactory);
-        explosion.transform.position = transform.position;
-    }
+    //private void OnDestroy()
+    //{
+    //    GameObject explosion = Instantiate(explosionFactory);
+    //    explosion.transform.position = transform.position;
+    //}
 }

@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool IsPause;
+    public Image FadeOutImage;
     public GameObject PauseMenu;
     public GameObject Manual;
     public GameObject text;
     public GameObject Radar;
     Image ManualImage;
+    bool isFade = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,23 +20,35 @@ public class GameManager : MonoBehaviour
         PauseMenu.SetActive(false);
         ManualImage = Manual.GetComponent<Image>();
         ManualImage.enabled = false;
+        text.SetActive(false);
+        Radar.SetActive(false);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.F3))
+        if (isFade)
         {
-            ManualImage.enabled = true;
-            text.SetActive(false);
-            Radar.SetActive(false);
+            StartCoroutine(FadeOut());
+            isFade = false;
         }
-        else
+        if (Input.GetKeyDown(KeyCode.F3))
         {
-            ManualImage.enabled = false;
-            text.SetActive(true);
-            Radar.SetActive(true);
+            if(ManualImage.enabled == false)
+            {
+                ManualImage.enabled = true;
+                text.SetActive(false);
+                Radar.SetActive(false);
+            }
+            else
+            {
+                ManualImage.enabled = false;
+                text.SetActive(true);
+                Radar.SetActive(true);
+            }
         }
+       
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SceneManager.LoadScene("MissionMode");
@@ -59,6 +73,18 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-       
+    }
+    public IEnumerator FadeOut()
+    {
+        for(float i = 1f; i>=0; i-= Time.deltaTime/10)
+        {
+            FadeOutImage.color = new Color(0, 0, 0, i);
+            if(i <0.1f)
+            {
+                text.SetActive(true);
+                Radar.SetActive(true);
+            }
+            yield return null;
+        }
     }
 }
