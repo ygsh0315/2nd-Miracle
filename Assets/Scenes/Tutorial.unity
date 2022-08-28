@@ -701,6 +701,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &636677531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8534804512439401158, guid: e8b044d65762edb44afbec7318805888, type: 3}
+  m_PrefabInstance: {fileID: 2106304549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &642480552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1906,6 +1911,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7395688876605123942, guid: 3eec57af250543640aeec04ff7c49668, type: 3}
   m_PrefabInstance: {fileID: 243368083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1718485818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1486773793965065253, guid: e8b044d65762edb44afbec7318805888, type: 3}
+  m_PrefabInstance: {fileID: 2106304549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1737484259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2007,6 +2017,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6395139670027374134, guid: 175db800670920e4dad49bb1369081e5, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 636677531}
+    - target: {fileID: 6395139670027374134, guid: 175db800670920e4dad49bb1369081e5, type: 3}
+      propertyPath: Radar
+      value: 
+      objectReference: {fileID: 1718485818}
     - target: {fileID: 6395139670027374135, guid: 175db800670920e4dad49bb1369081e5, type: 3}
       propertyPath: m_RootOrder
       value: 10
