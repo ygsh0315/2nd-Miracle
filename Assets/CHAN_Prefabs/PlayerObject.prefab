@@ -1509,7 +1509,7 @@ PrefabInstance:
       objectReference: {fileID: 2282235037523713504}
     - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: LOCVel
-      value: 90
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 8219666969988282380, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: controller
@@ -1554,6 +1554,10 @@ PrefabInstance:
     - target: {fileID: 8475262876080564477, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804521896918575242, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8804521896918575242, guid: 8908e52724cb0d84391e1eb969c5cf42, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1981,7 +1985,7 @@ PrefabInstance:
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: audioClips.Array.data[8]
       value: 
-      objectReference: {fileID: 8300000, guid: 8fc338cdc527e0144a3a2628d6467939, type: 3}
+      objectReference: {fileID: 8300000, guid: 15f970c3c40fa7e439b808d42afbb00b, type: 3}
     - target: {fileID: 5553983740090260562, guid: e7067079c5466d544a82b8596a4bc3da, type: 3}
       propertyPath: audioClips.Array.data[9]
       value: 

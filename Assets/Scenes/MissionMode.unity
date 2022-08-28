@@ -6037,14 +6037,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7404441382545788602, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997321737161891388, guid: e8b044d65762edb44afbec7318805888, type: 3}
-      propertyPath: LOCVel
-      value: 110
-      objectReference: {fileID: 0}
     - target: {fileID: 7997321737476533942, guid: e8b044d65762edb44afbec7318805888, type: 3}
       propertyPath: enemyPools
       value: 
