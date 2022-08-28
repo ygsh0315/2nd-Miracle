@@ -115,8 +115,10 @@ public class MissionManager : MonoBehaviour
                 Ending();
                 break;
             case State.missionFail:
-                MissionFail();
+                StopAllCoroutines();
+                StartCoroutine(delay());
                 print("fail");
+                state = State.Idle;
                 break;
         }
     }
@@ -318,6 +320,11 @@ public class MissionManager : MonoBehaviour
             }
             yield return null;
         }
+    }
+    IEnumerator delay()
+    {
+        yield return new WaitForSeconds(3);
+        MissionFail();
     }
     
 }

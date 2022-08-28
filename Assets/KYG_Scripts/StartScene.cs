@@ -5,14 +5,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class StartScene : MonoBehaviour
 {
+    public GameObject StartBtn;
     public GameObject tutorialBtn;
     public GameObject missionBtn;
-    public GameObject DogFightBtn;
     public GameObject exitBtn;
+    public GameObject LogoSpace;
+    public Image Logo;
     public AudioSource pointerHoverSound;
     public AudioSource pointerClickSound;
+    private void Start()
+    {
+        
+    }
 
-
+    private void Update()
+    {
+        
+    }
     public void OnMouseHover()
     {
         pointerHoverSound.Play();
@@ -23,8 +32,8 @@ public class StartScene : MonoBehaviour
         gameObject.SetActive(false);
         tutorialBtn.SetActive(true);
         missionBtn.SetActive(true);
-        DogFightBtn.SetActive(true);
         exitBtn.SetActive(true);
+        Logo.GetComponent<RectTransform>().anchoredPosition = new Vector3(Logo.GetComponent<RectTransform>().anchoredPosition.x, Logo.GetComponent<RectTransform>().anchoredPosition.y + 200);
     }
     
 
@@ -38,15 +47,11 @@ public class StartScene : MonoBehaviour
         pointerClickSound.Play();
         SceneManager.LoadScene("MissionMode");
     }
-    public void OnDogFightBtn()
-    {
-        pointerClickSound.Play();
-        SceneManager.LoadScene("DogFight_Scene");
-    }
     public void OnExitBtn()
     {
         pointerClickSound.Play();
         print("Exit");
         Application.Quit();
     }
+    
 }

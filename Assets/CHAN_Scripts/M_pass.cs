@@ -9,7 +9,7 @@ public class M_pass : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            MissionManager.instance.missionCount++;
+            
             Destroy(gameObject);
         }
     }
