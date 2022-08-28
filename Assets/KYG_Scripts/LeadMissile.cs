@@ -85,13 +85,22 @@ public class LeadMissile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject explosion = Instantiate(explosionFactory);
-        explosion.transform.position = collision.transform.position;
-        //print(collision.gameObject.name);
-        if(collision.gameObject.name == "Player")
+
+        
+        if (collision.gameObject.name == "Player")
         {
-        PlayerHP.Instance.HP -= 100;
+            PlayerHP.Instance.HP -= 100;
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else 
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+    private void OnDestroy()
+    {
+        GameObject explosion = Instantiate(explosionFactory);
+        explosion.transform.position = transform.position;
     }
 }
