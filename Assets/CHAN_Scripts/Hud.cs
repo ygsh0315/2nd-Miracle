@@ -185,6 +185,12 @@ public class Hud : MonoBehaviour
             {
                 isBehind[i] = false;
             }
+            for (int j = 0; j < enemyPools.transform.childCount; j++)
+            {
+                targetNameTexts[i].SetActive(false);
+                targetIcons[i].SetActive(false);
+                targetDistanceTexts[i].SetActive(false);
+            }
             // 여기에서 타깃 건물과 적을 분리한다.
             if (detect[i].gameObject.CompareTag("targetBuilding"))
             {
@@ -199,7 +205,7 @@ public class Hud : MonoBehaviour
                     targetDistanceTexts[i].SetActive(true);
                     targetIcons[i].SetActive(true);
                 }
-                else if (isBehind[i])
+                else if (isBehind[i]&&!detect[i].gameObject.GetComponent<ENF>().isTargetHit)
                 {
                     targetIcons[i].SetActive(false);
                     targetDistanceTexts[i].SetActive(false);
@@ -214,6 +220,7 @@ public class Hud : MonoBehaviour
             }
             else if(detect[i].gameObject.CompareTag("target"))
             {
+                
                 if (!isBehind[i] && !detect[i].gameObject.GetComponent<Enemy>().isHit)
                 {
                     targetIcons[i].transform.position = Camera.main.WorldToScreenPoint(detect[i].transform.position) + new Vector3(0, 8, 0);
@@ -225,7 +232,7 @@ public class Hud : MonoBehaviour
                     targetIcons[i].SetActive(true);
                     targetDistanceTexts[i].SetActive(true);
                 }
-                else if (isBehind[i])
+                else if (isBehind[i] && !detect[i].gameObject.GetComponent<Enemy>().isHit)
                 {
                     targetIcons[i].SetActive(false);
                     targetDistanceTexts[i].SetActive(false);
@@ -237,6 +244,7 @@ public class Hud : MonoBehaviour
                     targetDistanceTexts[i].SetActive(false);
                     targetNameTexts[i].SetActive(false);
                 }
+                
             }
         }
     }
