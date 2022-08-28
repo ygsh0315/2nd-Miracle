@@ -17,12 +17,16 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject Enemys;
 
 
-    [Header("narration Set")]
-    [SerializeField] string M_1Text = "";
-    [SerializeField] string M_2Text = "";
-    //[SerializeField] string M_3Text = "";
+    [Header("Section1 text Setting")]
+    [SerializeField] string[] Chepter1_Text = null;
+    int c1_Count=0;
+    [SerializeField] string[] Chepter2_Text = null;
+    int c2_Count;
+
     [SerializeField] string M_4Text = "";
     [SerializeField] string M_5Text = "";
+
+    //텍스트 재생시간
     [SerializeField] float playTime;
 
     [SerializeField] AirplaneController controller;
@@ -72,8 +76,8 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("PlayerObject");
-        state = State.Idle;
-        CountDown.enabled = false;
+        state = State.missionStart;
+        //CountDown.enabled = false;
         waitTime = 0;
     }
 
@@ -92,8 +96,6 @@ public class TutorialManager : MonoBehaviour
     {
         switch (state)
         {
-            case State.Idle:
-                break;
             case State.missionStart:
                 M_Start();
                 break;
@@ -126,17 +128,23 @@ public class TutorialManager : MonoBehaviour
 
     private void M_Start()
     {
-        // 미션을 시작
-        // 제한시간안에 링을 통과하라고 지령
-        // mission1으로 전환
-        StartCoroutine(NarrationSay(M_1Text, playTime));
-        waitTime += Time.deltaTime;
-        if (waitTime > 2)
+        if (c1_Count >= Chepter1_Text.Length)
         {
-            waitTime = 0;
-            CountDown.enabled = true;
-            state = State.mission1;
+            //두번째 챕터로 넘어감
         }
+        else
+        {
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(Chepter1_Text[c1_Count], playTime));
+            if (waitTime > playTime)
+            {
+                waitTime = 0;
+                c1_Count++;
+                print(c1_Count);
+                StopAllCoroutines();
+            }
+        }
+        
 
 
     }
@@ -179,7 +187,7 @@ public class TutorialManager : MonoBehaviour
         {
             // 시간안에 모든 링 통과하면 다음 미션 시작
             // 링 갯수가 상시 변할 수 있으므로 계층구조에 존재하는 갯수를 파악하는 방법은?
-            StartCoroutine(NarrationSay(M_2Text, playTime));
+            //StartCoroutine(NarrationSay(M_2Text, playTime));
             waitTime += Time.deltaTime;
             if (waitTime > 2)
             {
