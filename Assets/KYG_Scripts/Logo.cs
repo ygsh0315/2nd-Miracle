@@ -28,10 +28,10 @@ public class Logo : MonoBehaviour
     
     public IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1; i += Time.deltaTime / 6)
+        for (float i = 0; i <= 1; i += Time.deltaTime / 7)
         {
             LogoImage.color = new Color(1, 1, 1, i);
-            if (i >= 0.99f)
+            if (i >= 0.90f)
             {
                 StartBtn.SetActive(true);
             }

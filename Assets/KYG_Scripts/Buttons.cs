@@ -11,6 +11,7 @@ public class Buttons : MonoBehaviour
     }
     public void OnRetryBtn()
     {
+        print(1);
         SceneManager.LoadScene("MissionMode");
     }
 
