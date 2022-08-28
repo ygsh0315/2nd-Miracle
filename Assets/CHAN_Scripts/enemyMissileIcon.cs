@@ -36,7 +36,16 @@ public class enemyMissileIcon : MonoBehaviour
         if (!isBehind)
         {
             icon.transform.position = Camera.main.WorldToScreenPoint(missile.transform.position) + new Vector3(10, 20, 0);
+            icon.SetActive(true);
+        }
+        else
+        {
+            icon.SetActive(false);
         }
         
+    }
+    private void OnDestroy()
+    {
+        icon.SetActive(false);
     }
 }
