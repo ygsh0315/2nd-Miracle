@@ -33,7 +33,7 @@ public class CHAN_flareSet : MonoBehaviour
             curTime += Time.deltaTime;
             if (curTime > setTime)
             {
-                sound.flare.PlayOneShot(sound.audioClips[4], 1);
+                sound.flare.PlayOneShot(sound.audioClips[3], 1);
                 for (int j = 0; j < 2; j++)
                 {
                     

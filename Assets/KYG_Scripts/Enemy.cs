@@ -112,6 +112,8 @@ public class Enemy : MonoBehaviour
     Rigidbody rb;
 
     AudioSource audio;
+    public bool isHit = false;
+    
 
 
     // Start is called before the first frame update
@@ -156,7 +158,6 @@ public class Enemy : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             state = EnemyState.Destroy;
-          
         }
         
         //print(Vector3.Angle(transform.forward, target.transform.position) < 30f);
@@ -177,6 +178,7 @@ public class Enemy : MonoBehaviour
                 Avoid();
                 break;
             case EnemyState.Destroy:
+                isHit = true;
                 Destroy();
                 break;
         }
@@ -337,6 +339,8 @@ public class Enemy : MonoBehaviour
         rb.useGravity = true;
         Destroy(gameObject, 15f);
     }
+
+
 
 
 

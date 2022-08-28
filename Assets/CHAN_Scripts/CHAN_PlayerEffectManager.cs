@@ -13,19 +13,21 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] float start = 0;
     [SerializeField] float end = 0;
 
-    [SerializeField] GameObject smoke_R= null;
-    [SerializeField] GameObject smoke_L= null;
+    [SerializeField] ParticleSystem smoke_R= null;
+    [SerializeField] ParticleSystem smoke_L = null;
     [SerializeField] ParticleSystem afterBurner_R = null;
     [SerializeField] ParticleSystem afterBurner_L = null;
-    [SerializeField] ParticleSystem leadSmoke_R = null;
     [SerializeField] ParticleSystem leadSmoke_L = null;
+    [SerializeField] ParticleSystem leadSmoke_R = null;
+    [SerializeField] ParticleSystem entireSmoke_L = null;
+    [SerializeField] ParticleSystem entireSmoke_R = null;
     [SerializeField] ParticleSystem burning1 = null;
     //[SerializeField] ParticleSystem burning2 = null;
     [SerializeField] GameObject explosionFactory;
     [SerializeField] GameObject player;
 
 
-   [SerializeField] AirplaneController controller;
+    [SerializeField] AirplaneController controller;
     [SerializeField] CHAN_SoundManager sound;
     [SerializeField]  Image image;
     [SerializeField] Text warningText;
@@ -34,6 +36,8 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     [SerializeField] float fadeSpeed;
 
     public bool isDie;
+    bool hitTurn;
+    bool dieTurn;
     float delay;
     [SerializeField] float DelayToExplosion;
 
@@ -43,10 +47,13 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         Color color = image.color;
         color.a = 0;
-        smoke_R.SetActive(false);
-        smoke_L.SetActive(false);
+        smoke_R.Stop();
+        smoke_L.Stop();
         leadSmoke_L.Stop();
         leadSmoke_R.Stop();
+        entireSmoke_L.Stop();
+        entireSmoke_R.Stop();
+
         warningText.enabled = false;
 
     }
@@ -91,7 +98,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         // 계산한 알파 값 다시 설정.  
         image.color = color;
-        print(color.a);
+        //print(color.a);
         // Debug.Log(time);
     }
     void PlayFadeOut()
@@ -171,15 +178,17 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     }
     void SmokeEffect()
     {
-        if (controller.isSmoke&&!isDie)
+        if (controller.rb.velocity.magnitude>60)
         {
-            smoke_R.SetActive(true);
-            smoke_L.SetActive(true);
+            smoke_R.Play();
+            smoke_L.Play();
+            smoke_L.gravityModifier = controller.Pitch * 0.7f;
+            smoke_R.gravityModifier = controller.Pitch * 0.7f;
         }
         else
         {
-            smoke_R.SetActive(false);
-            smoke_L.SetActive(false);
+            smoke_R.Stop();
+            smoke_L.Stop();
         }
         if (controller.isLeadSmoke&&!isDie)
         {
@@ -191,6 +200,16 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             leadSmoke_L.Stop();
             leadSmoke_R.Stop();
         }
+        if (controller.isSmoke && !isDie)
+        {
+            entireSmoke_L.Play();
+            entireSmoke_R.Play();
+        }
+        else 
+        {
+            entireSmoke_L.Stop();
+            entireSmoke_R.Stop();
+        }
     }
     void GLOC()
     {
@@ -199,6 +218,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
             StartCoroutine(WarningUI("조종사 의식저하 9G", 1));
             PlayFadeIn();
             sound.Gloc();
+            sound.GlocTurn = true;
             if (n - controller.PilotState <= 0)
             {
 
@@ -212,6 +232,7 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
         }
         else
         {
+            sound.GlocTurn = false;
             StopAllCoroutines();
             if (warningText.enabled)
             {
@@ -248,17 +269,26 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
     {
         //여기서 불타는 이팩트 추가 할 예정 
         burning1.Play();
-        //burning2.Play();
-        delay += Time.deltaTime;
-        if (delay > DelayToExplosion)
+        if (!hitTurn)
         {
-            CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
-            GameObject explosion = Instantiate(explosionFactory);
-            print(explosion);
-            explosion.transform.position = player.transform.position;
-            player.SetActive(false);
-            delay = 0;
+            AudioSource playerHit=player.AddComponent<AudioSource>();
+            playerHit.PlayOneShot(CHAN_SoundManager.instance.audioClips[9], 1);
+            hitTurn = true;
         }
+        //burning2.Play();
+        if (!dieTurn)
+        {
+            delay += Time.deltaTime;
+            if (delay > DelayToExplosion)
+            {
+                CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
+                GameObject explosion = Instantiate(explosionFactory);
+                explosion.transform.position = player.transform.position;
+                player.SetActive(false);
+                dieTurn = true;
+            }
+        }
+       
         // 카메라는 그자리에서 대기
         // 미션 매니저에게 게임오버 반환
     }

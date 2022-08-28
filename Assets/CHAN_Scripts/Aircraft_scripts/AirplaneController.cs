@@ -332,19 +332,20 @@ public class AirplaneController : MonoBehaviour
         }
         if (Mathf.Abs(Pitch) > 0.4f && rb.velocity.magnitude > LOCVel)
         {
-            isSmoke = true;
+
+            isLeadSmoke = true;
             if (Mathf.Abs(Pitch) > 0.7f && rb.velocity.magnitude > LOCVel+10)
             {
-                isLeadSmoke = true;
+                isSmoke = true;
             }
             else 
             {
-                isLeadSmoke = false;
+                isSmoke = false;
             }
         }
         else 
         {
-            isSmoke = false;
+            isLeadSmoke = false;
         }
         if (isHit)
         {
@@ -418,8 +419,12 @@ public class AirplaneController : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            print("충돌");
+            //print("충돌");
             isHit = true;
+            Effect.isDie = true;
+        }
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
             Effect.isDie = true;
         }
     }
