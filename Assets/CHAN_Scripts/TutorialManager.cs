@@ -3,25 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class TutorialManager : MonoBehaviour
 
 {
     public static TutorialManager instance;
-    [SerializeField] Text CountDown;
     [SerializeField] Text Narration;
     [SerializeField] GameObject mission1Trigger;
     [SerializeField] GameObject mission3Trigger;
     [SerializeField] GameObject TargetBuilding;
     [SerializeField] GameObject Enemys;
 
+    [SerializeField] Collider[] missile;
+    [SerializeField] GameObject turret;
+    [SerializeField] GameObject enemyGroup;
 
+
+    [Header("Section Start text Setting")]
+    [SerializeField] string[] CStart_Text = null;
+    int cStart_Count = 0;
     [Header("Section1 text Setting")]
-    [SerializeField] string[] Chepter1_Text = null;
+    [SerializeField] string[] C1_Text = null;
     int c1_Count=0;
-    [SerializeField] string[] Chepter2_Text = null;
+    [Header("Section2 text Setting")]
+    [SerializeField] string[] C2_Text = null;
     int c2_Count;
+    [Header("Section3 text Setting")]
+    [SerializeField] string[] C3_Text = null;
+    int c3_Count;
+    [Header("Section4 text Setting")]
+    [SerializeField] string[] C4_Text = null;
+    int c4_Count;
+    [Header("Section5 text Setting")]
+    [SerializeField] string[] C5_Text = null;
+    int c5_Count;
+    [Header("End text Setting")]
+    [SerializeField] string[] E_Text = null;
+
 
     [SerializeField] string M_4Text = "";
     [SerializeField] string M_5Text = "";
@@ -37,7 +56,6 @@ public class TutorialManager : MonoBehaviour
     [Header("TimeSet")]
     [SerializeField] float min;
     [SerializeField] float sec;
-    float msec;
     float waitTime;
     public bool isLand;
 
@@ -58,13 +76,12 @@ public class TutorialManager : MonoBehaviour
     // 미션4: 항모에 착함해라
     public enum State
     {
-        Idle,
-        missionStart,
-        mission1,
-        mission2,
-        //mission3,
-        mission4,
-        mission5,
+        ChepterStart,
+        Chepter1,
+        Chepter2,
+        Chepter3,
+        Chepter4,
+        Chepter5,
         End,
         missionFail
     }
@@ -76,9 +93,11 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("PlayerObject");
-        state = State.missionStart;
+        state = State.ChepterStart;
         //CountDown.enabled = false;
         waitTime = 0;
+        turret.SetActive(false);
+        enemyGroup.SetActive(false);
     }
 
     // Update is called once per frame
@@ -96,23 +115,23 @@ public class TutorialManager : MonoBehaviour
     {
         switch (state)
         {
-            case State.missionStart:
-                M_Start();
+            case State.ChepterStart:
+                C_Start();
                 break;
-            case State.mission1:
-                M_1Start();
+            case State.Chepter1:
+                C1_Start();
                 break;
-            case State.mission2:
-                M_2Start();
+            case State.Chepter2:
+                C2_Start();
                 break;
-            //case State.mission3:
-            //    M_3Start();
-            //    break;
-            case State.mission4:
-                M_4Start();
+            case State.Chepter3:
+                C3_Start();
                 break;
-            case State.mission5:
-                M_5Start();
+            case State.Chepter4:
+                C4_Start();
+                break;
+            case State.Chepter5:
+                C5_Start();
                 break;
             case State.End:
                 Ending();
@@ -126,154 +145,162 @@ public class TutorialManager : MonoBehaviour
 
 
 
-    private void M_Start()
+    private void C_Start()
     {
-        if (c1_Count >= Chepter1_Text.Length)
+        if (cStart_Count >= CStart_Text.Length)
         {
             //두번째 챕터로 넘어감
+            Narration.enabled = false;
+            state = State.Chepter1;
         }
         else
         {
             waitTime += Time.fixedDeltaTime;
-            StartCoroutine(NarrationSay(Chepter1_Text[c1_Count], playTime));
+            StartCoroutine(NarrationSay(CStart_Text[cStart_Count], playTime));
+            if (waitTime > playTime)
+            {
+                waitTime = 0;
+                cStart_Count++;
+                StopAllCoroutines();
+            }
+        }
+    }
+    private void C1_Start()
+    {
+        if (c1_Count >= C1_Text.Length)
+        {
+            //두번째 챕터로 넘어감
+            Narration.enabled = false;
+            StartCoroutine(delay(5, State.Chepter2));
+        }
+        else
+        {
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(C1_Text[c1_Count], playTime));
             if (waitTime > playTime)
             {
                 waitTime = 0;
                 c1_Count++;
-                print(c1_Count);
                 StopAllCoroutines();
             }
         }
-        
-
-
     }
-    private void M_1Start()
+    private void C2_Start()
     {
-        // 타이머 시작
-        // second
-        // 초는 60단위로 작동된다. 초가 0보다 낮아질 경우 60부터 시작하도록 만들어야한다.
-        Timer();
-        if (msec <= 0)
+        if (c2_Count >= C2_Text.Length)
         {
-            msec = 0.99f;
-        }
-        if (sec <= 0)
-        {
-            if (min == 0)
+            //두번째 챕터로 넘어감
+            Narration.enabled = false;
+            if (mission1Trigger.transform.childCount == 0)
             {
-                sec = 0;
-                msec = 0;
-                if (!CountDown.enabled)
-                {
-                    CountDown.enabled = true;
-                }
-                StartCoroutine(NarrationSay("적 출현", 10));
+                state = State.Chepter3;
             }
-            else
-            {
-                min--;
-                sec = 60;
-            }
-
         }
-        if (min == 0 && sec <= 30 && sec >= 0)
+        else
         {
-            CountDown.GetComponent<Text>().color = Color.red;
-            StartCoroutine(Blink());
-            //텍스트를 깜빡거리게 만든다.   
-        }
-        if (mission1Trigger.transform.childCount == 0)
-        {
-            // 시간안에 모든 링 통과하면 다음 미션 시작
-            // 링 갯수가 상시 변할 수 있으므로 계층구조에 존재하는 갯수를 파악하는 방법은?
-            //StartCoroutine(NarrationSay(M_2Text, playTime));
-            waitTime += Time.deltaTime;
-            if (waitTime > 2)
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(C2_Text[c2_Count], playTime));
+            if (waitTime > playTime)
             {
                 waitTime = 0;
-                CountDown.enabled = false;
-                state = State.mission2;
+                c2_Count++;
+                StopAllCoroutines();
             }
-
         }
     }
-    private void M_2Start()
+    private void C3_Start()
     {
-        //이곳은 목표 건물을 타격하는 구간
-        //만약 건물을 파괴했다면 해당 미션 클리어 
-        if (!TargetBuilding)
+        turret.SetActive(true);
+        if (c3_Count >= C3_Text.Length)
         {
-            StartCoroutine(NarrationSay(M_4Text, playTime));
-            waitTime += Time.deltaTime;
-            if (waitTime > 2)
+            
+            Narration.enabled = false;
+            // 터렛을 활성화시킨다.
+            
+            missile = Physics.OverlapSphere(player.transform.position, 10000, 1 << 8);
+            if (missile.Length==0)
+            {
+                //4번째 챕터
+                state = State.Chepter4;
+            }
+        }
+        else
+        {
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(C3_Text[c3_Count], playTime));
+            if (waitTime > playTime)
             {
                 waitTime = 0;
-                CountDown.enabled = false;
-                state = State.mission4;
+                c3_Count++;
+                StopAllCoroutines();
             }
-
         }
     }
-
-    private void M_3Start()
+    private void C4_Start()
     {
-        //타격 완료하고 제시된 구간을 지나가도록 유도
-        //지정된 구간에 탈출하라고 안내
-        //이곳은 mission3Trigger를 만든다.
-
-        if (mission3Trigger.transform.childCount == 0)
+        if (c4_Count >= C4_Text.Length)
         {
-            StartCoroutine(NarrationSay(M_5Text, playTime));
-            waitTime += Time.deltaTime;
-            if (waitTime > 2)
+            Narration.enabled = false;
+            enemyGroup.SetActive(true);
+            if (enemyGroup.transform.childCount == 0)
+            {
+                state = State.Chepter5;
+            }
+        }
+        else
+        {
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(C4_Text[c4_Count], playTime));
+            if (waitTime > playTime)
             {
                 waitTime = 0;
-                CountDown.enabled = false;
-                state = State.mission5;
+                c4_Count++;
+                StopAllCoroutines();
             }
-
         }
     }
-    private void M_4Start()
+    private void C5_Start()
     {
-        //탈출 완료하면 적기 파괴 미션 하달
-        //적기를 모두 격추하면 마지막 미션으로
-        if (Enemys.transform.childCount == 0)
+        if (c5_Count >= C5_Text.Length)
         {
-            StartCoroutine(NarrationSay(M_5Text, playTime));
-            waitTime += Time.deltaTime;
-            if (waitTime > 2)
+            Narration.enabled = false;
+            if (isLand&&controller.rb.velocity.magnitude<= 0.05f)
             {
-                waitTime = 0;
-                CountDown.enabled = false;
-                state = State.mission5;
-            }
-
-        }
-
-    }
-
-    private void M_5Start()
-    {
-        // 항모에 안전하게 착륙하면 게임 클리어
-        // 플레이어가 지정된 trigger에 도착하고 속도가 0일 경우 게임이 끝나도록 유도
-        //완전히 멈추고 지정된 시간동안 유지될 경우 클리어
-        if (isLand == true && controller.rb.velocity.magnitude <= 0.05f)
-        {
-            waitTime += Time.deltaTime;
-            if (waitTime > 2)
-            {
+                c5_Count = 0;
                 state = State.End;
             }
-
+        }
+        else
+        {
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(C5_Text[c5_Count], playTime));
+            if (waitTime > playTime)
+            {
+                waitTime = 0;
+                c5_Count++;
+                StopAllCoroutines();
+            }
         }
     }
 
     private void Ending()
     {
-        Cursor.visible = true;
-        SceneManager.LoadScene("Ending_Scene");
+        if (c5_Count >= E_Text.Length)
+        {
+            Narration.enabled = false;
+            //다음씬으로 넘어감
+        }
+        else
+        {
+            waitTime += Time.fixedDeltaTime;
+            StartCoroutine(NarrationSay(E_Text[c5_Count], playTime));
+            if (waitTime > playTime)
+            {
+                waitTime = 0;
+                c5_Count++;
+                StopAllCoroutines();
+            }
+        }
     }
     // 해당 함수는 항공기가 터지거나, 미션에 실패했을 경우 발동되는 함수
     private void MissionFail()
@@ -282,36 +309,7 @@ public class TutorialManager : MonoBehaviour
         SceneManager.LoadScene("Fail_Scene");
     }
 
-    void Timer()
-    {
-        if (!(min == 0 && sec <= 0))
-        {
-            sec = sec - Time.deltaTime;
-            msec = msec - (Time.deltaTime);
-        }
-        string Sec = string.Format("{0:00}", sec);
-        string Msec = string.Format("{0:.00}", msec).Replace(".", "");
-        CountDown.text = $"{min}:{Sec}:{Msec}";
-    }
 
-    IEnumerator Blink()
-    {
-        float curTime = 0;
-        while (true)
-        {
-            curTime += Time.fixedDeltaTime;
-            if (curTime > 1f)
-            {
-                CountDown.enabled = false;
-            }
-            if (curTime > 2f)
-            {
-                CountDown.enabled = true;
-                curTime = 0;
-            }
-            yield return null;
-        }
-    }
     IEnumerator NarrationSay(string say, float t)
     {
         float delay = 0;
@@ -327,6 +325,11 @@ public class TutorialManager : MonoBehaviour
             }
             yield return null;
         }
+    }
+    IEnumerator delay(float delayTime,State chepter)
+    {
+        yield return new WaitForSeconds(delayTime);
+        state =chepter;
     }
 
 }
