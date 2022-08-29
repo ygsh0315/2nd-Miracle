@@ -17,7 +17,7 @@ public class Buttons : MonoBehaviour
 
     public void OnMainBtn()
     {
-        Time.timeScale = 1f;
+
         SceneManager.LoadScene("Start_Scene");
     }
 

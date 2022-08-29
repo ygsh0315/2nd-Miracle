@@ -11,9 +11,6 @@ public class TutorialManager : MonoBehaviour
     public static TutorialManager instance;
     [SerializeField] Text Narration;
     [SerializeField] GameObject mission1Trigger;
-    [SerializeField] GameObject mission3Trigger;
-    [SerializeField] GameObject TargetBuilding;
-    [SerializeField] GameObject Enemys;
 
     [SerializeField] Collider[] missile;
     [SerializeField] GameObject turret;
@@ -76,6 +73,7 @@ public class TutorialManager : MonoBehaviour
     // 미션4: 항모에 착함해라
     public enum State
     {
+        Idle,
         ChepterStart,
         Chepter1,
         Chepter2,
@@ -104,17 +102,14 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         StateMachine();
-
-        if (!player.activeSelf)
-        {
-            state = State.missionFail;
-        }
     }
 
     void StateMachine()
     {
         switch (state)
         {
+            case State.Idle:
+                break;
             case State.ChepterStart:
                 C_Start();
                 break;
@@ -137,8 +132,9 @@ public class TutorialManager : MonoBehaviour
                 Ending();
                 break;
             case State.missionFail:
-                MissionFail();
-                print("fail");
+                StopAllCoroutines();
+                StartCoroutine(delayScene());
+                state = State.Idle;
                 break;
         }
     }
@@ -330,6 +326,11 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         state =chepter;
+    }
+    IEnumerator delayScene()
+    {
+        yield return new WaitForSeconds(3);
+        MissionFail();
     }
 
 }

@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         if (isFade)
         {
-            StartCoroutine("FadeOut");
+            StartCoroutine(FadeOut());
             isFade = false;
         }
         if (Input.GetKeyDown(KeyCode.F3))

@@ -13,7 +13,6 @@ public class Logo : MonoBehaviour
     void Start()
     {
         StartBtn.SetActive(false);
-        isStarted = false;
     }
 
     // Update is called once per frame
@@ -21,17 +20,16 @@ public class Logo : MonoBehaviour
     {
         if (!isStarted)
         {
-            StartCoroutine("FadeIn");
+            StartCoroutine("FadeOut");
             isStarted = true;
         }
     }
-    
-    public IEnumerator FadeIn()
+    public IEnumerator FadeOut()
     {
         for (float i = 0; i <= 1; i += Time.deltaTime / 7)
         {
             LogoImage.color = new Color(1, 1, 1, i);
-            if (i >= 0.90f)
+            if (i > 0.9f)
             {
                 StartBtn.SetActive(true);
             }

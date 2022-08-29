@@ -1853,12 +1853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ac3039ac466f2438d9daae1fb5288f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartBtn: {fileID: 2108100463}
+  StartBtn: {fileID: 0}
   tutorialBtn: {fileID: 825266072}
   missionBtn: {fileID: 53989700}
   exitBtn: {fileID: 328134075}
-  LogoSpace: {fileID: 206410562}
-  Logo: {fileID: 206410564}
+  LogoSpace: {fileID: 0}
+  Logo: {fileID: 0}
   pointerHoverSound: {fileID: 0}
   pointerClickSound: {fileID: 0}
 --- !u!1 &1429689264

@@ -284,7 +284,15 @@ public class CHAN_PlayerEffectManager : MonoBehaviour
                 CHAN_SoundManager.instance.moveState = CHAN_SoundManager.MoveState.Explosion;
                 GameObject explosion = Instantiate(explosionFactory);
                 explosion.transform.position = player.transform.position;
-                MissionManager.instance.state = MissionManager.State.missionFail;
+                if (MissionManager.instance)
+                {
+                    MissionManager.instance.state = MissionManager.State.missionFail;
+                }
+                if(TutorialManager.instance)
+                {
+                    TutorialManager.instance.state = TutorialManager.State.missionFail;
+                }
+                
                 player.SetActive(false);
                 dieTurn = true;
             }
